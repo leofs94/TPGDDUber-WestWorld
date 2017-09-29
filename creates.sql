@@ -19,3 +19,8 @@ ALTER TABLE [WEST_WORLD].[Cliente]
 		DATA_COMPRESSION = NONE
 	) ON [PRIMARY]
 GO
+CREATE TABLE [WEST_WORLD].[Rubro]  ( 
+	[idRubro]   	bigint NOT NULL,
+	[nombre]      	nvarchar(50) NOT NULL,
+	CONSTRAINT [idRubro] PRIMARY KEY ([idRubro])
+ ON [PRIMARY])
