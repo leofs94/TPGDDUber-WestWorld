@@ -24,3 +24,17 @@ CREATE TABLE [WEST_WORLD].[Rubro]  (
 	[nombre]      	nvarchar(50) NOT NULL,
 	CONSTRAINT [idRubro] PRIMARY KEY ([idRubro])
  ON [PRIMARY])
+ GO
+ CREATE TABLE [WEST_WORLD].[Empresa]  ( 
+	[cuit]      	nvarchar(50) NOT NULL,
+	[nombre]    	nvarchar(255) NOT NULL,
+	[direccion] 	nvarchar(255) NOT NULL,
+	[idRubro]   	numeric(15,5) NOT NULL,
+	[habilitado]	bit NOT NULL,
+	CONSTRAINT [idEmpresa] PRIMARY KEY NONCLUSTERED([cuit])
+)
+GO
+ALTER TABLE [WEST_WORLD].[Empresa]
+	ADD CONSTRAINT [rubroFK]
+	FOREIGN KEY([idRubro])
+	REFERENCES [WEST_WORLD].[Rubro]([idRubro])
