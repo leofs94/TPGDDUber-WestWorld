@@ -49,6 +49,26 @@ CREATE TABLE [WEST_WORLD].[Sucursal]  (
 	[habilitado]  	bit NOT NULL,
 	CONSTRAINT [PKSucursal] PRIMARY KEY NONCLUSTERED([codigoPostal])
 )
+GO
+CREATE TABLE [WEST_WORLD].[Factura]  ( 
+	[numeroFactura]   	numeric(15,5) NOT NULL,
+	[cliente]         	bigint NOT NULL,
+	[empresa]         	nvarchar(50) NOT NULL,
+	[fechaAlta]       	datetime NOT NULL,
+	[fechaVencimiento]	datetime NOT NULL,
+	[total]           	numeric(15,5) NOT NULL,
+	CONSTRAINT [facturaPK] PRIMARY KEY CLUSTERED([numeroFactura])
+)
+GO
+ALTER TABLE [WEST_WORLD].[Factura]
+	ADD CONSTRAINT [empresaFK]
+	FOREIGN KEY([empresa])
+	REFERENCES [WEST_WORLD].[Empresa]([cuit])
+GO
+ALTER TABLE [WEST_WORLD].[Factura]
+	ADD CONSTRAINT [clienteFK]
+	FOREIGN KEY([cliente])
+	REFERENCES [WEST_WORLD].[Cliente]([idCliente])
 
 
 -- TABLAS QUE FALTAN:
