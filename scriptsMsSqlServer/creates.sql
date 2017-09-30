@@ -74,6 +74,24 @@ CREATE TABLE [WEST_WORLD].[Item]  (
 	[idItem]	bigint IDENTITY(1,1) NOT NULL,
 	CONSTRAINT [itemPK] PRIMARY KEY CLUSTERED([idItem])
 )
+GO
+CREATE TABLE [WEST_WORLD].[Factura_Item]  ( 
+	[idItem]       	bigint NOT NULL,
+	[numeroFactura]	numeric(15,5) NOT NULL,
+	[monto]        	numeric(15,5) NOT NULL,
+	[cantidad]     	numeric(15,5) NOT NULL,
+	CONSTRAINT [FacturaItemPK] PRIMARY KEY CLUSTERED([idItem],[numeroFactura])
+)
+GO
+ALTER TABLE [WEST_WORLD].[Factura_Item]
+	ADD CONSTRAINT [nroFacturaFK]
+	FOREIGN KEY([numeroFactura])
+	REFERENCES [WEST_WORLD].[Factura]([numeroFactura])
+GO
+ALTER TABLE [WEST_WORLD].[Factura_Item]
+	ADD CONSTRAINT [itemFK]
+	FOREIGN KEY([idItem])
+	REFERENCES [WEST_WORLD].[Item]([idItem])
 
 
 -- TABLAS QUE FALTAN:
