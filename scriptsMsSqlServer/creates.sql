@@ -69,6 +69,11 @@ ALTER TABLE [WEST_WORLD].[Factura]
 	ADD CONSTRAINT [clienteFK]
 	FOREIGN KEY([cliente])
 	REFERENCES [WEST_WORLD].[Cliente]([idCliente])
+GO
+CREATE TABLE [WEST_WORLD].[Item]  ( 
+	[idItem]	bigint IDENTITY(1,1) NOT NULL,
+	CONSTRAINT [itemPK] PRIMARY KEY CLUSTERED([idItem])
+)
 
 
 -- TABLAS QUE FALTAN:
