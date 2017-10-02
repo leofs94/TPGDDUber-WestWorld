@@ -102,6 +102,48 @@ CREATE TABLE [WEST_WORLD].[Usuario]  (
 	CONSTRAINT [idUserPK] PRIMARY KEY CLUSTERED([idUser])
 )
 
+GO
+CREATE TABLE [WEST_WORLD].[Rol]  ( 
+	[idRol]       	bigint IDENTITY(1,1) NOT NULL,
+	[nombre]	        nvarchar(50) NOT NULL,
+	[habilitado]        	bit NOT NULL,
+	CONSTRAINT [idRolPK] PRIMARY KEY CLUSTERED([idRol])
+)
+GO
+CREATE TABLE [WEST_WORLD].[Funcionalidad]  ( 
+	[idFuncionalidad]       	bigint IDENTITY(1,1) NOT NULL,
+	[nombre]	        nvarchar(50) NOT NULL,
+	CONSTRAINT [idFuncPK] PRIMARY KEY CLUSTERED([idFuncionalidad])
+)
+GO
+CREATE TABLE [WEST_WORLD].[Rol_Funcionalidad]  ( 
+	[idFuncionalidad]       	bigint  NOT NULL,
+	[idRol]	        bigint NOT NULL,
+    CONSTRAINT [RolFuncionalidadPK] PRIMARY KEY CLUSTERED([idFuncionalidad],[idRol]))
+GO
+ALTER TABLE [WEST_WORLD].[Rol_Funcionalidad]
+	ADD CONSTRAINT [FKFunc]
+	FOREIGN KEY([idFuncionalidad])
+	REFERENCES [WEST_WORLD].[Funcionalidad]([idFuncionalidad]), 
+	CONSTRAINT [FKRol]
+	FOREIGN KEY([idRol])
+	REFERENCES [WEST_WORLD].[Rol]([idRol])
+GO
+CREATE TABLE [WEST_WORLD].[Rol_Usuario]  ( 
+	[idUsuario]       	bigint  NOT NULL,
+	[idRol]	        bigint NOT NULL,
+    CONSTRAINT [RolUsuarioPK] PRIMARY KEY CLUSTERED([idUsuario],[idRol]))
+GO
+ALTER TABLE [WEST_WORLD].[Rol_Usuario]
+	ADD CONSTRAINT [RolFK]
+	FOREIGN KEY([idRol])
+	REFERENCES [WEST_WORLD].[Rol]([idRol]), 
+	CONSTRAINT [UsuarioFK]
+	FOREIGN KEY([idUsuario])
+	REFERENCES [WEST_WORLD].[Usuario]([idUser])
+	
+
+
 
 
 -- TABLAS QUE FALTAN:
