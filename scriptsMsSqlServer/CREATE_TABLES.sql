@@ -2,7 +2,7 @@
 Scripts Generados por el hombre del Oeste 0.1V
 */
 CREATE TABLE "WEST_WORLD"."Cliente"  ( 
-	"idCliente"   	bigint NOT NULL,
+	"idCliente"   	BIGINT IDENTITY(1,1) NOT NULL,
 	"nombre"      	nvarchar(255) NOT NULL,
 	"apellido"    	nvarchar(255) NOT NULL,
 	"mail"        	nvarchar(255) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE "WEST_WORLD"."Empresa"  (
 	"cuit"      	nvarchar(50) NOT NULL,
 	"nombre"    	nvarchar(255) NOT NULL,
 	"direccion" 	nvarchar(255) NOT NULL,
-	"idRubro"   	numeric(15,5) NOT NULL,
+	"idRubro"   	BIGINT IDENTITY(1,1) NOT NULL,
 	"habilitado"	bit NOT NULL,
 	CONSTRAINT "idEmpresa" PRIMARY KEY NONCLUSTERED("cuit")
 	WITH (
