@@ -8,13 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using System.Data.Entity.Infrastructure;
 
 namespace PagoAgilFrba.AbmCliente
 {
     public partial class clienteABM : Form
     {
-        SqlConnection sqlCon = new SqlConnection(@"Data Source=192.168.0.12;Integrated Security=False;User ID=SA;Password=uD4D9uwT9hNjV7;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection sqlCon = new SqlConnection(@"Data Source=192.168.0.31;Integrated Security=False;User ID=SA;Password=uD4D9uwT9hNjV7;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         public clienteABM()
         {
             InitializeComponent();
@@ -407,8 +407,21 @@ namespace PagoAgilFrba.AbmCliente
 
             }
             catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error Message");
+            { 
+                if(ex is SqlException)
+                {
+                    SqlException sqlException = ex as SqlException;
+
+                    if (sqlException.Number == 2627) MessageBox.Show("No pueden existir 2 clientes con el mismo mail", "Error Message");
+                    else if (sqlException.Number == 8114) MessageBox.Show("Todos los campos son obligatorios", "Error Message");
+                    else MessageBox.Show(ex.Message, "Mensaje de Error");
+
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Mensaje de Error");
+                }
+                
             }
             finally
             {
