@@ -73,11 +73,11 @@
     <Compile Include="AbmCliente\clienteABM.Designer.cs">
       <DependentUpon>clienteABM.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmEmpresa\Form1.cs">
+    <Compile Include="AbmEmpresa\empresaABM.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmEmpresa\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmEmpresa\empresaABM.Designer.cs">
+      <DependentUpon>empresaABM.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmFactura\Form1.cs">
       <SubType>Form</SubType>
@@ -97,11 +97,11 @@
     <Compile Include="AbmSucursal\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Index.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Index.Designer.cs">
+      <DependentUpon>Index.cs</DependentUpon>
     </Compile>
     <Compile Include="GD2C2017DataSet.cs">
       <DependentUpon>GD2C2017DataSet.xsd</DependentUpon>
@@ -134,6 +134,12 @@
     <EmbeddedResource Include="AbmCliente\clienteABM.resx">
       <DependentUpon>clienteABM.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AbmEmpresa\empresaABM.resx">
+      <DependentUpon>empresaABM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Index.resx">
+      <DependentUpon>Index.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -143,8 +149,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="AbmCliente\EF.Reverse.POCO.Core.ttinclude" />
-    <None Include="AbmCliente\EF.Reverse.POCO.ttinclude" />
     <None Include="GD2C2017DataSet.xsc">
       <DependentUpon>GD2C2017DataSet.xsd</DependentUpon>
     </None>

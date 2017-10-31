@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace PagoAgilFrba.AbmEmpresa
 {
-    public partial class Form1 : Form
+    public partial class empresaABM : Form
     {
-        public Form1()
+        public empresaABM()
         {
             InitializeComponent();
+        }
+
+        private void empresaABM_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

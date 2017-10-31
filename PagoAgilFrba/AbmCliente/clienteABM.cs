@@ -351,6 +351,7 @@ namespace PagoAgilFrba.AbmCliente
             this.Controls.Add(this.label1);
             this.Name = "clienteABM";
             this.Text = "ABMCliente";
+            this.Load += new System.EventHandler(this.clienteABM_Load);
             ((System.ComponentModel.ISupportInitialize)(this.clienteDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -493,6 +494,11 @@ namespace PagoAgilFrba.AbmCliente
         private void button1_Click_1(object sender, EventArgs e)
         {
             reset();
+        }
+
+        private void clienteABM_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
