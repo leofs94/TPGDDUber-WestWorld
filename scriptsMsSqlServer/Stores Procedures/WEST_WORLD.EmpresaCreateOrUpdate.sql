@@ -1,10 +1,9 @@
 ﻿CREATE PROCEDURE WEST_WORLD.EmpresaCreateOrUpdate
 @mode nvarchar(10),
-@idEmpresa bigint,
 @nombre nvarchar(255),
 @cuit nvarchar(50),
 @direccion nvarchar(255),
-@rubro bigint,
+@idRubro bigint,
 @habilitado bit
 
 AS
@@ -13,7 +12,7 @@ AS
 		INSERT INTO WEST_WORLD.Empresa(
 			nombre, 
 			cuit, 
-			direccion ,
+			direccion,
 			idRubro, 
 			habilitado
 		)
@@ -21,23 +20,19 @@ AS
 			@nombre,
 			@cuit,
 			@direccion,
-			@rubro,
+			@idRubro,
 			@habilitado
 		)
 	END
-	--ELSE IF @mode ='Edit'
-	--BEGIN
-	--	UPDATE WEST_WORLD.Empresa
-	--	SET nombre=@nombre, 
-	--		apellido=@apellido, 
-	--		mail=@mail ,
-	--		direccion=@direccion, 
-	--		codigoPostal=@codigoPostal, 
-	--		dni=@dni, 
-	--		telefono=@telefono, 
-	--		fecha_nac=@fec_nac,
-	--		habilitado=@habilitado
-	--	WHERE idCliente=@idCliente
-	--END
+	ELSE IF @mode ='Edit'
+	BEGIN
+		UPDATE WEST_WORLD.Empresa
+		SET nombre=@nombre, 
+			cuit=@cuit,
+			direccion=@direccion,
+			idRubro=@idRubro,
+			habilitado=@habilitado
+		WHERE cuit=@cuit
+	END
 
 RETURN 0
