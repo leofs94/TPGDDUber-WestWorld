@@ -42,8 +42,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cuitFilter = new System.Windows.Forms.TextBox();
-            this.nombreFilter = new System.Windows.Forms.TextBox();
-            this.rubroFilter = new System.Windows.Forms.ComboBox();
+            this.nombreFilterTextBox = new System.Windows.Forms.TextBox();
+            this.rubroFilterComboBox = new System.Windows.Forms.ComboBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.habilitadoCheck = new System.Windows.Forms.CheckBox();
@@ -168,20 +168,21 @@
             this.cuitFilter.Size = new System.Drawing.Size(41, 20);
             this.cuitFilter.TabIndex = 13;
             // 
-            // nombreFilter
+            // nombreFilterTextBox
             // 
-            this.nombreFilter.Location = new System.Drawing.Point(138, 178);
-            this.nombreFilter.Name = "nombreFilter";
-            this.nombreFilter.Size = new System.Drawing.Size(36, 20);
-            this.nombreFilter.TabIndex = 14;
+            this.nombreFilterTextBox.Location = new System.Drawing.Point(138, 178);
+            this.nombreFilterTextBox.Name = "nombreFilterTextBox";
+            this.nombreFilterTextBox.Size = new System.Drawing.Size(36, 20);
+            this.nombreFilterTextBox.TabIndex = 14;
             // 
-            // rubroFilter
+            // rubroFilterComboBox
             // 
-            this.rubroFilter.FormattingEnabled = true;
-            this.rubroFilter.Location = new System.Drawing.Point(404, 178);
-            this.rubroFilter.Name = "rubroFilter";
-            this.rubroFilter.Size = new System.Drawing.Size(121, 21);
-            this.rubroFilter.TabIndex = 15;
+            this.rubroFilterComboBox.FormattingEnabled = true;
+            this.rubroFilterComboBox.Location = new System.Drawing.Point(404, 178);
+            this.rubroFilterComboBox.Name = "rubroFilterComboBox";
+            this.rubroFilterComboBox.Size = new System.Drawing.Size(121, 21);
+            this.rubroFilterComboBox.TabIndex = 15;
+            this.rubroFilterComboBox.SelectedIndexChanged += new System.EventHandler(this.rubroFilter_SelectedIndexChanged);
             // 
             // btnGuardar
             // 
@@ -201,6 +202,7 @@
             this.btnBuscar.TabIndex = 17;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
             // 
             // habilitadoCheck
             // 
@@ -230,8 +232,8 @@
             this.Controls.Add(this.label13);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.rubroFilter);
-            this.Controls.Add(this.nombreFilter);
+            this.Controls.Add(this.rubroFilterComboBox);
+            this.Controls.Add(this.nombreFilterTextBox);
             this.Controls.Add(this.cuitFilter);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -270,8 +272,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox cuitFilter;
-        private System.Windows.Forms.TextBox nombreFilter;
-        private System.Windows.Forms.ComboBox rubroFilter;
+        private System.Windows.Forms.TextBox nombreFilterTextBox;
+        private System.Windows.Forms.ComboBox rubroFilterComboBox;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.CheckBox habilitadoCheck;

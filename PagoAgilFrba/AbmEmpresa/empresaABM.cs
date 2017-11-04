@@ -26,7 +26,7 @@ namespace PagoAgilFrba.AbmEmpresa
         {
             List<KeyValuePair<int, string>> rubros = GetRubros();
             llenar(rubroComboBox, rubros);
-            llenar(rubroFilter, rubros);
+            llenar(rubroFilterComboBox, rubros);
         }
 
         public void llenar(ComboBox combo, List<KeyValuePair<int,string>> items)
@@ -70,10 +70,8 @@ namespace PagoAgilFrba.AbmEmpresa
                         sqlCmd.Parameters.AddWithValue("@nombre", nombreTextBox.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@cuit", cuitTextBox.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@direccion", direccionTextBox.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@idRubro", 3);//probando
-                        sqlCmd.Parameters.AddWithValue("@habilitado", 1);//probando
-                        //sqlCmd.Parameters.AddWithValue("@idRubro", rubroComboBox.ValueMember);
-                        //sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
+                        sqlCmd.Parameters.AddWithValue("@idRubro", rubroComboBox.TabIndex);
+                        sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
 
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Empresa creada");
@@ -86,7 +84,7 @@ namespace PagoAgilFrba.AbmEmpresa
                         sqlCmd.Parameters.AddWithValue("@nombre", nombreTextBox.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@cuit", cuitTextBox.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@direccion", direccionTextBox.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@idRubro", rubroComboBox.ValueMember);
+                        sqlCmd.Parameters.AddWithValue("@idRubro", rubroComboBox.TabIndex);
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
 
                         sqlCmd.ExecuteNonQuery();
@@ -98,8 +96,8 @@ namespace PagoAgilFrba.AbmEmpresa
                 if(ex is SqlException)
                 {
                     SqlException sqlException = ex as SqlException;
-
-                    if (sqlException.Number == 8114) MessageBox.Show("Todos los campos son obligatorios", "Error Message");
+                    if (sqlException.Number == 2627) MessageBox.Show("No pueden existir 2 empresas con el mismo cuit", "Error Message");
+                    else if (sqlException.Number == 8114) MessageBox.Show("Todos los campos son obligatorios", "Error Message");
                     else MessageBox.Show(ex.Message, "Mensaje de Error");
 
                 }
@@ -121,10 +119,72 @@ namespace PagoAgilFrba.AbmEmpresa
 
         private void rubroComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
 
+        void fillDataGridView()
+        {
+            if (sqlCon.State == ConnectionState.Closed)
+            {
+                sqlCon.Open();
+                SqlDataAdapter sqlDa = new SqlDataAdapter("GD2C2017.WEST_WORLD.EmpresaViewOrSearch", sqlCon);
+                sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+                sqlDa.SelectCommand.Parameters.AddWithValue("@nombre", nombreFilterTextBox.Text.Trim());
+                sqlDa.SelectCommand.Parameters.AddWithValue("@cuit", cuitFilter.Text.Trim());
+
+                if (rubroFilterComboBox.Text == "") sqlDa.SelectCommand.Parameters.AddWithValue("@idRubro", DBNull.Value);
+                else sqlDa.SelectCommand.Parameters.AddWithValue("@idRubro", rubroFilterComboBox.ValueMember);
+
+                DataTable dtbl = new DataTable();
+                sqlDa.Fill(dtbl);
+
+                empresaDataGrid.DataSource = dtbl;
+                sqlCon.Close();
+            }
+        }
+
+        private void empresaDataGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (empresaDataGrid.CurrentRow.Index != -1)
+            {
+                nombreTextBox.Text = empresaDataGrid.CurrentRow.Cells[1].Value.ToString();
+                direccionTextBox.Text = empresaDataGrid.CurrentRow.Cells[2].Value.ToString();
+                habilitadoCheck.Checked = (bool)empresaDataGrid.CurrentRow.Cells[3].Value;
+                btnGuardar.Text = "Update";
+            }
+        }
+
+        void reset()
+        {
+            nombreTextBox.Text = direccionTextBox.Text = "";
+            btnGuardar.Text = "Guardar";
+        }
+
+        private void nombreFilter_TextChanged(object sender, EventArgs e)
+        {
 
         }
 
+        private void nombreTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rubroFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBuscar_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                fillDataGridView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Message");
+            }
+        }
 
     }
 }

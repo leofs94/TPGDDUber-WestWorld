@@ -18,7 +18,7 @@ CREATE TABLE "WEST_WORLD"."Empresa"  (
 	"cuit"      	nvarchar(50) NOT NULL,
 	"nombre"    	nvarchar(255) NOT NULL,
 	"direccion" 	nvarchar(255) NOT NULL,
-	"idRubro"   	BIGINT IDENTITY(1,1) NOT NULL,
+	"idRubro"   	BIGINT NOT NULL,
 	"habilitado"	bit NOT NULL,
 	CONSTRAINT "idEmpresa" PRIMARY KEY NONCLUSTERED("cuit")
 	WITH (
