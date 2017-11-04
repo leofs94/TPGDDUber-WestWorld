@@ -10,11 +10,12 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data.Entity.Infrastructure;
 
+
 namespace PagoAgilFrba.AbmCliente
 {
     public partial class clienteABM : Form
     {
-        SqlConnection sqlCon = new SqlConnection(ConnectionString.sqlCon);
+        SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.SQLSERVER2012);
         public clienteABM()
         {
             InitializeComponent();
@@ -27,6 +28,19 @@ namespace PagoAgilFrba.AbmCliente
 
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guardarToolStripButton_Click(object sender, EventArgs e)
+        {
+        }
 
         private void InitializeComponent()
         {
@@ -294,6 +308,7 @@ namespace PagoAgilFrba.AbmCliente
             this.label13.Size = new System.Drawing.Size(54, 13);
             this.label13.TabIndex = 28;
             this.label13.Text = "Habilitado";
+            this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
             // habilitadoCheck
             // 
@@ -303,6 +318,7 @@ namespace PagoAgilFrba.AbmCliente
             this.habilitadoCheck.Size = new System.Drawing.Size(15, 14);
             this.habilitadoCheck.TabIndex = 29;
             this.habilitadoCheck.UseVisualStyleBackColor = true;
+            this.habilitadoCheck.CheckedChanged += new System.EventHandler(this.habilitadoCheck_CheckedChanged);
             // 
             // clienteABM
             // 
@@ -403,7 +419,6 @@ namespace PagoAgilFrba.AbmCliente
                     if (sqlException.Number == 2627) MessageBox.Show("No pueden existir 2 clientes con el mismo mail", "Error Message");
                     else if (sqlException.Number == 8114) MessageBox.Show("Todos los campos son obligatorios", "Error Message");
                     else MessageBox.Show(ex.Message, "Mensaje de Error");
-                    
 
                 }
                 else
@@ -485,6 +500,16 @@ namespace PagoAgilFrba.AbmCliente
         }
 
         private void clienteABM_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void habilitadoCheck_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label13_Click(object sender, EventArgs e)
         {
 
         }

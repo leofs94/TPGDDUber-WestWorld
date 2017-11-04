@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.ABMClienteBtn = new System.Windows.Forms.Button();
-            this.abmEmpresa = new System.Windows.Forms.Button();
+            this.ABMEmpresaBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ABMClienteBtn
@@ -42,22 +42,22 @@
             this.ABMClienteBtn.UseVisualStyleBackColor = true;
             this.ABMClienteBtn.Click += new System.EventHandler(this.ABMClienteBtn_Click);
             // 
-            // abmEmpresa
+            // ABMEmpresaBtn
             // 
-            this.abmEmpresa.Location = new System.Drawing.Point(317, 12);
-            this.abmEmpresa.Name = "abmEmpresa";
-            this.abmEmpresa.Size = new System.Drawing.Size(207, 47);
-            this.abmEmpresa.TabIndex = 1;
-            this.abmEmpresa.Text = "ABM Empresa";
-            this.abmEmpresa.UseVisualStyleBackColor = true;
-            this.abmEmpresa.Click += new System.EventHandler(this.abmEmpresa_Click);
+            this.ABMEmpresaBtn.Location = new System.Drawing.Point(288, 12);
+            this.ABMEmpresaBtn.Name = "ABMEmpresaBtn";
+            this.ABMEmpresaBtn.Size = new System.Drawing.Size(218, 47);
+            this.ABMEmpresaBtn.TabIndex = 0;
+            this.ABMEmpresaBtn.Text = "ABM Empresa";
+            this.ABMEmpresaBtn.UseVisualStyleBackColor = true;
+            this.ABMEmpresaBtn.Click += new System.EventHandler(this.ABMEmpresaBtn_Click);
             // 
             // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(877, 317);
-            this.Controls.Add(this.abmEmpresa);
+            this.Controls.Add(this.ABMEmpresaBtn);
             this.Controls.Add(this.ABMClienteBtn);
             this.Name = "Index";
             this.Text = "Menu Principal";
@@ -69,7 +69,7 @@
         #endregion
 
         private System.Windows.Forms.Button ABMClienteBtn;
-        private System.Windows.Forms.Button abmEmpresa;
+        private System.Windows.Forms.Button ABMEmpresaBtn;
     }
 }
 

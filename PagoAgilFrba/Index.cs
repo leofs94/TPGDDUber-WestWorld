@@ -29,7 +29,7 @@ namespace PagoAgilFrba
 
         }
 
-        private void abmEmpresa_Click(object sender, EventArgs e)
+        private void ABMEmpresaBtn_Click(object sender, EventArgs e)
         {
             AbmEmpresa.empresaABM empresaABM = new AbmEmpresa.empresaABM();
             empresaABM.ShowDialog();

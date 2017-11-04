@@ -46,6 +46,8 @@
             this.rubroFilter = new System.Windows.Forms.ComboBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.habilitadoCheck = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.empresaDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,6 +85,7 @@
             this.rubroComboBox.Name = "rubroComboBox";
             this.rubroComboBox.Size = new System.Drawing.Size(121, 21);
             this.rubroComboBox.TabIndex = 3;
+            this.rubroComboBox.SelectedIndexChanged += new System.EventHandler(this.rubroComboBox_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -125,7 +128,7 @@
             // Filtrar
             // 
             this.Filtrar.AutoSize = true;
-            this.Filtrar.Location = new System.Drawing.Point(31, 128);
+            this.Filtrar.Location = new System.Drawing.Point(26, 148);
             this.Filtrar.Name = "Filtrar";
             this.Filtrar.Size = new System.Drawing.Size(32, 13);
             this.Filtrar.TabIndex = 9;
@@ -188,7 +191,7 @@
             this.btnGuardar.TabIndex = 16;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
-            //this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnBuscar
             // 
@@ -199,11 +202,32 @@
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             // 
+            // habilitadoCheck
+            // 
+            this.habilitadoCheck.AutoSize = true;
+            this.habilitadoCheck.Location = new System.Drawing.Point(102, 96);
+            this.habilitadoCheck.Name = "habilitadoCheck";
+            this.habilitadoCheck.Size = new System.Drawing.Size(15, 14);
+            this.habilitadoCheck.TabIndex = 31;
+            this.habilitadoCheck.UseVisualStyleBackColor = true;
+            this.habilitadoCheck.CheckedChanged += new System.EventHandler(this.habilitadoCheck_CheckedChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(26, 96);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(54, 13);
+            this.label13.TabIndex = 30;
+            this.label13.Text = "Habilitado";
+            // 
             // empresaABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(992, 452);
+            this.Controls.Add(this.habilitadoCheck);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.rubroFilter);
@@ -250,5 +274,7 @@
         private System.Windows.Forms.ComboBox rubroFilter;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.CheckBox habilitadoCheck;
+        private System.Windows.Forms.Label label13;
     }
 }
