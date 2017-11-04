@@ -13,9 +13,8 @@ namespace PagoAgilFrba.AbmEmpresa
 {
     public partial class empresaABM : Form
 
-    {
-
-        SqlConnection sqlCon = new SqlConnection(@"Data Source=10.15.241.254;Integrated Security=False;User ID=SA;Password=uD4D9uwT9hNjV7;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+    { 
+      SqlConnection sqlCon =  new SqlConnection(ConnectionString.sqlCon);
         public empresaABM()
         {
             InitializeComponent();

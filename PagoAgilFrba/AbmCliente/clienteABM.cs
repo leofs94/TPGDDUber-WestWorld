@@ -14,7 +14,7 @@ namespace PagoAgilFrba.AbmCliente
 {
     public partial class clienteABM : Form
     {
-        SqlConnection sqlCon = new SqlConnection(@"Data Source=192.168.0.31;Integrated Security=False;User ID=SA;Password=uD4D9uwT9hNjV7;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection sqlCon = new SqlConnection(ConnectionString.sqlCon);
         public clienteABM()
         {
             InitializeComponent();
@@ -27,19 +27,6 @@ namespace PagoAgilFrba.AbmCliente
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guardarToolStripButton_Click(object sender, EventArgs e)
-        {
-        }
 
         private void InitializeComponent()
         {
@@ -416,6 +403,7 @@ namespace PagoAgilFrba.AbmCliente
                     if (sqlException.Number == 2627) MessageBox.Show("No pueden existir 2 clientes con el mismo mail", "Error Message");
                     else if (sqlException.Number == 8114) MessageBox.Show("Todos los campos son obligatorios", "Error Message");
                     else MessageBox.Show(ex.Message, "Mensaje de Error");
+                    
 
                 }
                 else

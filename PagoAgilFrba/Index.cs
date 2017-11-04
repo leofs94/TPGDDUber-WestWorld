@@ -28,5 +28,11 @@ namespace PagoAgilFrba
             clienteABM.ShowDialog();
 
         }
+
+        private void abmEmpresa_Click(object sender, EventArgs e)
+        {
+            AbmEmpresa.empresaABM empresaABM = new AbmEmpresa.empresaABM();
+            empresaABM.ShowDialog();
+        }
     }
 }

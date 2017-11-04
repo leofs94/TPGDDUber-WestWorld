@@ -97,6 +97,7 @@
     <Compile Include="AbmSucursal\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Const.cs" />
     <Compile Include="Index.cs">
       <SubType>Form</SubType>
     </Compile>
