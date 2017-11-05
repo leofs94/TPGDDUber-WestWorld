@@ -137,6 +137,20 @@ namespace PagoAgilFrba.AbmSucursal
             }
         }
 
+        private void sucursalDataGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (sucursalDataGrid.CurrentRow.Index != -1)
+            {
+                nombreTextBox.Text = sucursalDataGrid.CurrentRow.Cells[1].Value.ToString();
+                direccionTextBox.Text = sucursalDataGrid.CurrentRow.Cells[2].Value.ToString();
+                codigoPostalTxtBox.Text = sucursalDataGrid.CurrentRow.Cells[3].Value.ToString();
+                habilitadoCheck.Checked = (bool)sucursalDataGrid.CurrentRow.Cells[4].Value;
+                guardarBtn.Text = "Update";
+            }
+        }
+
+
+
         private void sucursalDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 

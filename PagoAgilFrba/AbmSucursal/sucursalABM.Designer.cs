@@ -129,6 +129,8 @@
             this.sucursalDataGrid.Size = new System.Drawing.Size(623, 150);
             this.sucursalDataGrid.TabIndex = 36;
             this.sucursalDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sucursalDataGrid_CellContentClick);
+            this.sucursalDataGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.sucursalDataGrid_MouseDoubleClick);
+
             // 
             // label8
             // 

@@ -128,9 +128,11 @@ namespace PagoAgilFrba.AbmEmpresa
         {
             if (empresaDataGrid.CurrentRow.Index != -1)
             {
+                cuitTextBox.Text = empresaDataGrid.CurrentRow.Cells[0].Value.ToString();
                 nombreTextBox.Text = empresaDataGrid.CurrentRow.Cells[1].Value.ToString();
                 direccionTextBox.Text = empresaDataGrid.CurrentRow.Cells[2].Value.ToString();
-                habilitadoCheck.Checked = (bool)empresaDataGrid.CurrentRow.Cells[3].Value;
+                rubroComboBox.SelectedIndex = Convert.ToInt32(empresaDataGrid.CurrentRow.Cells[3].Value.ToString()) - 1;
+                habilitadoCheck.Checked = (bool)empresaDataGrid.CurrentRow.Cells[4].Value;
                 btnGuardar.Text = "Update";
             }
         }
@@ -196,6 +198,11 @@ namespace PagoAgilFrba.AbmEmpresa
             nombreTextBox.Text = direccionTextBox.Text = cuitTextBox.Text = nombreFilterTextBox.Text 
                 = cuitFilter.Text = rubroComboBox.Text = rubroFilterComboBox.Text = "";
             btnGuardar.Text = "Guardar";
+        }
+
+        private void empresaDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
 

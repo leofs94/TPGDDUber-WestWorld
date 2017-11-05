@@ -125,6 +125,9 @@
             this.empresaDataGrid.Name = "empresaDataGrid";
             this.empresaDataGrid.Size = new System.Drawing.Size(665, 150);
             this.empresaDataGrid.TabIndex = 8;
+            this.empresaDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.empresaDataGrid_CellContentClick);
+            this.empresaDataGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.empresaDataGrid_MouseDoubleClick);
+
             // 
             // Filtrar
             // 
