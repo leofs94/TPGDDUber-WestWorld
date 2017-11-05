@@ -37,7 +37,6 @@
             this.searchButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.sucursalDataGrid = new System.Windows.Forms.DataGridView();
-            this.dniFilterTxt = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.apellidoFilterTxt = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@
             this.guardarBtn = new System.Windows.Forms.Button();
             this.habilitadoCheck = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.codigoPostalFilterTxtBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.sucursalDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,6 +90,7 @@
             this.codigoPostalTxtBox.Name = "codigoPostalTxtBox";
             this.codigoPostalTxtBox.Size = new System.Drawing.Size(48, 20);
             this.codigoPostalTxtBox.TabIndex = 17;
+            this.codigoPostalTxtBox.TextChanged += new System.EventHandler(this.codigoPostalTxtBox_TextChanged);
             // 
             // label5
             // 
@@ -128,13 +129,6 @@
             this.sucursalDataGrid.Size = new System.Drawing.Size(623, 150);
             this.sucursalDataGrid.TabIndex = 36;
             this.sucursalDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sucursalDataGrid_CellContentClick);
-            // 
-            // dniFilterTxt
-            // 
-            this.dniFilterTxt.Location = new System.Drawing.Point(531, 215);
-            this.dniFilterTxt.Name = "dniFilterTxt";
-            this.dniFilterTxt.Size = new System.Drawing.Size(100, 20);
-            this.dniFilterTxt.TabIndex = 35;
             // 
             // label8
             // 
@@ -214,17 +208,25 @@
             this.label13.TabIndex = 39;
             this.label13.Text = "Habilitado";
             // 
+            // codigoPostalFilterTxtBox
+            // 
+            this.codigoPostalFilterTxtBox.Location = new System.Drawing.Point(544, 215);
+            this.codigoPostalFilterTxtBox.Name = "codigoPostalFilterTxtBox";
+            this.codigoPostalFilterTxtBox.Size = new System.Drawing.Size(122, 20);
+            this.codigoPostalFilterTxtBox.TabIndex = 41;
+            this.codigoPostalFilterTxtBox.TextChanged += new System.EventHandler(this.codigoPostalFilterTextBox_TextChanged);
+            // 
             // sucursalABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(859, 474);
+            this.Controls.Add(this.codigoPostalFilterTxtBox);
             this.Controls.Add(this.habilitadoCheck);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.sucursalDataGrid);
-            this.Controls.Add(this.dniFilterTxt);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.apellidoFilterTxt);
             this.Controls.Add(this.label7);
@@ -257,7 +259,6 @@
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView sucursalDataGrid;
-        private System.Windows.Forms.TextBox dniFilterTxt;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox apellidoFilterTxt;
         private System.Windows.Forms.Label label7;
@@ -267,5 +268,6 @@
         private System.Windows.Forms.Button guardarBtn;
         private System.Windows.Forms.CheckBox habilitadoCheck;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox codigoPostalFilterTxtBox;
     }
 }

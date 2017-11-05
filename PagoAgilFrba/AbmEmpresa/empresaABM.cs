@@ -170,8 +170,12 @@ namespace PagoAgilFrba.AbmEmpresa
                 SqlDataAdapter sqlDa = new SqlDataAdapter("GD2C2017.WEST_WORLD.EmpresaViewOrSearch", sqlCon);
                 sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
                 sqlDa.SelectCommand.Parameters.AddWithValue("@nombre", nombreFilterTextBox.Text.Trim());
-                sqlDa.SelectCommand.Parameters.AddWithValue("@cuit", cuitFilter.Text.Trim());
-                sqlDa.SelectCommand.Parameters.AddWithValue("@idRubro", rubroComboBox.SelectedIndex + 1);
+                if (cuitFilter.Text.Trim() == "")
+                    sqlDa.SelectCommand.Parameters.AddWithValue("@cuit", DBNull.Value);
+                else sqlDa.SelectCommand.Parameters.AddWithValue("@cuit", cuitFilter.Text.Trim());
+                if (rubroFilterComboBox.Text.Trim() == "")
+                    sqlDa.SelectCommand.Parameters.AddWithValue("@idRubro", DBNull.Value);
+                else sqlDa.SelectCommand.Parameters.AddWithValue("@idRubro", rubroFilterComboBox.SelectedIndex + 1);
 
                 DataTable dtbl = new DataTable();
                 sqlDa.Fill(dtbl);

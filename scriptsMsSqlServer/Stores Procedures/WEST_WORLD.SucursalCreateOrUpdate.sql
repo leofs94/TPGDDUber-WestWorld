@@ -3,7 +3,7 @@ CREATE PROCEDURE WEST_WORLD.SucursalCreateOrUpdate
 @idSucursal bigint,
 @nombre nvarchar(50),
 @direccion nvarchar(50),
-@codigoPostal numeric(15,5),
+@codigoPostal numeric(15,0),
 @habilitado bit,
 @operador bigint
 

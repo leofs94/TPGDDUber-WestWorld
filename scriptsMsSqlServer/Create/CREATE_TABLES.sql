@@ -68,7 +68,7 @@ CREATE TABLE "WEST_WORLD"."Pago"  (
 	"FechaVencimiento"	datetime NOT NULL,
 	"empresa"         	nvarchar(50) NOT NULL,
 	"cliente"         	bigint NOT NULL,
-	"sucursal"        	numeric(15,5) NOT NULL,
+	"sucursal"        	numeric(15,0) NOT NULL,
 	"importe"         	numeric(15,5) NOT NULL,
 	"formaPago"       	bigint NOT NULL,
 	CONSTRAINT "idPago" PRIMARY KEY CLUSTERED("idPago")
@@ -114,7 +114,7 @@ CREATE TABLE "WEST_WORLD"."Sucursal"  (
 	"idSucursal"  	bigint IDENTITY(1,1) NOT NULL,
 	"nombre"      	nvarchar(50) NOT NULL,
 	"direccion"   	nvarchar(50) NOT NULL,
-	"codigoPostal"	numeric(15,5) NOT NULL,
+	"codigoPostal"	numeric(15,0) NOT NULL,
 	"habilitado"  	bit NOT NULL,
 	"operador"    	bigint NOT NULL,
 	CONSTRAINT "PKSucursal" PRIMARY KEY NONCLUSTERED("codigoPostal")

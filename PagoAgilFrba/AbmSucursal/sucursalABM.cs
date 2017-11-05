@@ -30,7 +30,8 @@ namespace PagoAgilFrba.AbmSucursal
 
         void reset()
         {
-            nombreTextBox.Text = direccionTextBox.Text = codigoPostalTxtBox.Text = "";
+            nombreTextBox.Text = direccionTextBox.Text = codigoPostalTxtBox.Text = nombreFilterTxt.Text = 
+                apellidoFilterTxt.Text = "";
             guardarBtn.Text = "Guardar";
         }
 
@@ -48,12 +49,13 @@ namespace PagoAgilFrba.AbmSucursal
                 sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
                 sqlDa.SelectCommand.Parameters.AddWithValue("@nombre", nombreFilterTxt.Text.Trim());
                 sqlDa.SelectCommand.Parameters.AddWithValue("@direccion", apellidoFilterTxt.Text.Trim());
-                sqlDa.SelectCommand.Parameters.AddWithValue("@codigoPostal", Convert.ToInt32(codigoPostalTxtBox.Text.Trim()));
+                if (codigoPostalFilterTxtBox.Text.Trim() == "")
+                    sqlDa.SelectCommand.Parameters.AddWithValue("@codigoPostal", DBNull.Value);
+                else sqlDa.SelectCommand.Parameters.AddWithValue("@codigoPostal", Convert.ToInt32(codigoPostalFilterTxtBox.Text.Trim()));
                 DataTable dtbl = new DataTable();
                 sqlDa.Fill(dtbl);
 
                 sucursalDataGrid.DataSource = dtbl;
-                sqlCon.Close();
             }
         }
 
@@ -65,8 +67,11 @@ namespace PagoAgilFrba.AbmSucursal
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error Message");
+            }
+            finally
+            {
+                sqlCon.Close();
             }
 
         }
@@ -107,11 +112,8 @@ namespace PagoAgilFrba.AbmSucursal
 
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Sucursal modificada correctamente");
-
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -122,7 +124,6 @@ namespace PagoAgilFrba.AbmSucursal
                     if (sqlException.Number == 2627) MessageBox.Show("No pueden existir 2 sucursales con el mismo codigo postal", "Error Message");
                     else if (sqlException.Number == 8114) MessageBox.Show("Todos los campos son obligatorios", "Error Message");
                     else MessageBox.Show(ex.Message, "Mensaje de Error");
-
                 }
                 else
                 {
@@ -137,6 +138,16 @@ namespace PagoAgilFrba.AbmSucursal
         }
 
         private void sucursalDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void codigoPostalFilterTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void codigoPostalTxtBox_TextChanged(object sender, EventArgs e)
         {
 
         }
