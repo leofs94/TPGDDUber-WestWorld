@@ -70,7 +70,7 @@ namespace PagoAgilFrba.AbmEmpresa
                         sqlCmd.Parameters.AddWithValue("@nombre", nombreTextBox.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@cuit", cuitTextBox.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@direccion", direccionTextBox.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@idRubro", rubroComboBox.TabIndex);
+                        sqlCmd.Parameters.AddWithValue("@idRubro", rubroComboBox.SelectedIndex + 1); //+1 Porque arranca de 0
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
 
                         sqlCmd.ExecuteNonQuery();
@@ -84,7 +84,7 @@ namespace PagoAgilFrba.AbmEmpresa
                         sqlCmd.Parameters.AddWithValue("@nombre", nombreTextBox.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@cuit", cuitTextBox.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@direccion", direccionTextBox.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@idRubro", rubroComboBox.TabIndex);
+                        sqlCmd.Parameters.AddWithValue("@idRubro", rubroComboBox.SelectedIndex + 1); //+1 Porque arranca de 0
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
 
                         sqlCmd.ExecuteNonQuery();
@@ -131,8 +131,7 @@ namespace PagoAgilFrba.AbmEmpresa
                 sqlDa.SelectCommand.Parameters.AddWithValue("@nombre", nombreFilterTextBox.Text.Trim());
                 sqlDa.SelectCommand.Parameters.AddWithValue("@cuit", cuitFilter.Text.Trim());
 
-                if (rubroFilterComboBox.Text == "") sqlDa.SelectCommand.Parameters.AddWithValue("@idRubro", DBNull.Value);
-                else sqlDa.SelectCommand.Parameters.AddWithValue("@idRubro", rubroFilterComboBox.ValueMember);
+                sqlDa.SelectCommand.Parameters.AddWithValue("@idRubro", rubroFilterComboBox.ValueMember);
 
                 DataTable dtbl = new DataTable();
                 sqlDa.Fill(dtbl);

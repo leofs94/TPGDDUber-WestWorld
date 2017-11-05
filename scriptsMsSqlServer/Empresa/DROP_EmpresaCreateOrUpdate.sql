@@ -1,2 +1,0 @@
-IF OBJECT_ID('WEST_WORLD.EmpresaCreateOrUpdate') IS NOT NULL
-DROP PROCEDURE WEST_WORLD.EmpresaCreateOrUpdate 

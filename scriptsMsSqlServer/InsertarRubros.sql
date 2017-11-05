@@ -3,6 +3,5 @@ INSERT INTO WEST_WORLD.Rubro(idRubro,nombre)
 INSERT INTO WEST_WORLD.Rubro(idRubro,nombre) 
 					  VALUES(2, 'Piedras')
 INSERT INTO WEST_WORLD.Rubro(idRubro,nombre) 
-				      VALUES(3, 'Alquiler de pollos')
-
+				          VALUES(3, 'Alquiler de pollos')
 
