@@ -6,7 +6,7 @@ AS
 	SELECT *
 	FROM WEST_WORLD.Empresa
 	WHERE nombre LIKE @nombre + '%' 
-			 AND (@cuit IS NULL OR (cuit = @cuit))
+			 AND cuit LIKE @cuit
 			 AND (@idRubro IS NULL OR (idRubro = @idRubro))
         OPTION (RECOMPILE)
 RETURN 0

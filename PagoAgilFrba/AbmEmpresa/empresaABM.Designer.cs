@@ -48,6 +48,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.habilitadoCheck = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.empresaDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,7 +121,7 @@
             // empresaDataGrid
             // 
             this.empresaDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.empresaDataGrid.Location = new System.Drawing.Point(26, 239);
+            this.empresaDataGrid.Location = new System.Drawing.Point(91, 222);
             this.empresaDataGrid.Name = "empresaDataGrid";
             this.empresaDataGrid.Size = new System.Drawing.Size(665, 150);
             this.empresaDataGrid.TabIndex = 8;
@@ -186,7 +187,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(616, 55);
+            this.btnGuardar.Location = new System.Drawing.Point(132, 400);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 16;
@@ -223,11 +224,22 @@
             this.label13.TabIndex = 30;
             this.label13.Text = "Habilitado";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(304, 400);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 38;
+            this.button1.Text = "Limpiar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // empresaABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 452);
+            this.ClientSize = new System.Drawing.Size(799, 452);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.habilitadoCheck);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.btnBuscar);
@@ -278,5 +290,6 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.CheckBox habilitadoCheck;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button button1;
     }
 }

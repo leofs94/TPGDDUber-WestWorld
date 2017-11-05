@@ -91,11 +91,11 @@
     <Compile Include="AbmRol\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmSucursal\Form1.cs">
+    <Compile Include="AbmSucursal\sucursalABM.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmSucursal\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmSucursal\sucursalABM.Designer.cs">
+      <DependentUpon>sucursalABM.cs</DependentUpon>
     </Compile>
     <Compile Include="GD2C2017DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -133,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmEmpresa\empresaABM.resx">
       <DependentUpon>empresaABM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmSucursal\sucursalABM.resx">
+      <DependentUpon>sucursalABM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Index.resx">
       <DependentUpon>Index.cs</DependentUpon>

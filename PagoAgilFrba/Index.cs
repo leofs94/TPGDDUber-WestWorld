@@ -34,5 +34,11 @@ namespace PagoAgilFrba
             AbmEmpresa.empresaABM empresaABM = new AbmEmpresa.empresaABM();
             empresaABM.ShowDialog();
         }
+
+        private void AbmSucursalBtn_Click(object sender, EventArgs e)
+        {
+            AbmSucursal.sucursalABM sucursalABM = new AbmSucursal.sucursalABM();
+            sucursalABM.ShowDialog();
+        }
     }
 }

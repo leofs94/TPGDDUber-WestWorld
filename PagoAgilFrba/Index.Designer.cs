@@ -30,6 +30,7 @@
         {
             this.ABMClienteBtn = new System.Windows.Forms.Button();
             this.ABMEmpresaBtn = new System.Windows.Forms.Button();
+            this.AbmSucursalBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ABMClienteBtn
@@ -52,11 +53,22 @@
             this.ABMEmpresaBtn.UseVisualStyleBackColor = true;
             this.ABMEmpresaBtn.Click += new System.EventHandler(this.ABMEmpresaBtn_Click);
             // 
+            // AbmSucursalBtn
+            // 
+            this.AbmSucursalBtn.Location = new System.Drawing.Point(553, 12);
+            this.AbmSucursalBtn.Name = "AbmSucursalBtn";
+            this.AbmSucursalBtn.Size = new System.Drawing.Size(218, 47);
+            this.AbmSucursalBtn.TabIndex = 1;
+            this.AbmSucursalBtn.Text = "ABM Sucursal";
+            this.AbmSucursalBtn.UseVisualStyleBackColor = true;
+            this.AbmSucursalBtn.Click += new System.EventHandler(this.AbmSucursalBtn_Click);
+            // 
             // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(877, 317);
+            this.Controls.Add(this.AbmSucursalBtn);
             this.Controls.Add(this.ABMEmpresaBtn);
             this.Controls.Add(this.ABMClienteBtn);
             this.Name = "Index";
@@ -70,6 +82,7 @@
 
         private System.Windows.Forms.Button ABMClienteBtn;
         private System.Windows.Forms.Button ABMEmpresaBtn;
+        private System.Windows.Forms.Button AbmSucursalBtn;
     }
 }
 

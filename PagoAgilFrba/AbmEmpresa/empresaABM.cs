@@ -54,6 +54,7 @@ namespace PagoAgilFrba.AbmEmpresa
                 rubros.Add(new KeyValuePair<int, string>(Int32.Parse(reader["idRubro"].ToString()), reader["nombre"].ToString()));
             }
             reader.Close();
+            sqlCon.Close();
             return rubros;
         }
 
@@ -61,7 +62,8 @@ namespace PagoAgilFrba.AbmEmpresa
         {
             try
             {
-                if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
+                if (sqlCon.State == ConnectionState.Closed){
+                sqlCon.Open();
                 if (btnGuardar.Text == "Guardar")
                     {
                         SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.EmpresaCreateOrUpdate", sqlCon);
@@ -91,6 +93,7 @@ namespace PagoAgilFrba.AbmEmpresa
                         MessageBox.Show("Empresa modificada correctamente");
 
                     }
+                }
             }catch (Exception ex)
             { 
                 if(ex is SqlException)
@@ -121,26 +124,6 @@ namespace PagoAgilFrba.AbmEmpresa
         {
         }
 
-        void fillDataGridView()
-        {
-            if (sqlCon.State == ConnectionState.Closed)
-            {
-                sqlCon.Open();
-                SqlDataAdapter sqlDa = new SqlDataAdapter("GD2C2017.WEST_WORLD.EmpresaViewOrSearch", sqlCon);
-                sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-                sqlDa.SelectCommand.Parameters.AddWithValue("@nombre", nombreFilterTextBox.Text.Trim());
-                sqlDa.SelectCommand.Parameters.AddWithValue("@cuit", cuitFilter.Text.Trim());
-
-                sqlDa.SelectCommand.Parameters.AddWithValue("@idRubro", rubroFilterComboBox.ValueMember);
-
-                DataTable dtbl = new DataTable();
-                sqlDa.Fill(dtbl);
-
-                empresaDataGrid.DataSource = dtbl;
-                sqlCon.Close();
-            }
-        }
-
         private void empresaDataGrid_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (empresaDataGrid.CurrentRow.Index != -1)
@@ -150,12 +133,6 @@ namespace PagoAgilFrba.AbmEmpresa
                 habilitadoCheck.Checked = (bool)empresaDataGrid.CurrentRow.Cells[3].Value;
                 btnGuardar.Text = "Update";
             }
-        }
-
-        void reset()
-        {
-            nombreTextBox.Text = direccionTextBox.Text = "";
-            btnGuardar.Text = "Guardar";
         }
 
         private void nombreFilter_TextChanged(object sender, EventArgs e)
@@ -184,6 +161,39 @@ namespace PagoAgilFrba.AbmEmpresa
                 MessageBox.Show(ex.Message, "Error Message");
             }
         }
+
+        void fillDataGridView()
+        {
+            if (sqlCon.State == ConnectionState.Closed)
+            {
+                sqlCon.Open();
+                SqlDataAdapter sqlDa = new SqlDataAdapter("GD2C2017.WEST_WORLD.EmpresaViewOrSearch", sqlCon);
+                sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+                sqlDa.SelectCommand.Parameters.AddWithValue("@nombre", nombreFilterTextBox.Text.Trim());
+                sqlDa.SelectCommand.Parameters.AddWithValue("@cuit", cuitFilter.Text.Trim());
+                sqlDa.SelectCommand.Parameters.AddWithValue("@idRubro", rubroComboBox.SelectedIndex + 1);
+
+                DataTable dtbl = new DataTable();
+                sqlDa.Fill(dtbl);
+
+                empresaDataGrid.DataSource = dtbl;
+                sqlCon.Close();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            reset();
+        }
+
+
+        void reset()
+        {
+            nombreTextBox.Text = direccionTextBox.Text = cuitTextBox.Text = nombreFilterTextBox.Text 
+                = cuitFilter.Text = rubroComboBox.Text = rubroFilterComboBox.Text = "";
+            btnGuardar.Text = "Guardar";
+        }
+
 
     }
 }

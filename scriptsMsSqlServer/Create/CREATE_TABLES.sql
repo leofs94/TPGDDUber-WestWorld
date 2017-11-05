@@ -11,6 +11,7 @@ CREATE TABLE "WEST_WORLD"."Cliente"  (
 	"DNI"         	numeric(15,5) NOT NULL,
 	"telefono"    	numeric(15,5) NOT NULL,
 	"fecha_nac"   	datetime NOT NULL,
+	"habilitado"	bit NOT NULL,
 	CONSTRAINT "id" PRIMARY KEY CLUSTERED("idCliente")
  ON [PRIMARY])
 GO
