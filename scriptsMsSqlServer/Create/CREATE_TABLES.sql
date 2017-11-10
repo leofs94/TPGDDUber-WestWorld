@@ -123,9 +123,9 @@ CREATE TABLE "WEST_WORLD"."Sucursal"  (
 	) ON [PRIMARY])
 GO
 CREATE TABLE "WEST_WORLD"."Usuario"  ( 
-	"idUser"      	bigint NOT NULL,
+	"idUser"      	bigint IDENTITY (1, 1) NOT NULL,
 	"user"        	nvarchar(50) NOT NULL,
-	"pass"        	nvarchar(50) NOT NULL,
+	"pass"        	BINARY (50) NOT NULL,
 	"failedLogins"	int NOT NULL,
 	CONSTRAINT "idUserPK" PRIMARY KEY CLUSTERED("idUser")
  ON [PRIMARY])
