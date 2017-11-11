@@ -6,3 +6,6 @@ create schema WEST_WORLD
 USE WEST_WORLD
 
 Cualquier cosa miren la pagina 13 del enunciado
+
+Para loguearse es: user:admin
+                    pass:w23e
