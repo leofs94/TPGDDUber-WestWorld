@@ -112,7 +112,8 @@ namespace PagoAgilFrba.AbmEmpresa
             }
             finally
             {
-                sqlCon.Close();
+                if (sqlCon.State == ConnectionState.Open)
+                    sqlCon.Close();
             }
         }
 
@@ -201,6 +202,11 @@ namespace PagoAgilFrba.AbmEmpresa
         }
 
         private void empresaDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void empresaABM_Load(object sender, EventArgs e)
         {
 
         }

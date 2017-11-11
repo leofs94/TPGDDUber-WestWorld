@@ -130,7 +130,6 @@
             this.sucursalDataGrid.TabIndex = 36;
             this.sucursalDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sucursalDataGrid_CellContentClick);
             this.sucursalDataGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.sucursalDataGrid_MouseDoubleClick);
-
             // 
             // label8
             // 
@@ -244,6 +243,7 @@
             this.Controls.Add(this.label1);
             this.Name = "sucursalABM";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.sucursalABM_Load);
             ((System.ComponentModel.ISupportInitialize)(this.sucursalDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

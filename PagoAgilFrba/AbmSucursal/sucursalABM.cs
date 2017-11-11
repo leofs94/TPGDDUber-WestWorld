@@ -133,7 +133,8 @@ namespace PagoAgilFrba.AbmSucursal
             }
             finally
             {
-                sqlCon.Close();
+                if (sqlCon.State == ConnectionState.Open)
+                    sqlCon.Close();
             }
         }
 
@@ -162,6 +163,11 @@ namespace PagoAgilFrba.AbmSucursal
         }
 
         private void codigoPostalTxtBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sucursalABM_Load(object sender, EventArgs e)
         {
 
         }

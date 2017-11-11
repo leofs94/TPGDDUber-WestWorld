@@ -127,7 +127,6 @@
             this.empresaDataGrid.TabIndex = 8;
             this.empresaDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.empresaDataGrid_CellContentClick);
             this.empresaDataGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.empresaDataGrid_MouseDoubleClick);
-
             // 
             // Filtrar
             // 
@@ -150,7 +149,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(230, 181);
+            this.label6.Location = new System.Drawing.Point(273, 183);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(25, 13);
             this.label6.TabIndex = 11;
@@ -159,7 +158,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(362, 181);
+            this.label7.Location = new System.Drawing.Point(474, 181);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 13);
             this.label7.TabIndex = 12;
@@ -167,24 +166,24 @@
             // 
             // cuitFilter
             // 
-            this.cuitFilter.Location = new System.Drawing.Point(273, 178);
+            this.cuitFilter.Location = new System.Drawing.Point(304, 178);
             this.cuitFilter.Name = "cuitFilter";
-            this.cuitFilter.Size = new System.Drawing.Size(41, 20);
+            this.cuitFilter.Size = new System.Drawing.Size(112, 20);
             this.cuitFilter.TabIndex = 13;
             // 
             // nombreFilterTextBox
             // 
             this.nombreFilterTextBox.Location = new System.Drawing.Point(138, 178);
             this.nombreFilterTextBox.Name = "nombreFilterTextBox";
-            this.nombreFilterTextBox.Size = new System.Drawing.Size(36, 20);
+            this.nombreFilterTextBox.Size = new System.Drawing.Size(101, 20);
             this.nombreFilterTextBox.TabIndex = 14;
             // 
             // rubroFilterComboBox
             // 
             this.rubroFilterComboBox.FormattingEnabled = true;
-            this.rubroFilterComboBox.Location = new System.Drawing.Point(404, 178);
+            this.rubroFilterComboBox.Location = new System.Drawing.Point(528, 178);
             this.rubroFilterComboBox.Name = "rubroFilterComboBox";
-            this.rubroFilterComboBox.Size = new System.Drawing.Size(121, 21);
+            this.rubroFilterComboBox.Size = new System.Drawing.Size(110, 21);
             this.rubroFilterComboBox.TabIndex = 15;
             this.rubroFilterComboBox.SelectedIndexChanged += new System.EventHandler(this.rubroFilter_SelectedIndexChanged);
             // 
@@ -200,7 +199,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(604, 176);
+            this.btnBuscar.Location = new System.Drawing.Point(681, 176);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 17;
@@ -265,6 +264,7 @@
             this.Controls.Add(this.label1);
             this.Name = "empresaABM";
             this.Text = "ABM Empresa";
+            this.Load += new System.EventHandler(this.empresaABM_Load);
             ((System.ComponentModel.ISupportInitialize)(this.empresaDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

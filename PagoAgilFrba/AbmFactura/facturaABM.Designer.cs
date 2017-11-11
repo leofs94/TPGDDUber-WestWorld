@@ -34,25 +34,30 @@
             this.numFactTextBox = new System.Windows.Forms.TextBox();
             this.empresaComboBox = new System.Windows.Forms.ComboBox();
             this.numFactLabel = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.fechaAltaFactDT = new System.Windows.Forms.DateTimePicker();
             this.fechaAltaFactLabel = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.fechaVencDT = new System.Windows.Forms.DateTimePicker();
             this.fechaVencLabel = new System.Windows.Forms.Label();
             this.totalLabel = new System.Windows.Forms.Label();
-            this.TotalTextBox = new System.Windows.Forms.TextBox();
-            this.itemsLabel = new System.Windows.Forms.Label();
-            this.cantTextBox = new System.Windows.Forms.TextBox();
-            this.montoTextBox = new System.Windows.Forms.TextBox();
-            this.cantidadTextBox = new System.Windows.Forms.Label();
-            this.cantidadLabel = new System.Windows.Forms.Label();
-            this.agregarItemBtn = new System.Windows.Forms.Button();
+            this.totalTextBox = new System.Windows.Forms.TextBox();
             this.guardarFactButton = new System.Windows.Forms.Button();
+            this.itemsGroupBox = new System.Windows.Forms.GroupBox();
+            this.descrTextBox = new System.Windows.Forms.TextBox();
+            this.descripcionLabel = new System.Windows.Forms.Label();
+            this.itemsDataGrid = new System.Windows.Forms.DataGridView();
+            this.montoTextBox = new System.Windows.Forms.TextBox();
+            this.agregarItemBtn = new System.Windows.Forms.Button();
+            this.cantTextBox = new System.Windows.Forms.TextBox();
+            this.cantidadLabel = new System.Windows.Forms.Label();
+            this.cantidadTextBox = new System.Windows.Forms.Label();
+            this.itemsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // clienteLabel
             // 
             this.clienteLabel.AutoSize = true;
-            this.clienteLabel.Location = new System.Drawing.Point(75, 23);
+            this.clienteLabel.Location = new System.Drawing.Point(71, 26);
             this.clienteLabel.Name = "clienteLabel";
             this.clienteLabel.Size = new System.Drawing.Size(39, 13);
             this.clienteLabel.TabIndex = 0;
@@ -68,7 +73,7 @@
             // empresaLabel
             // 
             this.empresaLabel.AutoSize = true;
-            this.empresaLabel.Location = new System.Drawing.Point(66, 65);
+            this.empresaLabel.Location = new System.Drawing.Point(62, 65);
             this.empresaLabel.Name = "empresaLabel";
             this.empresaLabel.Size = new System.Drawing.Size(48, 13);
             this.empresaLabel.TabIndex = 2;
@@ -76,7 +81,7 @@
             // 
             // numFactTextBox
             // 
-            this.numFactTextBox.Location = new System.Drawing.Point(135, 118);
+            this.numFactTextBox.Location = new System.Drawing.Point(135, 115);
             this.numFactTextBox.Name = "numFactTextBox";
             this.numFactTextBox.Size = new System.Drawing.Size(121, 20);
             this.numFactTextBox.TabIndex = 3;
@@ -92,18 +97,18 @@
             // numFactLabel
             // 
             this.numFactLabel.AutoSize = true;
-            this.numFactLabel.Location = new System.Drawing.Point(16, 121);
+            this.numFactLabel.Location = new System.Drawing.Point(12, 118);
             this.numFactLabel.Name = "numFactLabel";
             this.numFactLabel.Size = new System.Drawing.Size(98, 13);
             this.numFactLabel.TabIndex = 5;
             this.numFactLabel.Text = "Numero de Factura";
             // 
-            // dateTimePicker1
+            // fechaAltaFactDT
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(491, 23);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 6;
+            this.fechaAltaFactDT.Location = new System.Drawing.Point(491, 23);
+            this.fechaAltaFactDT.Name = "fechaAltaFactDT";
+            this.fechaAltaFactDT.Size = new System.Drawing.Size(200, 20);
+            this.fechaAltaFactDT.TabIndex = 6;
             // 
             // fechaAltaFactLabel
             // 
@@ -114,12 +119,12 @@
             this.fechaAltaFactLabel.TabIndex = 7;
             this.fechaAltaFactLabel.Text = "Fecha Alta Factura";
             // 
-            // dateTimePicker2
+            // fechaVencDT
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(491, 68);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 8;
+            this.fechaVencDT.Location = new System.Drawing.Point(491, 68);
+            this.fechaVencDT.Name = "fechaVencDT";
+            this.fechaVencDT.Size = new System.Drawing.Size(200, 20);
+            this.fechaVencDT.TabIndex = 8;
             // 
             // fechaVencLabel
             // 
@@ -133,96 +138,125 @@
             // totalLabel
             // 
             this.totalLabel.AutoSize = true;
-            this.totalLabel.Location = new System.Drawing.Point(445, 124);
+            this.totalLabel.Location = new System.Drawing.Point(438, 118);
             this.totalLabel.Name = "totalLabel";
             this.totalLabel.Size = new System.Drawing.Size(31, 13);
             this.totalLabel.TabIndex = 10;
             this.totalLabel.Text = "Total";
             // 
-            // TotalTextBox
+            // totalTextBox
             // 
-            this.TotalTextBox.Location = new System.Drawing.Point(498, 121);
-            this.TotalTextBox.Name = "TotalTextBox";
-            this.TotalTextBox.Size = new System.Drawing.Size(193, 20);
-            this.TotalTextBox.TabIndex = 11;
-            // 
-            // itemsLabel
-            // 
-            this.itemsLabel.AutoSize = true;
-            this.itemsLabel.Location = new System.Drawing.Point(34, 241);
-            this.itemsLabel.Name = "itemsLabel";
-            this.itemsLabel.Size = new System.Drawing.Size(32, 13);
-            this.itemsLabel.TabIndex = 12;
-            this.itemsLabel.Text = "Items";
-            // 
-            // cantTextBox
-            // 
-            this.cantTextBox.Location = new System.Drawing.Point(156, 260);
-            this.cantTextBox.Name = "cantTextBox";
-            this.cantTextBox.Size = new System.Drawing.Size(100, 20);
-            this.cantTextBox.TabIndex = 13;
-            // 
-            // montoTextBox
-            // 
-            this.montoTextBox.Location = new System.Drawing.Point(156, 300);
-            this.montoTextBox.Name = "montoTextBox";
-            this.montoTextBox.Size = new System.Drawing.Size(100, 20);
-            this.montoTextBox.TabIndex = 14;
-            // 
-            // cantidadTextBox
-            // 
-            this.cantidadTextBox.AutoSize = true;
-            this.cantidadTextBox.Location = new System.Drawing.Point(88, 263);
-            this.cantidadTextBox.Name = "cantidadTextBox";
-            this.cantidadTextBox.Size = new System.Drawing.Size(37, 13);
-            this.cantidadTextBox.TabIndex = 15;
-            this.cantidadTextBox.Text = "Monto";
-            // 
-            // cantidadLabel
-            // 
-            this.cantidadLabel.AutoSize = true;
-            this.cantidadLabel.Location = new System.Drawing.Point(88, 307);
-            this.cantidadLabel.Name = "cantidadLabel";
-            this.cantidadLabel.Size = new System.Drawing.Size(49, 13);
-            this.cantidadLabel.TabIndex = 16;
-            this.cantidadLabel.Text = "Cantidad";
-            // 
-            // agregarItemBtn
-            // 
-            this.agregarItemBtn.Location = new System.Drawing.Point(156, 326);
-            this.agregarItemBtn.Name = "agregarItemBtn";
-            this.agregarItemBtn.Size = new System.Drawing.Size(75, 23);
-            this.agregarItemBtn.TabIndex = 17;
-            this.agregarItemBtn.Text = "Agregar Item";
-            this.agregarItemBtn.UseVisualStyleBackColor = true;
+            this.totalTextBox.Location = new System.Drawing.Point(491, 115);
+            this.totalTextBox.Name = "totalTextBox";
+            this.totalTextBox.Size = new System.Drawing.Size(103, 20);
+            this.totalTextBox.TabIndex = 11;
             // 
             // guardarFactButton
             // 
-            this.guardarFactButton.Location = new System.Drawing.Point(283, 169);
+            this.guardarFactButton.Location = new System.Drawing.Point(287, 154);
             this.guardarFactButton.Name = "guardarFactButton";
             this.guardarFactButton.Size = new System.Drawing.Size(105, 29);
             this.guardarFactButton.TabIndex = 18;
             this.guardarFactButton.Text = "Guardar Factura";
             this.guardarFactButton.UseVisualStyleBackColor = true;
+            this.guardarFactButton.Click += new System.EventHandler(this.guardarFactButton_Click);
+            // 
+            // itemsGroupBox
+            // 
+            this.itemsGroupBox.Controls.Add(this.descrTextBox);
+            this.itemsGroupBox.Controls.Add(this.descripcionLabel);
+            this.itemsGroupBox.Controls.Add(this.itemsDataGrid);
+            this.itemsGroupBox.Controls.Add(this.montoTextBox);
+            this.itemsGroupBox.Controls.Add(this.agregarItemBtn);
+            this.itemsGroupBox.Controls.Add(this.cantTextBox);
+            this.itemsGroupBox.Controls.Add(this.cantidadLabel);
+            this.itemsGroupBox.Controls.Add(this.cantidadTextBox);
+            this.itemsGroupBox.Location = new System.Drawing.Point(15, 204);
+            this.itemsGroupBox.Name = "itemsGroupBox";
+            this.itemsGroupBox.Size = new System.Drawing.Size(676, 206);
+            this.itemsGroupBox.TabIndex = 19;
+            this.itemsGroupBox.TabStop = false;
+            this.itemsGroupBox.Text = "Items";
+            // 
+            // descrTextBox
+            // 
+            this.descrTextBox.Location = new System.Drawing.Point(120, 33);
+            this.descrTextBox.Name = "descrTextBox";
+            this.descrTextBox.Size = new System.Drawing.Size(100, 20);
+            this.descrTextBox.TabIndex = 20;
+            // 
+            // descripcionLabel
+            // 
+            this.descripcionLabel.AutoSize = true;
+            this.descripcionLabel.Location = new System.Drawing.Point(41, 36);
+            this.descripcionLabel.Name = "descripcionLabel";
+            this.descripcionLabel.Size = new System.Drawing.Size(63, 13);
+            this.descripcionLabel.TabIndex = 19;
+            this.descripcionLabel.Text = "Descripcion";
+            // 
+            // itemsDataGrid
+            // 
+            this.itemsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.itemsDataGrid.Location = new System.Drawing.Point(313, 19);
+            this.itemsDataGrid.Name = "itemsDataGrid";
+            this.itemsDataGrid.Size = new System.Drawing.Size(346, 181);
+            this.itemsDataGrid.TabIndex = 18;
+            // 
+            // montoTextBox
+            // 
+            this.montoTextBox.Location = new System.Drawing.Point(120, 112);
+            this.montoTextBox.Name = "montoTextBox";
+            this.montoTextBox.Size = new System.Drawing.Size(100, 20);
+            this.montoTextBox.TabIndex = 14;
+            // 
+            // agregarItemBtn
+            // 
+            this.agregarItemBtn.Location = new System.Drawing.Point(109, 161);
+            this.agregarItemBtn.Name = "agregarItemBtn";
+            this.agregarItemBtn.Size = new System.Drawing.Size(75, 23);
+            this.agregarItemBtn.TabIndex = 17;
+            this.agregarItemBtn.Text = "Agregar Item";
+            this.agregarItemBtn.UseVisualStyleBackColor = true;
+            this.agregarItemBtn.Click += new System.EventHandler(this.agregarItemBtn_Click);
+            // 
+            // cantTextBox
+            // 
+            this.cantTextBox.Location = new System.Drawing.Point(120, 72);
+            this.cantTextBox.Name = "cantTextBox";
+            this.cantTextBox.Size = new System.Drawing.Size(100, 20);
+            this.cantTextBox.TabIndex = 13;
+            // 
+            // cantidadLabel
+            // 
+            this.cantidadLabel.AutoSize = true;
+            this.cantidadLabel.Location = new System.Drawing.Point(41, 119);
+            this.cantidadLabel.Name = "cantidadLabel";
+            this.cantidadLabel.Size = new System.Drawing.Size(49, 13);
+            this.cantidadLabel.TabIndex = 16;
+            this.cantidadLabel.Text = "Cantidad";
+            // 
+            // cantidadTextBox
+            // 
+            this.cantidadTextBox.AutoSize = true;
+            this.cantidadTextBox.Location = new System.Drawing.Point(41, 75);
+            this.cantidadTextBox.Name = "cantidadTextBox";
+            this.cantidadTextBox.Size = new System.Drawing.Size(37, 13);
+            this.cantidadTextBox.TabIndex = 15;
+            this.cantidadTextBox.Text = "Monto";
             // 
             // facturaABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 353);
+            this.ClientSize = new System.Drawing.Size(761, 422);
+            this.Controls.Add(this.itemsGroupBox);
             this.Controls.Add(this.guardarFactButton);
-            this.Controls.Add(this.agregarItemBtn);
-            this.Controls.Add(this.cantidadLabel);
-            this.Controls.Add(this.cantidadTextBox);
-            this.Controls.Add(this.montoTextBox);
-            this.Controls.Add(this.cantTextBox);
-            this.Controls.Add(this.itemsLabel);
-            this.Controls.Add(this.TotalTextBox);
+            this.Controls.Add(this.totalTextBox);
             this.Controls.Add(this.totalLabel);
             this.Controls.Add(this.fechaVencLabel);
-            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.fechaVencDT);
             this.Controls.Add(this.fechaAltaFactLabel);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.fechaAltaFactDT);
             this.Controls.Add(this.numFactLabel);
             this.Controls.Add(this.empresaComboBox);
             this.Controls.Add(this.numFactTextBox);
@@ -231,6 +265,10 @@
             this.Controls.Add(this.clienteLabel);
             this.Name = "facturaABM";
             this.Text = "ABM  Factura";
+            this.Load += new System.EventHandler(this.facturaABM_Load_1);
+            this.itemsGroupBox.ResumeLayout(false);
+            this.itemsGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,18 +282,22 @@
         private System.Windows.Forms.TextBox numFactTextBox;
         private System.Windows.Forms.ComboBox empresaComboBox;
         private System.Windows.Forms.Label numFactLabel;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker fechaAltaFactDT;
         private System.Windows.Forms.Label fechaAltaFactLabel;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker fechaVencDT;
         private System.Windows.Forms.Label fechaVencLabel;
         private System.Windows.Forms.Label totalLabel;
-        private System.Windows.Forms.TextBox TotalTextBox;
-        private System.Windows.Forms.Label itemsLabel;
-        private System.Windows.Forms.TextBox cantTextBox;
-        private System.Windows.Forms.TextBox montoTextBox;
-        private System.Windows.Forms.Label cantidadTextBox;
-        private System.Windows.Forms.Label cantidadLabel;
-        private System.Windows.Forms.Button agregarItemBtn;
+        private System.Windows.Forms.TextBox totalTextBox;
         private System.Windows.Forms.Button guardarFactButton;
+        private System.Windows.Forms.GroupBox itemsGroupBox;
+        private System.Windows.Forms.DataGridView itemsDataGrid;
+        private System.Windows.Forms.TextBox montoTextBox;
+        private System.Windows.Forms.Button agregarItemBtn;
+        private System.Windows.Forms.TextBox cantTextBox;
+        private System.Windows.Forms.Label cantidadLabel;
+        private System.Windows.Forms.Label cantidadTextBox;
+        private System.Windows.Forms.TextBox descrTextBox;
+        private System.Windows.Forms.Label descripcionLabel;
+
     }
 }

@@ -27,7 +27,7 @@ CREATE TABLE "WEST_WORLD"."Empresa"  (
 	) ON [PRIMARY])
 GO
 CREATE TABLE "WEST_WORLD"."Factura"  ( 
-	"numeroFactura"   	numeric(15,5) NOT NULL,
+	"numeroFactura"   	numeric(15,0) NOT NULL,
 	"cliente"         	bigint NOT NULL,
 	"empresa"         	nvarchar(50) NOT NULL,
 	"fechaAlta"       	datetime NOT NULL,
@@ -39,9 +39,9 @@ CREATE TABLE "WEST_WORLD"."Factura"  (
 GO
 CREATE TABLE "WEST_WORLD"."Factura_Item"  ( 
 	"idItem"       	bigint NOT NULL,
-	"numeroFactura"	numeric(15,5) NOT NULL,
+	"numeroFactura"	numeric(15,0) NOT NULL,
 	"monto"        	numeric(15,5) NOT NULL,
-	"cantidad"     	numeric(15,5) NOT NULL,
+	"cantidad"     	smallint NOT NULL,
 	CONSTRAINT "FacturaItemPK" PRIMARY KEY CLUSTERED("idItem","numeroFactura")
  ON [PRIMARY])
 GO
@@ -58,7 +58,8 @@ CREATE TABLE "WEST_WORLD"."Funcionalidad"  (
  ON [PRIMARY])
 GO
 CREATE TABLE "WEST_WORLD"."Item"  ( 
-	"idItem"	bigint IDENTITY(1,1) NOT NULL,
+	"idItem"		bigint IDENTITY(1,1) NOT NULL,
+	"descripcion"	nvarchar(255) NOT NULL,
 	CONSTRAINT "itemPK" PRIMARY KEY CLUSTERED("idItem")
  ON [PRIMARY])
 GO
