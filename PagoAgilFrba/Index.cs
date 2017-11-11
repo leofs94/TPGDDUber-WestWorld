@@ -40,5 +40,16 @@ namespace PagoAgilFrba
             AbmSucursal.sucursalABM sucursalABM = new AbmSucursal.sucursalABM();
             sucursalABM.ShowDialog();
         }
+
+        private void registrarPagoBtn_Click(object sender, EventArgs e)
+        {
+            RegistroPago.RegistroPago registroPago = new RegistroPago.RegistroPago();
+            registroPago.ShowDialog();
+        }
+
+        private void ABMFacturaBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

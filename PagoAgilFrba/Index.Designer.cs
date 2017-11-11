@@ -31,6 +31,8 @@
             this.ABMClienteBtn = new System.Windows.Forms.Button();
             this.ABMEmpresaBtn = new System.Windows.Forms.Button();
             this.AbmSucursalBtn = new System.Windows.Forms.Button();
+            this.registrarPagoBtn = new System.Windows.Forms.Button();
+            this.ABMFacturaBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ABMClienteBtn
@@ -63,11 +65,33 @@
             this.AbmSucursalBtn.UseVisualStyleBackColor = true;
             this.AbmSucursalBtn.Click += new System.EventHandler(this.AbmSucursalBtn_Click);
             // 
+            // registrarPagoBtn
+            // 
+            this.registrarPagoBtn.Location = new System.Drawing.Point(288, 89);
+            this.registrarPagoBtn.Name = "registrarPagoBtn";
+            this.registrarPagoBtn.Size = new System.Drawing.Size(218, 57);
+            this.registrarPagoBtn.TabIndex = 2;
+            this.registrarPagoBtn.Text = "Registrar Pago";
+            this.registrarPagoBtn.UseVisualStyleBackColor = true;
+            this.registrarPagoBtn.Click += new System.EventHandler(this.registrarPagoBtn_Click);
+            // 
+            // ABMFacturaBtn
+            // 
+            this.ABMFacturaBtn.Location = new System.Drawing.Point(27, 89);
+            this.ABMFacturaBtn.Name = "ABMFacturaBtn";
+            this.ABMFacturaBtn.Size = new System.Drawing.Size(218, 57);
+            this.ABMFacturaBtn.TabIndex = 3;
+            this.ABMFacturaBtn.Text = "ABM Factura";
+            this.ABMFacturaBtn.UseVisualStyleBackColor = true;
+            this.ABMFacturaBtn.Click += new System.EventHandler(this.ABMFacturaBtn_Click);
+            // 
             // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(877, 317);
+            this.Controls.Add(this.ABMFacturaBtn);
+            this.Controls.Add(this.registrarPagoBtn);
             this.Controls.Add(this.AbmSucursalBtn);
             this.Controls.Add(this.ABMEmpresaBtn);
             this.Controls.Add(this.ABMClienteBtn);
@@ -83,6 +107,8 @@
         private System.Windows.Forms.Button ABMClienteBtn;
         private System.Windows.Forms.Button ABMEmpresaBtn;
         private System.Windows.Forms.Button AbmSucursalBtn;
+        private System.Windows.Forms.Button registrarPagoBtn;
+        private System.Windows.Forms.Button ABMFacturaBtn;
     }
 }
 
