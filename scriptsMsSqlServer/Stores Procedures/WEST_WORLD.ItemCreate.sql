@@ -1,11 +1,12 @@
 CREATE PROCEDURE WEST_WORLD.ItemCreate
-@DESCRIPCION nvarchar(255),
-@MONTO numeric(15,5),
-@CANTIDAD smallint
+	@DESCRIPCION nvarchar(255),
+	@MONTO numeric(15,5),
+	@CANTIDAD numeric(15,0),
+	@NUMEROFACTURA numeric(15,0)
 
 AS
-	INSERT INTO WEST_WORLD.Factura_Item(cantidad, monto)
-	VALUES(@CANTIDAD, @MONTO)
+	INSERT INTO WEST_WORLD.Factura_Item(numeroFactura, cantidad, monto)
+	VALUES(@NUMEROFACTURA, @CANTIDAD, @MONTO)
 
 	INSERT INTO WEST_WORLD.Item(descripcion)
 	VALUES(@DESCRIPCION)

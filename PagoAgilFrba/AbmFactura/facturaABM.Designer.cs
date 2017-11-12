@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.clienteLabel = new System.Windows.Forms.Label();
-            this.clienteTextBox = new System.Windows.Forms.TextBox();
             this.empresaLabel = new System.Windows.Forms.Label();
             this.numFactTextBox = new System.Windows.Forms.TextBox();
             this.empresaComboBox = new System.Windows.Forms.ComboBox();
@@ -42,6 +41,7 @@
             this.totalTextBox = new System.Windows.Forms.TextBox();
             this.guardarFactButton = new System.Windows.Forms.Button();
             this.itemsGroupBox = new System.Windows.Forms.GroupBox();
+            this.refreshBtn = new System.Windows.Forms.Button();
             this.descrTextBox = new System.Windows.Forms.TextBox();
             this.descripcionLabel = new System.Windows.Forms.Label();
             this.itemsDataGrid = new System.Windows.Forms.DataGridView();
@@ -49,7 +49,8 @@
             this.agregarItemBtn = new System.Windows.Forms.Button();
             this.cantTextBox = new System.Windows.Forms.TextBox();
             this.cantidadLabel = new System.Windows.Forms.Label();
-            this.cantidadTextBox = new System.Windows.Forms.Label();
+            this.cantidadextBox = new System.Windows.Forms.Label();
+            this.clienteComboBox = new System.Windows.Forms.ComboBox();
             this.itemsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsDataGrid)).BeginInit();
             this.SuspendLayout();
@@ -62,13 +63,6 @@
             this.clienteLabel.Size = new System.Drawing.Size(39, 13);
             this.clienteLabel.TabIndex = 0;
             this.clienteLabel.Text = "Cliente";
-            // 
-            // clienteTextBox
-            // 
-            this.clienteTextBox.Location = new System.Drawing.Point(135, 23);
-            this.clienteTextBox.Name = "clienteTextBox";
-            this.clienteTextBox.Size = new System.Drawing.Size(121, 20);
-            this.clienteTextBox.TabIndex = 1;
             // 
             // empresaLabel
             // 
@@ -93,6 +87,7 @@
             this.empresaComboBox.Name = "empresaComboBox";
             this.empresaComboBox.Size = new System.Drawing.Size(121, 21);
             this.empresaComboBox.TabIndex = 4;
+            this.empresaComboBox.SelectedIndexChanged += new System.EventHandler(this.empresaComboBox_SelectedIndexChanged);
             // 
             // numFactLabel
             // 
@@ -163,6 +158,7 @@
             // 
             // itemsGroupBox
             // 
+            this.itemsGroupBox.Controls.Add(this.refreshBtn);
             this.itemsGroupBox.Controls.Add(this.descrTextBox);
             this.itemsGroupBox.Controls.Add(this.descripcionLabel);
             this.itemsGroupBox.Controls.Add(this.itemsDataGrid);
@@ -170,13 +166,24 @@
             this.itemsGroupBox.Controls.Add(this.agregarItemBtn);
             this.itemsGroupBox.Controls.Add(this.cantTextBox);
             this.itemsGroupBox.Controls.Add(this.cantidadLabel);
-            this.itemsGroupBox.Controls.Add(this.cantidadTextBox);
+            this.itemsGroupBox.Controls.Add(this.cantidadextBox);
             this.itemsGroupBox.Location = new System.Drawing.Point(15, 204);
             this.itemsGroupBox.Name = "itemsGroupBox";
             this.itemsGroupBox.Size = new System.Drawing.Size(676, 206);
             this.itemsGroupBox.TabIndex = 19;
             this.itemsGroupBox.TabStop = false;
             this.itemsGroupBox.Text = "Items";
+            this.itemsGroupBox.Enter += new System.EventHandler(this.itemsGroupBox_Enter);
+            // 
+            // refreshBtn
+            // 
+            this.refreshBtn.Location = new System.Drawing.Point(443, 165);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(75, 23);
+            this.refreshBtn.TabIndex = 21;
+            this.refreshBtn.Text = "Refresh";
+            this.refreshBtn.UseVisualStyleBackColor = true;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
             // 
             // descrTextBox
             // 
@@ -199,12 +206,12 @@
             this.itemsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsDataGrid.Location = new System.Drawing.Point(313, 19);
             this.itemsDataGrid.Name = "itemsDataGrid";
-            this.itemsDataGrid.Size = new System.Drawing.Size(346, 181);
+            this.itemsDataGrid.Size = new System.Drawing.Size(346, 140);
             this.itemsDataGrid.TabIndex = 18;
             // 
             // montoTextBox
             // 
-            this.montoTextBox.Location = new System.Drawing.Point(120, 112);
+            this.montoTextBox.Location = new System.Drawing.Point(120, 75);
             this.montoTextBox.Name = "montoTextBox";
             this.montoTextBox.Size = new System.Drawing.Size(100, 20);
             this.montoTextBox.TabIndex = 14;
@@ -221,10 +228,11 @@
             // 
             // cantTextBox
             // 
-            this.cantTextBox.Location = new System.Drawing.Point(120, 72);
+            this.cantTextBox.Location = new System.Drawing.Point(120, 116);
             this.cantTextBox.Name = "cantTextBox";
             this.cantTextBox.Size = new System.Drawing.Size(100, 20);
             this.cantTextBox.TabIndex = 13;
+            this.cantTextBox.TextChanged += new System.EventHandler(this.cantTextBox_TextChanged);
             // 
             // cantidadLabel
             // 
@@ -235,20 +243,29 @@
             this.cantidadLabel.TabIndex = 16;
             this.cantidadLabel.Text = "Cantidad";
             // 
-            // cantidadTextBox
+            // cantidadextBox
             // 
-            this.cantidadTextBox.AutoSize = true;
-            this.cantidadTextBox.Location = new System.Drawing.Point(41, 75);
-            this.cantidadTextBox.Name = "cantidadTextBox";
-            this.cantidadTextBox.Size = new System.Drawing.Size(37, 13);
-            this.cantidadTextBox.TabIndex = 15;
-            this.cantidadTextBox.Text = "Monto";
+            this.cantidadextBox.AutoSize = true;
+            this.cantidadextBox.Location = new System.Drawing.Point(41, 75);
+            this.cantidadextBox.Name = "cantidadextBox";
+            this.cantidadextBox.Size = new System.Drawing.Size(37, 13);
+            this.cantidadextBox.TabIndex = 15;
+            this.cantidadextBox.Text = "Monto";
+            // 
+            // clienteComboBox
+            // 
+            this.clienteComboBox.FormattingEnabled = true;
+            this.clienteComboBox.Location = new System.Drawing.Point(135, 20);
+            this.clienteComboBox.Name = "clienteComboBox";
+            this.clienteComboBox.Size = new System.Drawing.Size(121, 21);
+            this.clienteComboBox.TabIndex = 20;
             // 
             // facturaABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(761, 422);
+            this.Controls.Add(this.clienteComboBox);
             this.Controls.Add(this.itemsGroupBox);
             this.Controls.Add(this.guardarFactButton);
             this.Controls.Add(this.totalTextBox);
@@ -261,7 +278,6 @@
             this.Controls.Add(this.empresaComboBox);
             this.Controls.Add(this.numFactTextBox);
             this.Controls.Add(this.empresaLabel);
-            this.Controls.Add(this.clienteTextBox);
             this.Controls.Add(this.clienteLabel);
             this.Name = "facturaABM";
             this.Text = "ABM  Factura";
@@ -277,7 +293,6 @@
         #endregion
 
         private System.Windows.Forms.Label clienteLabel;
-        private System.Windows.Forms.TextBox clienteTextBox;
         private System.Windows.Forms.Label empresaLabel;
         private System.Windows.Forms.TextBox numFactTextBox;
         private System.Windows.Forms.ComboBox empresaComboBox;
@@ -295,9 +310,11 @@
         private System.Windows.Forms.Button agregarItemBtn;
         private System.Windows.Forms.TextBox cantTextBox;
         private System.Windows.Forms.Label cantidadLabel;
-        private System.Windows.Forms.Label cantidadTextBox;
+        private System.Windows.Forms.Label cantidadextBox;
         private System.Windows.Forms.TextBox descrTextBox;
         private System.Windows.Forms.Label descripcionLabel;
+        private System.Windows.Forms.Button refreshBtn;
+        private System.Windows.Forms.ComboBox clienteComboBox;
 
     }
 }
