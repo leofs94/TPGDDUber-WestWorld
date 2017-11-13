@@ -1,7 +1,7 @@
 CREATE PROCEDURE WEST_WORLD.SucursalViewOrSearch
 	@nombre nvarchar(50),
 	@direccion nvarchar(50),
-	@codigoPostal numeric(15,0)
+	@codigoPostal nvarchar(50)
 AS
 	SELECT *
 	FROM WEST_WORLD.Sucursal

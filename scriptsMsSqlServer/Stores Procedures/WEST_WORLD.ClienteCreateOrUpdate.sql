@@ -6,8 +6,8 @@
 @mail nvarchar(255),
 @direccion nvarchar(255),
 @codigoPostal nvarchar(255),
-@dni numeric(15),
-@telefono numeric(15),
+@dni numeric(15,0),
+@telefono numeric(15,0),
 @fec_nac dateTime,
 @habilitado bit
 

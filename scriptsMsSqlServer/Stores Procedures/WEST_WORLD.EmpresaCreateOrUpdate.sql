@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE WEST_WORLD.EmpresaCreateOrUpdate
 @mode nvarchar(10),
+@idEmpresa bigint,
 @nombre nvarchar(255),
 @cuit nvarchar(50),
 @direccion nvarchar(255),
@@ -32,7 +33,7 @@ AS
 			direccion=@direccion,
 			idRubro=@idRubro,
 			habilitado=@habilitado
-		WHERE cuit=@cuit
+		WHERE idEmpresa=@idEmpresa
 	END
 
 RETURN 0

@@ -62,16 +62,20 @@ namespace PagoAgilFrba.AbmEmpresa
         {
             try
             {
-                if (sqlCon.State == ConnectionState.Closed){
-                sqlCon.Open();
-                if (btnGuardar.Text == "Guardar")
+                if (sqlCon.State == ConnectionState.Closed)
+                {
+                    sqlCon.Open();
+                    if (btnGuardar.Text == "Guardar")
                     {
                         SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.EmpresaCreateOrUpdate", sqlCon);
                         sqlCmd.CommandType = CommandType.StoredProcedure;
                         sqlCmd.Parameters.AddWithValue("@mode", "Add");
-                        sqlCmd.Parameters.AddWithValue("@nombre", nombreTextBox.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@cuit", cuitTextBox.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@direccion", direccionTextBox.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@idEmpresa", 0);
+
+                        validarYAgregar(sqlCmd, "@nombre", nombreTextBox);
+                        validarYAgregar(sqlCmd, "@cuit", cuitTextBox);
+                        validarYAgregar(sqlCmd, "@direccion", direccionTextBox);
+
                         sqlCmd.Parameters.AddWithValue("@idRubro", rubroComboBox.SelectedIndex + 1); //+1 Porque arranca de 0
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
 
@@ -83,20 +87,25 @@ namespace PagoAgilFrba.AbmEmpresa
                         SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.EmpresaCreateOrUpdate", sqlCon);
                         sqlCmd.CommandType = CommandType.StoredProcedure;
                         sqlCmd.Parameters.AddWithValue("@mode", "Edit");
-                        sqlCmd.Parameters.AddWithValue("@nombre", nombreTextBox.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@cuit", cuitTextBox.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@direccion", direccionTextBox.Text.Trim());
+
+                        sqlCmd.Parameters.AddWithValue("@idEmpresa", Convert.ToInt32(empresaDataGrid.CurrentRow.Cells[0].Value.ToString()));
+                        validarYAgregar(sqlCmd, "@nombre", nombreTextBox);
+                        validarYAgregar(sqlCmd, "@cuit", cuitTextBox);
+                        validarYAgregar(sqlCmd, "@direccion", direccionTextBox);
+
                         sqlCmd.Parameters.AddWithValue("@idRubro", rubroComboBox.SelectedIndex + 1); //+1 Porque arranca de 0
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
 
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Empresa modificada correctamente");
+                        btnBuscar_Click_1(sender, e);
 
                     }
                 }
-            }catch (Exception ex)
-            { 
-                if(ex is SqlException)
+            }
+            catch (Exception ex)
+            {
+                if (ex is SqlException)
                 {
                     SqlException sqlException = ex as SqlException;
                     if (sqlException.Number == 2627) MessageBox.Show("No pueden existir 2 empresas con el mismo cuit", "Error Message");
@@ -108,13 +117,19 @@ namespace PagoAgilFrba.AbmEmpresa
                 {
                     MessageBox.Show(ex.Message, "Mensaje de Error");
                 }
-                
+
             }
             finally
             {
                 if (sqlCon.State == ConnectionState.Open)
                     sqlCon.Close();
             }
+        }
+
+        public void validarYAgregar(SqlCommand sqlCmd, string variable, TextBox text)
+        {
+            if ((string.IsNullOrWhiteSpace(text.Text.Trim()))) throw new Exception("Todos los campos son obligatorios");
+            else sqlCmd.Parameters.AddWithValue(variable, text.Text.Trim());
         }
 
         private void habilitadoCheck_CheckedChanged(object sender, EventArgs e)
@@ -129,11 +144,11 @@ namespace PagoAgilFrba.AbmEmpresa
         {
             if (empresaDataGrid.CurrentRow.Index != -1)
             {
-                cuitTextBox.Text = empresaDataGrid.CurrentRow.Cells[0].Value.ToString();
-                nombreTextBox.Text = empresaDataGrid.CurrentRow.Cells[1].Value.ToString();
-                direccionTextBox.Text = empresaDataGrid.CurrentRow.Cells[2].Value.ToString();
-                rubroComboBox.SelectedIndex = Convert.ToInt32(empresaDataGrid.CurrentRow.Cells[3].Value.ToString()) - 1;
-                habilitadoCheck.Checked = (bool)empresaDataGrid.CurrentRow.Cells[4].Value;
+                cuitTextBox.Text = empresaDataGrid.CurrentRow.Cells[1].Value.ToString();
+                nombreTextBox.Text = empresaDataGrid.CurrentRow.Cells[2].Value.ToString();
+                direccionTextBox.Text = empresaDataGrid.CurrentRow.Cells[3].Value.ToString();
+                rubroComboBox.SelectedIndex = Convert.ToInt32(empresaDataGrid.CurrentRow.Cells[4].Value.ToString()) - 1;
+                habilitadoCheck.Checked = (bool) empresaDataGrid.CurrentRow.Cells[5].Value;
                 btnGuardar.Text = "Update";
             }
         }
@@ -190,15 +205,11 @@ namespace PagoAgilFrba.AbmEmpresa
 
         private void button1_Click(object sender, EventArgs e)
         {
-            reset();
-        }
-
-
-        void reset()
-        {
             nombreTextBox.Text = direccionTextBox.Text = cuitTextBox.Text = nombreFilterTextBox.Text 
                 = cuitFilter.Text = rubroComboBox.Text = rubroFilterComboBox.Text = "";
             btnGuardar.Text = "Guardar";
+
+            empresaDataGrid.DataSource = new DataTable();
         }
 
         private void empresaDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)

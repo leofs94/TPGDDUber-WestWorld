@@ -28,16 +28,13 @@ namespace PagoAgilFrba.AbmSucursal
         {
         }
 
-        void reset()
-        {
-            nombreTextBox.Text = direccionTextBox.Text = codigoPostalTxtBox.Text = nombreFilterTxt.Text = 
-                apellidoFilterTxt.Text = "";
-            guardarBtn.Text = "Guardar";
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            reset();
+            nombreTextBox.Text = direccionTextBox.Text = codigoPostalTxtBox.Text = nombreFilterTxt.Text =
+                            apellidoFilterTxt.Text = "";
+            guardarBtn.Text = "Guardar";
+
+            sucursalDataGrid.DataSource = new DataTable();
         }
 
         public void fillDataGridView()
@@ -88,7 +85,13 @@ namespace PagoAgilFrba.AbmSucursal
                         SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.SucursalCreateOrUpdate", sqlCon);
                         sqlCmd.CommandType = CommandType.StoredProcedure;
                         sqlCmd.Parameters.AddWithValue("@mode", "Add");
+
                         sqlCmd.Parameters.AddWithValue("@idSucursal", 0);
+                        validarYAgregar(sqlCmd, "@nombre", nombreTextBox);
+                        validarYAgregar(sqlCmd, "@direccion", direccionTextBox);
+                        validarYAgregar(sqlCmd, "@codigoPostal", nombreTextBox);
+                        validarYAgregar(sqlCmd, "@nombre", nombreTextBox);
+
                         sqlCmd.Parameters.AddWithValue("@nombre", nombreTextBox.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@direccion", direccionTextBox.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@codigoPostal", Convert.ToInt32(codigoPostalTxtBox.Text.Trim()));
@@ -103,15 +106,17 @@ namespace PagoAgilFrba.AbmSucursal
                         SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.SucursalCreateOrUpdate", sqlCon);
                         sqlCmd.CommandType = CommandType.StoredProcedure;
                         sqlCmd.Parameters.AddWithValue("@mode", "Edit");
+
                         sqlCmd.Parameters.AddWithValue("@idSucursal", Convert.ToInt32(sucursalDataGrid.CurrentRow.Cells[0].Value.ToString()));
                         sqlCmd.Parameters.AddWithValue("@nombre", nombreTextBox.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@direccion", direccionTextBox.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@codigoPostal", Convert.ToInt32(codigoPostalTxtBox.Text.Trim()));
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
-                        sqlCmd.Parameters.AddWithValue("@operador", 0);
+                        sqlCmd.Parameters.AddWithValue("@operador", 0); // TODO este id saldria del login
 
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Sucursal modificada correctamente");
+                        searchButton_Click(sender, e);
                     }
                 }
             }
@@ -136,6 +141,12 @@ namespace PagoAgilFrba.AbmSucursal
                 if (sqlCon.State == ConnectionState.Open)
                     sqlCon.Close();
             }
+        }
+
+        public void validarYAgregar(SqlCommand sqlCmd, string variable, TextBox text)
+        {
+            if ((string.IsNullOrWhiteSpace(text.Text.Trim()))) throw new Exception("Todos los campos son obligatorios");
+            else sqlCmd.Parameters.AddWithValue(variable, text.Text.Trim());
         }
 
         private void sucursalDataGrid_MouseDoubleClick(object sender, MouseEventArgs e)

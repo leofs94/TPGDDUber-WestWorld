@@ -5,11 +5,11 @@ CREATE TABLE "WEST_WORLD"."Cliente"(
 	"idCliente"   	BIGINT IDENTITY(1,1) NOT NULL,
 	"nombre"      	nvarchar(255) NOT NULL,
 	"apellido"    	nvarchar(255) NOT NULL,
-	"mail"        	nvarchar(255) NOT NULL,
+	"mail"        	nvarchar(255) NOT NULL UNIQUE,
 	"direccion"   	nvarchar(255) NOT NULL,
 	"codigoPostal"	nvarchar(255) NOT NULL,
-	"DNI"         	numeric(15,5) NOT NULL,
-	"telefono"    	numeric(15,5) NOT NULL,
+	"DNI"         	numeric(15) NOT NULL,
+	"telefono"    	numeric(15) NOT NULL,
 	"fecha_nac"   	datetime NOT NULL,
 	"habilitado"	bit NOT NULL,
 	CONSTRAINT "id" PRIMARY KEY CLUSTERED("idCliente")
@@ -26,22 +26,30 @@ CREATE TABLE "WEST_WORLD"."Empresa" (
 ON [PRIMARY])
 GO
 CREATE TABLE "WEST_WORLD"."Factura"  ( 
-	"numeroFactura"   	numeric(15,0) NOT NULL,
-	"cliente"         	bigint NOT NULL,
-	"empresa"         	bigint NOT NULL,
+	"numeroFactura"   	bigint NOT NULL,
+	"cliente"         	bigint NULL,
+	"empresa"         	bigint NULL,
 	"fechaAlta"       	datetime NOT NULL,
 	"fechaVencimiento"	datetime NOT NULL,
-	"total"           	numeric(15,5) NOT NULL,
+	"total"           	numeric(15,2) NOT NULL CHECK (total > 0),
 	"rendicion"       	bigint NULL,
+	"pago"				bigint NULL,
 	CONSTRAINT "facturaPK" PRIMARY KEY CLUSTERED("numeroFactura")
  ON [PRIMARY])
 GO
 CREATE TABLE "WEST_WORLD"."Factura_Item"( 
 	"idItem"       	bigint IDENTITY(1,1) NOT NULL,
-	"numeroFactura"	numeric(15,0) NOT NULL,
-	"monto"        	numeric(15,5) NOT NULL,
-	"cantidad"     	numeric(15,0) NOT NULL,
+	"numeroFactura"	bigint NOT NULL,
+	"monto"         numeric(15,2) NOT NULL,
+	"cantidad"     	smallint NOT NULL,
+	"importe"		numeric(15,2) NOT NULL CHECK (importe > 0),
 	CONSTRAINT "FacturaItemPK" PRIMARY KEY CLUSTERED("idItem","numeroFactura")
+ ON [PRIMARY])
+GO
+CREATE TABLE "WEST_WORLD"."Item"  ( 
+	"idItem"		bigint IDENTITY(1,1) NOT NULL,
+	"descripcion"	nvarchar(255) NOT NULL,
+	CONSTRAINT "itemPK" PRIMARY KEY CLUSTERED("idItem")
  ON [PRIMARY])
 GO
 CREATE TABLE "WEST_WORLD"."FormaPago"  ( 
@@ -56,32 +64,26 @@ CREATE TABLE "WEST_WORLD"."Funcionalidad"  (
 	CONSTRAINT "idFuncPK" PRIMARY KEY CLUSTERED("idFuncionalidad")
  ON [PRIMARY])
 GO
-CREATE TABLE "WEST_WORLD"."Item"  ( 
-	"idItem"		bigint IDENTITY(1,1) NOT NULL,
-	"descripcion"	nvarchar(255) NOT NULL,
-	CONSTRAINT "itemPK" PRIMARY KEY CLUSTERED("idItem")
- ON [PRIMARY])
-GO
 CREATE TABLE "WEST_WORLD"."Pago"  ( 
-	"idPago"          	bigint NOT NULL,
+	"idPago"          	bigint IDENTITY(1,1) NOT NULL,
 	"FechaCobro"      	datetime NOT NULL,
-	"FechaVencimiento"	datetime NOT NULL,
+	"FechaVencimiento"	datetime NOT NULL CHECK(FechaVencimiento <= GETDATE()),
 	"empresa"         	bigint NOT NULL,
 	"cliente"         	bigint NOT NULL,
-	"sucursal"        	numeric(15,0) NOT NULL,
-	"importe"         	numeric(15,5) NOT NULL,
+	"sucursal"        	bigint NOT NULL,
+	"importe"         	numeric(15,2) NOT NULL CHECK(importe > 0),
 	"formaPago"       	bigint NOT NULL,
-	CONSTRAINT "idPago" PRIMARY KEY CLUSTERED("idPago")
+	CONSTRAINT "idPagoPK" PRIMARY KEY CLUSTERED("idPago")
  ON [PRIMARY])
 GO
 CREATE TABLE "WEST_WORLD"."Rendicion"  ( 
-	"idRendicion"       	bigint NOT NULL,
+	"idRendicion"       	bigint IDENTITY(1,1) NOT NULL,
 	"FechaRendicion"    	datetime NOT NULL,
-	"cantidadFacturas"  	numeric(15,5) NOT NULL,
-	"importe"           	numeric(15,5) NOT NULL,
+	"cantidadFacturas"  	smallint NOT NULL,
+	"importe"           	numeric(15,2) NOT NULL,
 	"empresa"           	bigint NOT NULL,
 	"porcentajeComision"	bigint NOT NULL,
-	"importeTotal"      	numeric(15,5) NOT NULL,
+	"importeTotal"      	numeric(15,2) NOT NULL,
 	CONSTRAINT "RendicionPK" PRIMARY KEY CLUSTERED("idRendicion")
  ON [PRIMARY])
 GO
@@ -105,7 +107,7 @@ CREATE TABLE "WEST_WORLD"."Rol_Usuario"  (
  ON [PRIMARY])
 GO
 CREATE TABLE "WEST_WORLD"."Rubro"  ( 
-	"idRubro"	bigint NOT NULL,
+	"idRubro"	bigint IDENTITY(1,1) NOT NULL,
 	"nombre" 	nvarchar(50) NOT NULL,
 	CONSTRAINT "idRubro" PRIMARY KEY CLUSTERED("idRubro")
  ON [PRIMARY])
@@ -114,13 +116,11 @@ CREATE TABLE "WEST_WORLD"."Sucursal"  (
 	"idSucursal"  	bigint IDENTITY(1,1) NOT NULL,
 	"nombre"      	nvarchar(50) NOT NULL,
 	"direccion"   	nvarchar(50) NOT NULL,
-	"codigoPostal"	numeric(15,0) NOT NULL,
+	"codigoPostal"	nvarchar(10) NOT NULL,
 	"habilitado"  	bit NOT NULL,
 	"operador"    	bigint NOT NULL,
-	CONSTRAINT "PKSucursal" PRIMARY KEY NONCLUSTERED("codigoPostal")
-	WITH (
-		DATA_COMPRESSION = NONE
-	) ON [PRIMARY])
+	CONSTRAINT "PKSucursal" PRIMARY KEY NONCLUSTERED("idSucursal")
+ON [PRIMARY])
 GO
 CREATE TABLE "WEST_WORLD"."Usuario"  ( 
 	"idUser"      	bigint IDENTITY (1, 1) NOT NULL,
@@ -131,13 +131,6 @@ CREATE TABLE "WEST_WORLD"."Usuario"  (
  ON [PRIMARY])
 GO
 
-ALTER TABLE "WEST_WORLD"."Cliente"
-	ADD CONSTRAINT "mailunique"
-	UNIQUE ("mail")
-	WITH (
-		DATA_COMPRESSION = NONE
-	) ON [PRIMARY]
-GO
 ALTER TABLE "WEST_WORLD"."Usuario"
 	ADD CONSTRAINT "UQ__Usuario__7FC76D7279515943"
 	UNIQUE ("user")
@@ -152,21 +145,21 @@ ALTER TABLE "WEST_WORLD"."Factura"
 	ADD CONSTRAINT "empresaFK"
 	FOREIGN KEY("empresa")
 	REFERENCES "WEST_WORLD"."Empresa"("idEmpresa")
-	ON DELETE NO ACTION 
+	ON DELETE SET NULL 
 	ON UPDATE NO ACTION 
 GO
 ALTER TABLE "WEST_WORLD"."Factura"
 	ADD CONSTRAINT "clienteFK"
 	FOREIGN KEY("cliente")
 	REFERENCES "WEST_WORLD"."Cliente"("idCliente")
-	ON DELETE NO ACTION 
+	ON DELETE SET NULL 
 	ON UPDATE NO ACTION 
 GO
 ALTER TABLE "WEST_WORLD"."Factura_Item"
 	ADD CONSTRAINT "nroFacturaFK"
 	FOREIGN KEY("numeroFactura")
 	REFERENCES "WEST_WORLD"."Factura"("numeroFactura")
-	ON DELETE NO ACTION 
+	ON DELETE CASCADE
 	ON UPDATE NO ACTION 
 GO
 ALTER TABLE "WEST_WORLD"."Factura_Item"
@@ -177,9 +170,9 @@ ALTER TABLE "WEST_WORLD"."Factura_Item"
 	ON UPDATE NO ACTION 
 GO
 ALTER TABLE "WEST_WORLD"."Pago"
-	ADD CONSTRAINT "FKSucursal"
+	ADD CONSTRAINT "sucursalFK"
 	FOREIGN KEY("sucursal")
-	REFERENCES "WEST_WORLD"."Sucursal"("codigoPostal")
+	REFERENCES "WEST_WORLD"."Sucursal"("idSucursal")
 	ON DELETE NO ACTION 
 	ON UPDATE NO ACTION 
 GO
@@ -250,6 +243,20 @@ ALTER TABLE [WEST_WORLD].[Empresa]
 	ADD CONSTRAINT [rubroFK]
 	FOREIGN KEY([idRubro])
 	REFERENCES [WEST_WORLD].[Rubro]([idRubro])
+	ON DELETE NO ACTION 
+	ON UPDATE NO ACTION 
+GO
+ALTER TABLE [WEST_WORLD].[Factura]
+	ADD CONSTRAINT [rendicionFK]
+	FOREIGN KEY([rendicion])
+	REFERENCES [WEST_WORLD].[Rendicion]([idRendicion])
+	ON DELETE NO ACTION 
+	ON UPDATE NO ACTION 
+GO
+ALTER TABLE [WEST_WORLD].[Factura]
+	ADD CONSTRAINT [pagoFK]
+	FOREIGN KEY([pago])
+	REFERENCES [WEST_WORLD].[Pago]([idPago])
 	ON DELETE NO ACTION 
 	ON UPDATE NO ACTION 
 GO

@@ -272,11 +272,13 @@ namespace PagoAgilFrba.AbmCliente
             // 
             // clienteDataGrid
             // 
+            this.clienteDataGrid.AllowUserToAddRows = false;
             this.clienteDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.clienteDataGrid.Location = new System.Drawing.Point(86, 295);
             this.clienteDataGrid.Name = "clienteDataGrid";
             this.clienteDataGrid.Size = new System.Drawing.Size(623, 150);
             this.clienteDataGrid.TabIndex = 25;
+            this.clienteDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.clienteDataGrid_CellContentClick);
             this.clienteDataGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.clienteDataGrid_MouseDoubleClick);
             // 
             // button1
@@ -402,6 +404,7 @@ namespace PagoAgilFrba.AbmCliente
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Cliente modificado correctamente");
+                        searchButton_Click(sender, e);
 
                     }
                     
@@ -491,6 +494,8 @@ namespace PagoAgilFrba.AbmCliente
             nombreTextBox.Text = apellidoTextBox.Text = mailTextBox.Text = direccionTextBox.Text =
                 codigoPostalTxtBox.Text = dniTextBox.Text = telefonoTxtBox.Text = fechaNacimientoTime.Text = "";
             guardarBtn.Text = "Guardar";
+
+            clienteDataGrid.DataSource = new DataTable();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -509,6 +514,11 @@ namespace PagoAgilFrba.AbmCliente
         }
 
         private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clienteDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

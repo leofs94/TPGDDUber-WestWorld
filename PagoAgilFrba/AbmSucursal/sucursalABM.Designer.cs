@@ -123,6 +123,7 @@
             // 
             // sucursalDataGrid
             // 
+            this.sucursalDataGrid.AllowUserToAddRows = false;
             this.sucursalDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.sucursalDataGrid.Location = new System.Drawing.Point(76, 253);
             this.sucursalDataGrid.Name = "sucursalDataGrid";
