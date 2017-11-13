@@ -386,6 +386,10 @@ namespace PagoAgilFrba.AbmCliente
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Cliente creado");
+
+                        if (sqlCon.State == ConnectionState.Open) sqlCon.Close();
+                        searchButton_Click(sender, e);
+
                     }
                     else
                     {
@@ -404,6 +408,8 @@ namespace PagoAgilFrba.AbmCliente
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Cliente modificado correctamente");
+
+                        if (sqlCon.State == ConnectionState.Open) sqlCon.Close();
                         searchButton_Click(sender, e);
 
                     }
@@ -431,7 +437,7 @@ namespace PagoAgilFrba.AbmCliente
             }
             finally
             {
-                sqlCon.Close();
+                if (sqlCon.State == ConnectionState.Open) sqlCon.Close();
             }
         }
 
@@ -466,9 +472,13 @@ namespace PagoAgilFrba.AbmCliente
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error Message");
             }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open) sqlCon.Close();
+            }
+
 
         }
 
@@ -493,6 +503,7 @@ namespace PagoAgilFrba.AbmCliente
         {
             nombreTextBox.Text = apellidoTextBox.Text = mailTextBox.Text = direccionTextBox.Text =
                 codigoPostalTxtBox.Text = dniTextBox.Text = telefonoTxtBox.Text = fechaNacimientoTime.Text = "";
+            habilitadoCheck.Checked = false;
             guardarBtn.Text = "Guardar";
 
             clienteDataGrid.DataSource = new DataTable();

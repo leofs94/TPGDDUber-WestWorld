@@ -425,24 +425,37 @@ namespace PagoAgilFrba.AbmFactura
 
         private void eliminarBtnL_Click(object sender, EventArgs e)
         {
-            if (sqlCon.State == ConnectionState.Closed)
+            try
             {
-                sqlCon.Open();
-                SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.FacturaDelete", sqlCon);
-                sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@numerofactura", Convert.ToInt64(facturasDataGridL.CurrentRow.Cells[0].Value.ToString()));
-
-                int exitCode = sqlCmd.ExecuteNonQuery();
-                if (exitCode == -1) MessageBox.Show("No se puede eliminar una factura pagada/rendida");
-                else
+                if (sqlCon.State == ConnectionState.Closed)
                 {
-                    MessageBox.Show("Factura " + facturasDataGridL.CurrentRow.Cells[0].Value.ToString() + " Eliminada");
-                    facturasDataGridL.Rows.RemoveAt(facturasDataGridL.CurrentRow.Index);
+                    sqlCon.Open();
+                    SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.FacturaDelete", sqlCon);
+                    sqlCmd.CommandType = CommandType.StoredProcedure;
+                    if (facturasDataGridL.CurrentRow == null) throw new Exception("No se selecciono ninguna factura");
+                    sqlCmd.Parameters.AddWithValue("@numerofactura", Convert.ToInt64(facturasDataGridL.CurrentRow.Cells[0].Value.ToString()));
+
+                    int exitCode = sqlCmd.ExecuteNonQuery();
+                    if (exitCode == -1) MessageBox.Show("No se puede eliminar una factura pagada/rendida");
+                    else
+                    {
+                        MessageBox.Show("Factura " + facturasDataGridL.CurrentRow.Cells[0].Value.ToString() + " Eliminada");
+                        facturasDataGridL.Rows.RemoveAt(facturasDataGridL.CurrentRow.Index);
+                    }
+
+                    if (sqlCon.State == ConnectionState.Open) sqlCon.Close();
+
+                    searchBtnL_Click(sender, e);
                 }
-
-                sqlCon.Close();
-
-                searchBtnL_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Message");
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                    sqlCon.Close();
             }
 
         }

@@ -52,7 +52,7 @@
             // 
             // direccionTextBox
             // 
-            this.direccionTextBox.Location = new System.Drawing.Point(421, 30);
+            this.direccionTextBox.Location = new System.Drawing.Point(489, 33);
             this.direccionTextBox.Name = "direccionTextBox";
             this.direccionTextBox.Size = new System.Drawing.Size(121, 20);
             this.direccionTextBox.TabIndex = 11;
@@ -62,14 +62,14 @@
             // 
             this.nombreTextBox.Location = new System.Drawing.Point(125, 33);
             this.nombreTextBox.Name = "nombreTextBox";
-            this.nombreTextBox.Size = new System.Drawing.Size(100, 20);
+            this.nombreTextBox.Size = new System.Drawing.Size(126, 20);
             this.nombreTextBox.TabIndex = 10;
             this.nombreTextBox.TextChanged += new System.EventHandler(this.nombreTextBox_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(335, 33);
+            this.label3.Location = new System.Drawing.Point(403, 36);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 9;
@@ -88,7 +88,7 @@
             // 
             this.codigoPostalTxtBox.Location = new System.Drawing.Point(125, 87);
             this.codigoPostalTxtBox.Name = "codigoPostalTxtBox";
-            this.codigoPostalTxtBox.Size = new System.Drawing.Size(48, 20);
+            this.codigoPostalTxtBox.Size = new System.Drawing.Size(126, 20);
             this.codigoPostalTxtBox.TabIndex = 17;
             this.codigoPostalTxtBox.TextChanged += new System.EventHandler(this.codigoPostalTxtBox_TextChanged);
             // 

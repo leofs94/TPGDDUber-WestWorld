@@ -81,6 +81,9 @@ namespace PagoAgilFrba.AbmEmpresa
 
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Empresa creada");
+
+                        if (sqlCon.State == ConnectionState.Open) sqlCon.Close();
+                        btnBuscar_Click_1(sender, e);
                     }
                     else
                     {
@@ -98,8 +101,9 @@ namespace PagoAgilFrba.AbmEmpresa
 
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Empresa modificada correctamente");
+                        
+                        if (sqlCon.State == ConnectionState.Open) sqlCon.Close();
                         btnBuscar_Click_1(sender, e);
-
                     }
                 }
             }
@@ -178,6 +182,11 @@ namespace PagoAgilFrba.AbmEmpresa
             {
                 MessageBox.Show(ex.Message, "Error Message");
             }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                    sqlCon.Close();
+            }
         }
 
         void fillDataGridView()
@@ -199,7 +208,7 @@ namespace PagoAgilFrba.AbmEmpresa
                 sqlDa.Fill(dtbl);
 
                 empresaDataGrid.DataSource = dtbl;
-                sqlCon.Close();
+                if(sqlCon.State == ConnectionState.Open) sqlCon.Close();
             }
         }
 
@@ -207,6 +216,7 @@ namespace PagoAgilFrba.AbmEmpresa
         {
             nombreTextBox.Text = direccionTextBox.Text = cuitTextBox.Text = nombreFilterTextBox.Text 
                 = cuitFilter.Text = rubroComboBox.Text = rubroFilterComboBox.Text = "";
+            habilitadoCheck.Checked = false;
             btnGuardar.Text = "Guardar";
 
             empresaDataGrid.DataSource = new DataTable();
