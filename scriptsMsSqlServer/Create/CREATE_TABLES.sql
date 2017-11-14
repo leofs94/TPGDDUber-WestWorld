@@ -30,7 +30,7 @@ CREATE TABLE "WEST_WORLD"."Factura"  (
 	"cliente"         	bigint NULL,
 	"empresa"         	bigint NULL,
 	"fechaAlta"       	datetime NOT NULL,
-	"fechaVencimiento"	datetime NOT NULL,
+	"FechaVencimiento"	datetime NOT NULL CHECK(FechaVencimiento <= SYSDATETIME()),
 	"total"           	numeric(15,2) NOT NULL CHECK (total > 0),
 	"rendicion"       	bigint NULL,
 	"pago"				bigint NULL,
@@ -42,7 +42,7 @@ CREATE TABLE "WEST_WORLD"."Factura_Item"(
 	"numeroFactura"	bigint NOT NULL,
 	"monto"         numeric(15,2) NOT NULL,
 	"cantidad"     	smallint NOT NULL,
-	"importe"		numeric(15,2) NOT NULL CHECK (importe > 0),
+	"importe"		numeric(15,2) NOT NULL,
 	CONSTRAINT "FacturaItemPK" PRIMARY KEY CLUSTERED("idItem","numeroFactura")
  ON [PRIMARY])
 GO
@@ -66,9 +66,7 @@ CREATE TABLE "WEST_WORLD"."Funcionalidad"  (
 GO
 CREATE TABLE "WEST_WORLD"."Pago"  ( 
 	"idPago"          	bigint IDENTITY(1,1) NOT NULL,
-	"FechaCobro"      	datetime NOT NULL,
-	"FechaVencimiento"	datetime NOT NULL CHECK(FechaVencimiento <= GETDATE()),
-	"empresa"         	bigint NOT NULL,
+	"FechaCobro"      	datetime NOT NULL DEFAULT SYSDATETIME(),
 	"cliente"         	bigint NOT NULL,
 	"sucursal"        	bigint NOT NULL,
 	"importe"         	numeric(15,2) NOT NULL CHECK(importe > 0),
@@ -180,13 +178,6 @@ ALTER TABLE "WEST_WORLD"."Pago"
 	ADD CONSTRAINT "FKFormaPago"
 	FOREIGN KEY("formaPago")
 	REFERENCES "WEST_WORLD"."FormaPago"("idFormaPago")
-	ON DELETE NO ACTION 
-	ON UPDATE NO ACTION 
-GO
-ALTER TABLE "WEST_WORLD"."Pago"
-	ADD CONSTRAINT "FkEmpresa"
-	FOREIGN KEY("empresa")
-	REFERENCES "WEST_WORLD"."Empresa"("idEmpresa")
 	ON DELETE NO ACTION 
 	ON UPDATE NO ACTION 
 GO

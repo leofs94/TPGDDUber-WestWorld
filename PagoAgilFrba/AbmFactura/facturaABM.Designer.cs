@@ -30,14 +30,28 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Listado = new System.Windows.Forms.TabPage();
+            this.clienteFilterLabel = new System.Windows.Forms.Label();
+            this.clienteFilterComboBox = new System.Windows.Forms.ComboBox();
+            this.limpiarBtnL = new System.Windows.Forms.Button();
+            this.empresaFilterLabel = new System.Windows.Forms.Label();
+            this.empresaFilterComboBox = new System.Windows.Forms.ComboBox();
+            this.facturasLabel = new System.Windows.Forms.Label();
+            this.eliminarBtnL = new System.Windows.Forms.Button();
             this.searchBtnL = new System.Windows.Forms.Button();
             this.facturasDataGridL = new System.Windows.Forms.DataGridView();
             this.numFactLabelL = new System.Windows.Forms.Label();
             this.numFactFilterTextBoxL = new System.Windows.Forms.TextBox();
+            this.cobrarGroupBox = new System.Windows.Forms.GroupBox();
+            this.clienteCobroTextBox = new System.Windows.Forms.TextBox();
+            this.clienteLabel2 = new System.Windows.Forms.Label();
+            this.importeFilterLabel = new System.Windows.Forms.Label();
+            this.cobrarBtn = new System.Windows.Forms.Button();
+            this.importeCobroTextBox = new System.Windows.Forms.TextBox();
             this.ABM = new System.Windows.Forms.TabPage();
             this.limpiarBtn = new System.Windows.Forms.Button();
             this.clienteComboBox = new System.Windows.Forms.ComboBox();
             this.itemsGroupBox = new System.Windows.Forms.GroupBox();
+            this.eliminarItemBtn = new System.Windows.Forms.Button();
             this.numFactLabel2 = new System.Windows.Forms.Label();
             this.itemsFacturaLabel = new System.Windows.Forms.Label();
             this.refreshBtn = new System.Windows.Forms.Button();
@@ -61,12 +75,16 @@
             this.numFactTextBox = new System.Windows.Forms.TextBox();
             this.empresaLabel = new System.Windows.Forms.Label();
             this.clienteLabel = new System.Windows.Forms.Label();
-            this.limpariBtnL = new System.Windows.Forms.Button();
-            this.eliminarBtnL = new System.Windows.Forms.Button();
-            this.eliminarItemBtn = new System.Windows.Forms.Button();
+            this.formaDePagoTextBox = new System.Windows.Forms.TextBox();
+            this.formaDePagoLabel = new System.Windows.Forms.Label();
+            this.sucursalLabel = new System.Windows.Forms.Label();
+            this.sucursalCobroTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.fechaCobroDT = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.Listado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.facturasDataGridL)).BeginInit();
+            this.cobrarGroupBox.SuspendLayout();
             this.ABM.SuspendLayout();
             this.itemsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsDataGrid)).BeginInit();
@@ -79,30 +97,101 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(768, 481);
+            this.tabControl1.Size = new System.Drawing.Size(769, 481);
             this.tabControl1.TabIndex = 0;
             // 
             // Listado
             // 
+            this.Listado.Controls.Add(this.clienteFilterLabel);
+            this.Listado.Controls.Add(this.clienteFilterComboBox);
+            this.Listado.Controls.Add(this.limpiarBtnL);
+            this.Listado.Controls.Add(this.empresaFilterLabel);
+            this.Listado.Controls.Add(this.empresaFilterComboBox);
+            this.Listado.Controls.Add(this.facturasLabel);
             this.Listado.Controls.Add(this.eliminarBtnL);
-            this.Listado.Controls.Add(this.limpariBtnL);
             this.Listado.Controls.Add(this.searchBtnL);
             this.Listado.Controls.Add(this.facturasDataGridL);
             this.Listado.Controls.Add(this.numFactLabelL);
             this.Listado.Controls.Add(this.numFactFilterTextBoxL);
+            this.Listado.Controls.Add(this.cobrarGroupBox);
             this.Listado.Location = new System.Drawing.Point(4, 22);
             this.Listado.Name = "Listado";
             this.Listado.Padding = new System.Windows.Forms.Padding(3);
-            this.Listado.Size = new System.Drawing.Size(760, 455);
+            this.Listado.Size = new System.Drawing.Size(761, 455);
             this.Listado.TabIndex = 0;
             this.Listado.Text = "Listado";
             this.Listado.UseVisualStyleBackColor = true;
+            this.Listado.Click += new System.EventHandler(this.Listado_Click);
+            // 
+            // clienteFilterLabel
+            // 
+            this.clienteFilterLabel.AutoSize = true;
+            this.clienteFilterLabel.Location = new System.Drawing.Point(369, 23);
+            this.clienteFilterLabel.Name = "clienteFilterLabel";
+            this.clienteFilterLabel.Size = new System.Drawing.Size(39, 13);
+            this.clienteFilterLabel.TabIndex = 15;
+            this.clienteFilterLabel.Text = "Cliente";
+            // 
+            // clienteFilterComboBox
+            // 
+            this.clienteFilterComboBox.FormattingEnabled = true;
+            this.clienteFilterComboBox.Location = new System.Drawing.Point(414, 21);
+            this.clienteFilterComboBox.Name = "clienteFilterComboBox";
+            this.clienteFilterComboBox.Size = new System.Drawing.Size(142, 21);
+            this.clienteFilterComboBox.TabIndex = 14;
+            this.clienteFilterComboBox.SelectedIndexChanged += new System.EventHandler(this.clienteFilterComboBox_SelectedIndexChanged);
+            // 
+            // limpiarBtnL
+            // 
+            this.limpiarBtnL.Location = new System.Drawing.Point(299, 400);
+            this.limpiarBtnL.Name = "limpiarBtnL";
+            this.limpiarBtnL.Size = new System.Drawing.Size(109, 31);
+            this.limpiarBtnL.TabIndex = 4;
+            this.limpiarBtnL.Text = "Limpiar";
+            this.limpiarBtnL.UseVisualStyleBackColor = true;
+            this.limpiarBtnL.Click += new System.EventHandler(this.limpiarBtnL_Click);
+            // 
+            // empresaFilterLabel
+            // 
+            this.empresaFilterLabel.AutoSize = true;
+            this.empresaFilterLabel.Location = new System.Drawing.Point(109, 59);
+            this.empresaFilterLabel.Name = "empresaFilterLabel";
+            this.empresaFilterLabel.Size = new System.Drawing.Size(48, 13);
+            this.empresaFilterLabel.TabIndex = 12;
+            this.empresaFilterLabel.Text = "Empresa";
+            // 
+            // empresaFilterComboBox
+            // 
+            this.empresaFilterComboBox.FormattingEnabled = true;
+            this.empresaFilterComboBox.Location = new System.Drawing.Point(166, 56);
+            this.empresaFilterComboBox.Name = "empresaFilterComboBox";
+            this.empresaFilterComboBox.Size = new System.Drawing.Size(142, 21);
+            this.empresaFilterComboBox.TabIndex = 11;
+            // 
+            // facturasLabel
+            // 
+            this.facturasLabel.AutoSize = true;
+            this.facturasLabel.Location = new System.Drawing.Point(22, 92);
+            this.facturasLabel.Name = "facturasLabel";
+            this.facturasLabel.Size = new System.Drawing.Size(48, 13);
+            this.facturasLabel.TabIndex = 6;
+            this.facturasLabel.Text = "Facturas";
+            // 
+            // eliminarBtnL
+            // 
+            this.eliminarBtnL.Location = new System.Drawing.Point(626, 83);
+            this.eliminarBtnL.Name = "eliminarBtnL";
+            this.eliminarBtnL.Size = new System.Drawing.Size(116, 22);
+            this.eliminarBtnL.TabIndex = 5;
+            this.eliminarBtnL.Text = "Eliminar";
+            this.eliminarBtnL.UseVisualStyleBackColor = true;
+            this.eliminarBtnL.Click += new System.EventHandler(this.eliminarBtnL_Click);
             // 
             // searchBtnL
             // 
-            this.searchBtnL.Location = new System.Drawing.Point(514, 36);
+            this.searchBtnL.Location = new System.Drawing.Point(372, 48);
             this.searchBtnL.Name = "searchBtnL";
-            this.searchBtnL.Size = new System.Drawing.Size(125, 35);
+            this.searchBtnL.Size = new System.Drawing.Size(184, 29);
             this.searchBtnL.TabIndex = 3;
             this.searchBtnL.Text = "Buscar";
             this.searchBtnL.UseVisualStyleBackColor = true;
@@ -112,9 +201,9 @@
             // 
             this.facturasDataGridL.AllowUserToAddRows = false;
             this.facturasDataGridL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.facturasDataGridL.Location = new System.Drawing.Point(21, 89);
+            this.facturasDataGridL.Location = new System.Drawing.Point(21, 108);
             this.facturasDataGridL.Name = "facturasDataGridL";
-            this.facturasDataGridL.Size = new System.Drawing.Size(721, 244);
+            this.facturasDataGridL.Size = new System.Drawing.Size(721, 148);
             this.facturasDataGridL.TabIndex = 2;
             this.facturasDataGridL.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.facturasDataGrid_CellContentClick);
             this.facturasDataGridL.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.facturasDataGridL_MouseDoubleClick);
@@ -122,7 +211,7 @@
             // numFactLabelL
             // 
             this.numFactLabelL.AutoSize = true;
-            this.numFactLabelL.Location = new System.Drawing.Point(18, 44);
+            this.numFactLabelL.Location = new System.Drawing.Point(61, 25);
             this.numFactLabelL.Name = "numFactLabelL";
             this.numFactLabelL.Size = new System.Drawing.Size(98, 13);
             this.numFactLabelL.TabIndex = 1;
@@ -130,10 +219,74 @@
             // 
             // numFactFilterTextBoxL
             // 
-            this.numFactFilterTextBoxL.Location = new System.Drawing.Point(141, 44);
+            this.numFactFilterTextBoxL.Location = new System.Drawing.Point(165, 22);
             this.numFactFilterTextBoxL.Name = "numFactFilterTextBoxL";
-            this.numFactFilterTextBoxL.Size = new System.Drawing.Size(122, 20);
+            this.numFactFilterTextBoxL.Size = new System.Drawing.Size(143, 20);
             this.numFactFilterTextBoxL.TabIndex = 0;
+            // 
+            // cobrarGroupBox
+            // 
+            this.cobrarGroupBox.Controls.Add(this.label1);
+            this.cobrarGroupBox.Controls.Add(this.fechaCobroDT);
+            this.cobrarGroupBox.Controls.Add(this.formaDePagoLabel);
+            this.cobrarGroupBox.Controls.Add(this.formaDePagoTextBox);
+            this.cobrarGroupBox.Controls.Add(this.clienteCobroTextBox);
+            this.cobrarGroupBox.Controls.Add(this.sucursalCobroTextBox);
+            this.cobrarGroupBox.Controls.Add(this.clienteLabel2);
+            this.cobrarGroupBox.Controls.Add(this.sucursalLabel);
+            this.cobrarGroupBox.Controls.Add(this.importeFilterLabel);
+            this.cobrarGroupBox.Controls.Add(this.cobrarBtn);
+            this.cobrarGroupBox.Controls.Add(this.importeCobroTextBox);
+            this.cobrarGroupBox.Location = new System.Drawing.Point(21, 275);
+            this.cobrarGroupBox.Name = "cobrarGroupBox";
+            this.cobrarGroupBox.Size = new System.Drawing.Size(721, 101);
+            this.cobrarGroupBox.TabIndex = 13;
+            this.cobrarGroupBox.TabStop = false;
+            this.cobrarGroupBox.Text = "Cobrar Facturas";
+            // 
+            // clienteCobroTextBox
+            // 
+            this.clienteCobroTextBox.Enabled = false;
+            this.clienteCobroTextBox.Location = new System.Drawing.Point(132, 67);
+            this.clienteCobroTextBox.Name = "clienteCobroTextBox";
+            this.clienteCobroTextBox.Size = new System.Drawing.Size(100, 20);
+            this.clienteCobroTextBox.TabIndex = 20;
+            // 
+            // clienteLabel2
+            // 
+            this.clienteLabel2.AutoSize = true;
+            this.clienteLabel2.Location = new System.Drawing.Point(65, 70);
+            this.clienteLabel2.Name = "clienteLabel2";
+            this.clienteLabel2.Size = new System.Drawing.Size(42, 13);
+            this.clienteLabel2.TabIndex = 18;
+            this.clienteLabel2.Text = "Cliente:";
+            // 
+            // importeFilterLabel
+            // 
+            this.importeFilterLabel.AutoSize = true;
+            this.importeFilterLabel.Location = new System.Drawing.Point(548, 29);
+            this.importeFilterLabel.Name = "importeFilterLabel";
+            this.importeFilterLabel.Size = new System.Drawing.Size(42, 13);
+            this.importeFilterLabel.TabIndex = 1;
+            this.importeFilterLabel.Text = "Importe";
+            // 
+            // cobrarBtn
+            // 
+            this.cobrarBtn.Location = new System.Drawing.Point(594, 60);
+            this.cobrarBtn.Name = "cobrarBtn";
+            this.cobrarBtn.Size = new System.Drawing.Size(102, 32);
+            this.cobrarBtn.TabIndex = 10;
+            this.cobrarBtn.Text = "Cobrar";
+            this.cobrarBtn.UseVisualStyleBackColor = true;
+            this.cobrarBtn.Click += new System.EventHandler(this.registrarPagoBtn_Click);
+            // 
+            // importeCobroTextBox
+            // 
+            this.importeCobroTextBox.Enabled = false;
+            this.importeCobroTextBox.Location = new System.Drawing.Point(596, 26);
+            this.importeCobroTextBox.Name = "importeCobroTextBox";
+            this.importeCobroTextBox.Size = new System.Drawing.Size(100, 20);
+            this.importeCobroTextBox.TabIndex = 0;
             // 
             // ABM
             // 
@@ -155,7 +308,7 @@
             this.ABM.Location = new System.Drawing.Point(4, 22);
             this.ABM.Name = "ABM";
             this.ABM.Padding = new System.Windows.Forms.Padding(3);
-            this.ABM.Size = new System.Drawing.Size(760, 455);
+            this.ABM.Size = new System.Drawing.Size(761, 455);
             this.ABM.TabIndex = 1;
             this.ABM.Text = "ABM";
             this.ABM.UseVisualStyleBackColor = true;
@@ -199,6 +352,16 @@
             this.itemsGroupBox.TabIndex = 34;
             this.itemsGroupBox.TabStop = false;
             this.itemsGroupBox.Text = "Items";
+            // 
+            // eliminarItemBtn
+            // 
+            this.eliminarItemBtn.Location = new System.Drawing.Point(556, 177);
+            this.eliminarItemBtn.Name = "eliminarItemBtn";
+            this.eliminarItemBtn.Size = new System.Drawing.Size(75, 23);
+            this.eliminarItemBtn.TabIndex = 24;
+            this.eliminarItemBtn.Text = "Eliminar";
+            this.eliminarItemBtn.UseVisualStyleBackColor = true;
+            this.eliminarItemBtn.Click += new System.EventHandler(this.eliminarItemBtn_Click);
             // 
             // numFactLabel2
             // 
@@ -397,41 +560,61 @@
             this.clienteLabel.TabIndex = 22;
             this.clienteLabel.Text = "Cliente";
             // 
-            // limpariBtnL
+            // formaDePagoTextBox
             // 
-            this.limpariBtnL.Location = new System.Drawing.Point(154, 351);
-            this.limpariBtnL.Name = "limpariBtnL";
-            this.limpariBtnL.Size = new System.Drawing.Size(109, 31);
-            this.limpariBtnL.TabIndex = 4;
-            this.limpariBtnL.Text = "Limpiar";
-            this.limpariBtnL.UseVisualStyleBackColor = true;
-            this.limpariBtnL.Click += new System.EventHandler(this.limpariBtnL_Click);
+            this.formaDePagoTextBox.Location = new System.Drawing.Point(133, 26);
+            this.formaDePagoTextBox.Name = "formaDePagoTextBox";
+            this.formaDePagoTextBox.Size = new System.Drawing.Size(100, 20);
+            this.formaDePagoTextBox.TabIndex = 21;
             // 
-            // eliminarBtnL
+            // formaDePagoLabel
             // 
-            this.eliminarBtnL.Location = new System.Drawing.Point(447, 351);
-            this.eliminarBtnL.Name = "eliminarBtnL";
-            this.eliminarBtnL.Size = new System.Drawing.Size(116, 31);
-            this.eliminarBtnL.TabIndex = 5;
-            this.eliminarBtnL.Text = "Eliminar";
-            this.eliminarBtnL.UseVisualStyleBackColor = true;
-            this.eliminarBtnL.Click += new System.EventHandler(this.eliminarBtnL_Click);
+            this.formaDePagoLabel.AutoSize = true;
+            this.formaDePagoLabel.Location = new System.Drawing.Point(28, 29);
+            this.formaDePagoLabel.Name = "formaDePagoLabel";
+            this.formaDePagoLabel.Size = new System.Drawing.Size(79, 13);
+            this.formaDePagoLabel.TabIndex = 22;
+            this.formaDePagoLabel.Text = "Forma de Pago";
             // 
-            // eliminarItemBtn
+            // sucursalLabel
             // 
-            this.eliminarItemBtn.Location = new System.Drawing.Point(556, 177);
-            this.eliminarItemBtn.Name = "eliminarItemBtn";
-            this.eliminarItemBtn.Size = new System.Drawing.Size(75, 23);
-            this.eliminarItemBtn.TabIndex = 24;
-            this.eliminarItemBtn.Text = "Eliminar";
-            this.eliminarItemBtn.UseVisualStyleBackColor = true;
-            this.eliminarItemBtn.Click += new System.EventHandler(this.eliminarItemBtn_Click);
+            this.sucursalLabel.AutoSize = true;
+            this.sucursalLabel.Location = new System.Drawing.Point(302, 29);
+            this.sucursalLabel.Name = "sucursalLabel";
+            this.sucursalLabel.Size = new System.Drawing.Size(51, 13);
+            this.sucursalLabel.TabIndex = 14;
+            this.sucursalLabel.Text = "Sucursal:";
+            // 
+            // sucursalCobroTextBox
+            // 
+            this.sucursalCobroTextBox.Enabled = false;
+            this.sucursalCobroTextBox.Location = new System.Drawing.Point(359, 26);
+            this.sucursalCobroTextBox.Name = "sucursalCobroTextBox";
+            this.sucursalCobroTextBox.Size = new System.Drawing.Size(118, 20);
+            this.sucursalCobroTextBox.TabIndex = 19;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(270, 70);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 13);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Fecha de Cobro";
+            // 
+            // fechaCobroDT
+            // 
+            this.fechaCobroDT.Enabled = false;
+            this.fechaCobroDT.Location = new System.Drawing.Point(359, 67);
+            this.fechaCobroDT.Name = "fechaCobroDT";
+            this.fechaCobroDT.Size = new System.Drawing.Size(200, 20);
+            this.fechaCobroDT.TabIndex = 23;
             // 
             // facturaABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 519);
+            this.ClientSize = new System.Drawing.Size(796, 505);
             this.Controls.Add(this.tabControl1);
             this.Name = "facturaABM";
             this.Text = "ABM  Factura";
@@ -440,6 +623,8 @@
             this.Listado.ResumeLayout(false);
             this.Listado.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.facturasDataGridL)).EndInit();
+            this.cobrarGroupBox.ResumeLayout(false);
+            this.cobrarGroupBox.PerformLayout();
             this.ABM.ResumeLayout(false);
             this.ABM.PerformLayout();
             this.itemsGroupBox.ResumeLayout(false);
@@ -484,9 +669,26 @@
         private System.Windows.Forms.TextBox numFactTextBox;
         private System.Windows.Forms.Label empresaLabel;
         private System.Windows.Forms.Label clienteLabel;
-        private System.Windows.Forms.Button limpariBtnL;
+        private System.Windows.Forms.Button limpiarBtnL;
         private System.Windows.Forms.Button eliminarBtnL;
         private System.Windows.Forms.Button eliminarItemBtn;
+        private System.Windows.Forms.Label facturasLabel;
+        private System.Windows.Forms.Button cobrarBtn;
+        private System.Windows.Forms.Label empresaFilterLabel;
+        private System.Windows.Forms.ComboBox empresaFilterComboBox;
+        private System.Windows.Forms.GroupBox cobrarGroupBox;
+        private System.Windows.Forms.Label importeFilterLabel;
+        private System.Windows.Forms.TextBox importeCobroTextBox;
+        private System.Windows.Forms.Label clienteFilterLabel;
+        private System.Windows.Forms.ComboBox clienteFilterComboBox;
+        private System.Windows.Forms.Label clienteLabel2;
+        private System.Windows.Forms.TextBox clienteCobroTextBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker fechaCobroDT;
+        private System.Windows.Forms.Label formaDePagoLabel;
+        private System.Windows.Forms.TextBox formaDePagoTextBox;
+        private System.Windows.Forms.TextBox sucursalCobroTextBox;
+        private System.Windows.Forms.Label sucursalLabel;
 
 
     }

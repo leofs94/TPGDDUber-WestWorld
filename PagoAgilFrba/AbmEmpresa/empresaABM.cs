@@ -15,6 +15,7 @@ namespace PagoAgilFrba.AbmEmpresa
 
     {
         static SqlConnection sqlCon = new SqlConnection(@Properties.Settings.Default.SQLSERVER2012);
+        private Utils utils = new Utils();
 
         public empresaABM()
         {
@@ -24,38 +25,9 @@ namespace PagoAgilFrba.AbmEmpresa
 
         public void llenarCombosRubro()
         {
-            List<KeyValuePair<int, string>> rubros = GetRubros();
-            llenar(rubroComboBox, rubros);
-            llenar(rubroFilterComboBox, rubros);
-        }
-
-        public void llenar(ComboBox combo, List<KeyValuePair<int,string>> items)
-        {
-            combo.Items.Clear();
-            combo.DisplayMember = "Value";
-            combo.ValueMember = "Key";
-
-            items.ForEach(item => combo.Items.Add(item));
-        }
-
-        static public List<KeyValuePair<int, string>> GetRubros()
-        {
-            List<KeyValuePair<int, string>> rubros = new List<KeyValuePair<int, string>>();
-
-            SqlCommand com = new SqlCommand("WEST_WORLD.GetRubros", sqlCon);
-            com.CommandType = CommandType.StoredProcedure;
-
-            if (sqlCon.State == ConnectionState.Closed)
-                sqlCon.Open();
-
-            SqlDataReader reader = com.ExecuteReader();
-            while (reader.Read())
-            {
-                rubros.Add(new KeyValuePair<int, string>(Int32.Parse(reader["idRubro"].ToString()), reader["nombre"].ToString()));
-            }
-            reader.Close();
-            sqlCon.Close();
-            return rubros;
+            List<KeyValuePair<int, string>> rubros = Utils.GetRubros();
+            utils.llenar(rubroComboBox, rubros);
+            utils.llenar(rubroFilterComboBox, rubros);
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -72,9 +44,9 @@ namespace PagoAgilFrba.AbmEmpresa
                         sqlCmd.Parameters.AddWithValue("@mode", "Add");
                         sqlCmd.Parameters.AddWithValue("@idEmpresa", 0);
 
-                        validarYAgregar(sqlCmd, "@nombre", nombreTextBox);
-                        validarYAgregar(sqlCmd, "@cuit", cuitTextBox);
-                        validarYAgregar(sqlCmd, "@direccion", direccionTextBox);
+                        utils.validarYAgregarParam(sqlCmd, "@nombre", nombreTextBox);
+                        utils.validarYAgregarParam(sqlCmd, "@cuit", cuitTextBox);
+                        utils.validarYAgregarParam(sqlCmd, "@direccion", direccionTextBox);
 
                         sqlCmd.Parameters.AddWithValue("@idRubro", rubroComboBox.SelectedIndex + 1); //+1 Porque arranca de 0
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
@@ -92,9 +64,9 @@ namespace PagoAgilFrba.AbmEmpresa
                         sqlCmd.Parameters.AddWithValue("@mode", "Edit");
 
                         sqlCmd.Parameters.AddWithValue("@idEmpresa", Convert.ToInt32(empresaDataGrid.CurrentRow.Cells[0].Value.ToString()));
-                        validarYAgregar(sqlCmd, "@nombre", nombreTextBox);
-                        validarYAgregar(sqlCmd, "@cuit", cuitTextBox);
-                        validarYAgregar(sqlCmd, "@direccion", direccionTextBox);
+                        utils.validarYAgregarParam(sqlCmd, "@nombre", nombreTextBox);
+                        utils.validarYAgregarParam(sqlCmd, "@cuit", cuitTextBox);
+                        utils.validarYAgregarParam(sqlCmd, "@direccion", direccionTextBox);
 
                         sqlCmd.Parameters.AddWithValue("@idRubro", rubroComboBox.SelectedIndex + 1); //+1 Porque arranca de 0
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
@@ -128,12 +100,6 @@ namespace PagoAgilFrba.AbmEmpresa
                 if (sqlCon.State == ConnectionState.Open)
                     sqlCon.Close();
             }
-        }
-
-        public void validarYAgregar(SqlCommand sqlCmd, string variable, TextBox text)
-        {
-            if ((string.IsNullOrWhiteSpace(text.Text.Trim()))) throw new Exception("Todos los campos son obligatorios");
-            else sqlCmd.Parameters.AddWithValue(variable, text.Text.Trim());
         }
 
         private void habilitadoCheck_CheckedChanged(object sender, EventArgs e)

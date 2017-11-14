@@ -1,3 +1,7 @@
+DELETE FROM WEST_WORLD.Empresa
+DELETE FROM WEST_WORLD.Rubro
+DELETE FROM WEST_WORLD.Cliente
+
 INSERT INTO WEST_WORLD.Rubro(nombre) 
 			VALUES('Manijas')
 INSERT INTO WEST_WORLD.Rubro(nombre) 
@@ -16,3 +20,6 @@ INSERT INTO WEST_WORLD.Empresa(cuit, nombre, direccion, idRubro, habilitado)
 
 INSERT INTO WEST_WORLD.Cliente(nombre, apellido, mail, direccion, codigoPostal, dni, telefono, fecha_nac, habilitado)
 			VALUES('Juan', 'Perez', 'juan@perez.com', 'juancilandia', 1010, 40500600, 65546465, '20120618 10:34:09 AM', 1)
+
+INSERT INTO WEST_WORLD.Cliente(nombre, apellido, mail, direccion, codigoPostal, dni, telefono, fecha_nac, habilitado)
+			VALUES('Pepe', 'Pompin', 'Pepe@Pompin.com', 'pepelandia', 222, 2600300, 2144124, '18000618 10:34:09 AM', 1)
