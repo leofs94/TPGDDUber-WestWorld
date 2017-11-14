@@ -15,12 +15,11 @@ AS
 
 			INSERT INTO WEST_WORLD.Pago(FechaCobro, cliente, sucursal, importe, formaPago)
 					VALUES(@FECHACOBRO, @IDCLIENTE, @IDSUCURSAL, @IMPORTE, (select IDENT_CURRENT('WEST_WORLD.FormaPago')))
-			
-			RETURN  (select IDENT_CURRENT('WEST_WORLD.Pago'))
 		END
 	ELSE	
 		BEGIN
 			INSERT INTO WEST_WORLD.Pago(FechaCobro, cliente, sucursal, importe, formaPago)
 				VALUES(@FECHACOBRO, @IDCLIENTE, @IDSUCURSAL, @IMPORTE, @@idFormaPago)
-			RETURN @@idFormaPago
 		END
+
+RETURN  (select IDENT_CURRENT('WEST_WORLD.Pago'))
