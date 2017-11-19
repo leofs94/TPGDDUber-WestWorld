@@ -3,9 +3,8 @@ CREATE PROCEDURE WEST_WORLD.ItemView
 
 AS
 
-	SELECT i.idItem, descripcion, monto, cantidad, importe
-	FROM WEST_WORLD.Factura_Item fi
-	JOIN WEST_WORLD.Item i on (fi.idItem=i.idItem)
+	SELECT idItem, monto, cantidad, importe
+	FROM WEST_WORLD.Item i
 	WHERE numeroFactura = @NUMEROFACTURA
 
 	OPTION (RECOMPILE)

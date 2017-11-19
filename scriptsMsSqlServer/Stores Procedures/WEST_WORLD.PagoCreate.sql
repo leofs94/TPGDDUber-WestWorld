@@ -6,10 +6,10 @@ CREATE PROCEDURE WEST_WORLD.PagoCreate
 @FORMADEPAGO nvarchar(50)
 
 AS
-	DECLARE @@idFormaPago int
-	SET @@idFormaPago = (SELECT idFormaPago FROM WEST_WORLD.FormaPago WHERE descripcion like @FORMADEPAGO)
+	DECLARE @idFormaPago int
+	SET @idFormaPago = (SELECT idFormaPago FROM WEST_WORLD.FormaPago WHERE descripcion like @FORMADEPAGO)
 	
-	IF (@@idFormaPago IS NULL)
+	IF (@idFormaPago IS NULL)
 		BEGIN
 			INSERT INTO WEST_WORLD.FormaPago(descripcion) VALUES (@FORMADEPAGO)
 
@@ -19,7 +19,7 @@ AS
 	ELSE	
 		BEGIN
 			INSERT INTO WEST_WORLD.Pago(FechaCobro, cliente, sucursal, importe, formaPago)
-				VALUES(@FECHACOBRO, @IDCLIENTE, @IDSUCURSAL, @IMPORTE, @@idFormaPago)
+				VALUES(@FECHACOBRO, @IDCLIENTE, @IDSUCURSAL, @IMPORTE, @idFormaPago)
 		END
 
 RETURN  (select IDENT_CURRENT('WEST_WORLD.Pago'))

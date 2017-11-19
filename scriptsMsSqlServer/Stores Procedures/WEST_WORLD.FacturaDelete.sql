@@ -8,13 +8,10 @@ AS
 		
 			DECLARE @idItem bigint
 
-			SET @idItem = (SELECT idItem FROM WEST_WORLD.Factura_Item
+			SET @idItem = (SELECT idItem FROM WEST_WORLD.Item
 							WHERE numeroFactura=@NUMEROFACTURA)
 
 			DELETE FROM WEST_WORLD.Item
-			WHERE idItem = @idItem
-
-			DELETE FROM WEST_WORLD.Factura_Item
 			WHERE numeroFactura = @NUMEROFACTURA and idItem = @idItem
 
 			DELETE FROM WEST_WORLD.Factura

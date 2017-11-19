@@ -165,9 +165,7 @@ namespace PagoAgilFrba.AbmFactura
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@mode", "Add");
                 sqlCmd.Parameters.AddWithValue("@idItem", 0);
-
-                utils.validarYAgregarParam(sqlCmd, "@descripcion", descrTextBox);
-
+                
                 utils.validarConvYAgregarParam(sqlCmd, "@monto", montoTextBox);
                 utils.validarConvYAgregarParam(sqlCmd, "@cantidad", cantTextBox);
 
@@ -194,8 +192,6 @@ namespace PagoAgilFrba.AbmFactura
                 sqlCmd.Parameters.AddWithValue("@mode", "Edit");
                 sqlCmd.Parameters.AddWithValue("@idItem", Convert.ToInt32(itemsDataGrid.CurrentRow.Cells[0].Value.ToString()));
                 sqlCmd.Parameters.AddWithValue("@numeroFactura", numFactLabel2.Text.Trim());
-
-                if (!(string.IsNullOrWhiteSpace(descrTextBox.Text.Trim()))) sqlCmd.Parameters.AddWithValue("@descripcion", descrTextBox.Text.Trim());
 
                 utils.validarConvYAgregarParam(sqlCmd, "@monto", montoTextBox);
                 utils.validarConvYAgregarParam(sqlCmd, "@cantidad", cantTextBox);
@@ -266,7 +262,7 @@ namespace PagoAgilFrba.AbmFactura
         private void limpiarBtn_Click_1(object sender, EventArgs e)
         {
             clienteComboBox.Text = empresaComboBox.Text = numFactTextBox.Text = fechaAltaFactDT.Text
-                 = fechaVencDT.Text = totalTextBox.Text = montoTextBox.Text = cantTextBox.Text = descrTextBox.Text = numFactLabel2.Text = "";
+                 = fechaVencDT.Text = totalTextBox.Text = montoTextBox.Text = cantTextBox.Text = numFactLabel2.Text = "";
             guardarFactButton.Text = "Guardar Factura";
             agregarItemBtn.Text = "Agregar Item";
 
@@ -277,9 +273,8 @@ namespace PagoAgilFrba.AbmFactura
         {
             if (itemsDataGrid.CurrentRow.Index != -1)
             {
-                descrTextBox.Text = itemsDataGrid.CurrentRow.Cells[1].Value.ToString();
-                montoTextBox.Text = itemsDataGrid.CurrentRow.Cells[2].Value.ToString();
-                cantTextBox.Text = itemsDataGrid.CurrentRow.Cells[3].Value.ToString();
+                montoTextBox.Text = itemsDataGrid.CurrentRow.Cells[1].Value.ToString();
+                cantTextBox.Text = itemsDataGrid.CurrentRow.Cells[2].Value.ToString();
                 numFactLabel2.Text = numFactTextBox.Text;
 
                 agregarItemBtn.Text = "Update Item";
@@ -326,6 +321,7 @@ namespace PagoAgilFrba.AbmFactura
                 else sqlDa.SelectCommand.Parameters.AddWithValue("@idCliente", clienteFilterComboBox.SelectedIndex + 1);
 
                 DataTable dtbl = new DataTable();
+
                 sqlDa.Fill(dtbl);
                 facturasDataGridL.DataSource = dtbl;
                 importeCobroTextBox.Text = utils.calcularColumna("total", dtbl);

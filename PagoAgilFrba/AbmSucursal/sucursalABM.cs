@@ -93,7 +93,7 @@ namespace PagoAgilFrba.AbmSucursal
                         validarYAgregar(sqlCmd, "@codigoPostal", codigoPostalTxtBox);
 
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
-                        sqlCmd.Parameters.AddWithValue("@operador", 0);// TODO este id saldria del login
+                        sqlCmd.Parameters.AddWithValue("@operador", 1);// TODO este id saldria del login
 
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Sucursal creada");
