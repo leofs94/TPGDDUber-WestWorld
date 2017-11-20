@@ -58,7 +58,12 @@
             this.facturasACobrarDataGrid = new System.Windows.Forms.DataGridView();
             this.agregarABtn = new System.Windows.Forms.Button();
             this.facturasACobrarLabel = new System.Windows.Forms.Label();
+            this.NumFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Empresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaAlta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaVencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eliminarBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.facturasDataGridL)).BeginInit();
             this.cobrarGroupBox.SuspendLayout();
             this.filtrarGroupBox.SuspendLayout();
@@ -76,7 +81,7 @@
             this.facturasDataGridL.Location = new System.Drawing.Point(47, 154);
             this.facturasDataGridL.Name = "facturasDataGridL";
             this.facturasDataGridL.ReadOnly = true;
-            this.facturasDataGridL.Size = new System.Drawing.Size(373, 102);
+            this.facturasDataGridL.Size = new System.Drawing.Size(350, 159);
             this.facturasDataGridL.TabIndex = 15;
             // 
             // cobrarGroupBox
@@ -93,16 +98,16 @@
             this.cobrarGroupBox.Controls.Add(this.importeFilterLabel);
             this.cobrarGroupBox.Controls.Add(this.cobrarBtn);
             this.cobrarGroupBox.Controls.Add(this.importeCobroTextBox);
-            this.cobrarGroupBox.Location = new System.Drawing.Point(47, 309);
+            this.cobrarGroupBox.Location = new System.Drawing.Point(47, 319);
             this.cobrarGroupBox.Name = "cobrarGroupBox";
-            this.cobrarGroupBox.Size = new System.Drawing.Size(770, 107);
+            this.cobrarGroupBox.Size = new System.Drawing.Size(770, 110);
             this.cobrarGroupBox.TabIndex = 14;
             this.cobrarGroupBox.TabStop = false;
             this.cobrarGroupBox.Text = "Registrar Pago";
             // 
             // limpiarCobroBtn
             // 
-            this.limpiarCobroBtn.Location = new System.Drawing.Point(695, 82);
+            this.limpiarCobroBtn.Location = new System.Drawing.Point(695, 87);
             this.limpiarCobroBtn.Name = "limpiarCobroBtn";
             this.limpiarCobroBtn.Size = new System.Drawing.Size(75, 23);
             this.limpiarCobroBtn.TabIndex = 29;
@@ -337,23 +342,31 @@
             // 
             this.facturasACobrarDataGrid.AllowUserToAddRows = false;
             this.facturasACobrarDataGrid.AllowUserToDeleteRows = false;
+            this.facturasACobrarDataGrid.AllowUserToResizeColumns = false;
             this.facturasACobrarDataGrid.AllowUserToResizeRows = false;
+            this.facturasACobrarDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.facturasACobrarDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.facturasACobrarDataGrid.ColumnHeadersVisible = false;
             this.facturasACobrarDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Empresa});
-            this.facturasACobrarDataGrid.Location = new System.Drawing.Point(444, 154);
+            this.NumFactura,
+            this.Empresa,
+            this.Total,
+            this.fechaAlta,
+            this.fechaVencimiento});
+            this.facturasACobrarDataGrid.Location = new System.Drawing.Point(457, 154);
             this.facturasACobrarDataGrid.Name = "facturasACobrarDataGrid";
             this.facturasACobrarDataGrid.ReadOnly = true;
-            this.facturasACobrarDataGrid.Size = new System.Drawing.Size(373, 102);
+            this.facturasACobrarDataGrid.Size = new System.Drawing.Size(360, 159);
             this.facturasACobrarDataGrid.TabIndex = 21;
             // 
             // agregarABtn
             // 
-            this.agregarABtn.Location = new System.Drawing.Point(396, 262);
+            this.agregarABtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.agregarABtn.Location = new System.Drawing.Point(403, 191);
             this.agregarABtn.Name = "agregarABtn";
-            this.agregarABtn.Size = new System.Drawing.Size(75, 23);
+            this.agregarABtn.Size = new System.Drawing.Size(48, 37);
             this.agregarABtn.TabIndex = 22;
-            this.agregarABtn.Text = "Agregar A";
+            this.agregarABtn.Text = "=>";
             this.agregarABtn.UseVisualStyleBackColor = true;
             this.agregarABtn.Click += new System.EventHandler(this.agregarABtn_Click);
             // 
@@ -361,21 +374,62 @@
             // 
             this.facturasACobrarLabel.AutoSize = true;
             this.facturasACobrarLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.facturasACobrarLabel.Location = new System.Drawing.Point(464, 134);
+            this.facturasACobrarLabel.Location = new System.Drawing.Point(454, 134);
             this.facturasACobrarLabel.Name = "facturasACobrarLabel";
             this.facturasACobrarLabel.Size = new System.Drawing.Size(116, 17);
             this.facturasACobrarLabel.TabIndex = 23;
             this.facturasACobrarLabel.Text = "Facturas a pagar";
+            // 
+            // NumFactura
+            // 
+            this.NumFactura.HeaderText = "Num Factura";
+            this.NumFactura.Name = "NumFactura";
+            this.NumFactura.ReadOnly = true;
+            this.NumFactura.Width = 5;
             // 
             // Empresa
             // 
             this.Empresa.HeaderText = "Empresa";
             this.Empresa.Name = "Empresa";
             this.Empresa.ReadOnly = true;
+            this.Empresa.Width = 5;
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            this.Total.Width = 5;
+            // 
+            // fechaAlta
+            // 
+            this.fechaAlta.HeaderText = "Fecha Alta";
+            this.fechaAlta.Name = "fechaAlta";
+            this.fechaAlta.ReadOnly = true;
+            this.fechaAlta.Width = 5;
+            // 
+            // fechaVencimiento
+            // 
+            this.fechaVencimiento.HeaderText = "Fecha Venc";
+            this.fechaVencimiento.Name = "fechaVencimiento";
+            this.fechaVencimiento.ReadOnly = true;
+            this.fechaVencimiento.Width = 5;
+            // 
+            // eliminarBtn
+            // 
+            this.eliminarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.eliminarBtn.Location = new System.Drawing.Point(401, 234);
+            this.eliminarBtn.Name = "eliminarBtn";
+            this.eliminarBtn.Size = new System.Drawing.Size(50, 32);
+            this.eliminarBtn.TabIndex = 24;
+            this.eliminarBtn.Text = "X";
+            this.eliminarBtn.UseVisualStyleBackColor = true;
+            this.eliminarBtn.Click += new System.EventHandler(this.eliminarBtn_Click);
             // 
             // RegistroPago
             // 
             this.ClientSize = new System.Drawing.Size(856, 481);
+            this.Controls.Add(this.eliminarBtn);
             this.Controls.Add(this.facturasACobrarLabel);
             this.Controls.Add(this.agregarABtn);
             this.Controls.Add(this.facturasACobrarDataGrid);
@@ -434,6 +488,11 @@
         private System.Windows.Forms.DataGridView facturasACobrarDataGrid;
         private System.Windows.Forms.Button agregarABtn;
         private System.Windows.Forms.Label facturasACobrarLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumFactura;
         private System.Windows.Forms.DataGridViewTextBoxColumn Empresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaAlta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaVencimiento;
+        private System.Windows.Forms.Button eliminarBtn;
     }
 }
