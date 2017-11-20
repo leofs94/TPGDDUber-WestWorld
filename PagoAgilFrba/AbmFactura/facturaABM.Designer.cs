@@ -147,6 +147,7 @@
             this.facturasDataGridL.AllowUserToAddRows = false;
             this.facturasDataGridL.AllowUserToDeleteRows = false;
             this.facturasDataGridL.AllowUserToResizeRows = false;
+            this.facturasDataGridL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.facturasDataGridL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.facturasDataGridL.Location = new System.Drawing.Point(25, 179);
             this.facturasDataGridL.Name = "facturasDataGridL";

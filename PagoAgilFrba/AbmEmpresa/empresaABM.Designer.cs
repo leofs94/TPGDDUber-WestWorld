@@ -196,6 +196,7 @@
             this.btnBuscar.TabIndex = 46;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
             // 
             // rubroFilterComboBox
             // 

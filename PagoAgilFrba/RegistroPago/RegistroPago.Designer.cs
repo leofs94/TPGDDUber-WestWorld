@@ -30,6 +30,7 @@
         {
             this.facturasDataGridL = new System.Windows.Forms.DataGridView();
             this.cobrarGroupBox = new System.Windows.Forms.GroupBox();
+            this.limpiarCobroBtn = new System.Windows.Forms.Button();
             this.formaPagoComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.fechaCobroDT = new System.Windows.Forms.DateTimePicker();
@@ -42,6 +43,7 @@
             this.cobrarBtn = new System.Windows.Forms.Button();
             this.importeCobroTextBox = new System.Windows.Forms.TextBox();
             this.filtrarGroupBox = new System.Windows.Forms.GroupBox();
+            this.limpiarFiltrosBtn = new System.Windows.Forms.Button();
             this.clienteGroupBox = new System.Windows.Forms.GroupBox();
             this.idClienteTextBox = new System.Windows.Forms.TextBox();
             this.seleccionarClienteBtn = new System.Windows.Forms.Button();
@@ -53,12 +55,15 @@
             this.empresaFilterLabel = new System.Windows.Forms.Label();
             this.limpiarBtn = new System.Windows.Forms.Button();
             this.facturasLabel = new System.Windows.Forms.Label();
-            this.limpiarFiltrosBtn = new System.Windows.Forms.Button();
-            this.limpiarCobroBtn = new System.Windows.Forms.Button();
+            this.facturasACobrarDataGrid = new System.Windows.Forms.DataGridView();
+            this.agregarABtn = new System.Windows.Forms.Button();
+            this.facturasACobrarLabel = new System.Windows.Forms.Label();
+            this.Empresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.facturasDataGridL)).BeginInit();
             this.cobrarGroupBox.SuspendLayout();
             this.filtrarGroupBox.SuspendLayout();
             this.clienteGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.facturasACobrarDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // facturasDataGridL
@@ -66,11 +71,12 @@
             this.facturasDataGridL.AllowUserToAddRows = false;
             this.facturasDataGridL.AllowUserToDeleteRows = false;
             this.facturasDataGridL.AllowUserToResizeRows = false;
+            this.facturasDataGridL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.facturasDataGridL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.facturasDataGridL.Location = new System.Drawing.Point(47, 154);
             this.facturasDataGridL.Name = "facturasDataGridL";
             this.facturasDataGridL.ReadOnly = true;
-            this.facturasDataGridL.Size = new System.Drawing.Size(770, 197);
+            this.facturasDataGridL.Size = new System.Drawing.Size(373, 102);
             this.facturasDataGridL.TabIndex = 15;
             // 
             // cobrarGroupBox
@@ -87,17 +93,27 @@
             this.cobrarGroupBox.Controls.Add(this.importeFilterLabel);
             this.cobrarGroupBox.Controls.Add(this.cobrarBtn);
             this.cobrarGroupBox.Controls.Add(this.importeCobroTextBox);
-            this.cobrarGroupBox.Location = new System.Drawing.Point(47, 357);
+            this.cobrarGroupBox.Location = new System.Drawing.Point(47, 309);
             this.cobrarGroupBox.Name = "cobrarGroupBox";
-            this.cobrarGroupBox.Size = new System.Drawing.Size(770, 143);
+            this.cobrarGroupBox.Size = new System.Drawing.Size(770, 107);
             this.cobrarGroupBox.TabIndex = 14;
             this.cobrarGroupBox.TabStop = false;
-            this.cobrarGroupBox.Text = "Cobrar Facturas";
+            this.cobrarGroupBox.Text = "Registrar Pago";
+            // 
+            // limpiarCobroBtn
+            // 
+            this.limpiarCobroBtn.Location = new System.Drawing.Point(695, 82);
+            this.limpiarCobroBtn.Name = "limpiarCobroBtn";
+            this.limpiarCobroBtn.Size = new System.Drawing.Size(75, 23);
+            this.limpiarCobroBtn.TabIndex = 29;
+            this.limpiarCobroBtn.Text = "Limpiar";
+            this.limpiarCobroBtn.UseVisualStyleBackColor = true;
+            this.limpiarCobroBtn.Click += new System.EventHandler(this.limpiarCobroBtn_Click);
             // 
             // formaPagoComboBox
             // 
             this.formaPagoComboBox.FormattingEnabled = true;
-            this.formaPagoComboBox.Location = new System.Drawing.Point(102, 29);
+            this.formaPagoComboBox.Location = new System.Drawing.Point(95, 30);
             this.formaPagoComboBox.Name = "formaPagoComboBox";
             this.formaPagoComboBox.Size = new System.Drawing.Size(121, 21);
             this.formaPagoComboBox.TabIndex = 25;
@@ -114,15 +130,16 @@
             // fechaCobroDT
             // 
             this.fechaCobroDT.Enabled = false;
+            this.fechaCobroDT.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.fechaCobroDT.Location = new System.Drawing.Point(339, 70);
             this.fechaCobroDT.Name = "fechaCobroDT";
-            this.fechaCobroDT.Size = new System.Drawing.Size(200, 20);
+            this.fechaCobroDT.Size = new System.Drawing.Size(103, 20);
             this.fechaCobroDT.TabIndex = 23;
             // 
             // formaDePagoLabel
             // 
             this.formaDePagoLabel.AutoSize = true;
-            this.formaDePagoLabel.Location = new System.Drawing.Point(17, 29);
+            this.formaDePagoLabel.Location = new System.Drawing.Point(10, 30);
             this.formaDePagoLabel.Name = "formaDePagoLabel";
             this.formaDePagoLabel.Size = new System.Drawing.Size(79, 13);
             this.formaDePagoLabel.TabIndex = 22;
@@ -131,7 +148,7 @@
             // clienteTxt
             // 
             this.clienteTxt.Enabled = false;
-            this.clienteTxt.Location = new System.Drawing.Point(102, 67);
+            this.clienteTxt.Location = new System.Drawing.Point(95, 68);
             this.clienteTxt.Name = "clienteTxt";
             this.clienteTxt.Size = new System.Drawing.Size(121, 20);
             this.clienteTxt.TabIndex = 20;
@@ -139,33 +156,33 @@
             // sucursalTextBox
             // 
             this.sucursalTextBox.Enabled = false;
-            this.sucursalTextBox.Location = new System.Drawing.Point(339, 30);
+            this.sucursalTextBox.Location = new System.Drawing.Point(302, 31);
             this.sucursalTextBox.Name = "sucursalTextBox";
-            this.sucursalTextBox.Size = new System.Drawing.Size(200, 20);
+            this.sucursalTextBox.Size = new System.Drawing.Size(140, 20);
             this.sucursalTextBox.TabIndex = 19;
             // 
             // clienteLabel2
             // 
             this.clienteLabel2.AutoSize = true;
-            this.clienteLabel2.Location = new System.Drawing.Point(54, 70);
+            this.clienteLabel2.Location = new System.Drawing.Point(47, 71);
             this.clienteLabel2.Name = "clienteLabel2";
-            this.clienteLabel2.Size = new System.Drawing.Size(42, 13);
+            this.clienteLabel2.Size = new System.Drawing.Size(39, 13);
             this.clienteLabel2.TabIndex = 18;
-            this.clienteLabel2.Text = "Cliente:";
+            this.clienteLabel2.Text = "Cliente";
             // 
             // sucursalLabel
             // 
             this.sucursalLabel.AutoSize = true;
-            this.sucursalLabel.Location = new System.Drawing.Point(282, 33);
+            this.sucursalLabel.Location = new System.Drawing.Point(245, 34);
             this.sucursalLabel.Name = "sucursalLabel";
-            this.sucursalLabel.Size = new System.Drawing.Size(51, 13);
+            this.sucursalLabel.Size = new System.Drawing.Size(48, 13);
             this.sucursalLabel.TabIndex = 14;
-            this.sucursalLabel.Text = "Sucursal:";
+            this.sucursalLabel.Text = "Sucursal";
             // 
             // importeFilterLabel
             // 
             this.importeFilterLabel.AutoSize = true;
-            this.importeFilterLabel.Location = new System.Drawing.Point(594, 32);
+            this.importeFilterLabel.Location = new System.Drawing.Point(485, 29);
             this.importeFilterLabel.Name = "importeFilterLabel";
             this.importeFilterLabel.Size = new System.Drawing.Size(42, 13);
             this.importeFilterLabel.TabIndex = 1;
@@ -173,7 +190,7 @@
             // 
             // cobrarBtn
             // 
-            this.cobrarBtn.Location = new System.Drawing.Point(597, 66);
+            this.cobrarBtn.Location = new System.Drawing.Point(488, 63);
             this.cobrarBtn.Name = "cobrarBtn";
             this.cobrarBtn.Size = new System.Drawing.Size(145, 32);
             this.cobrarBtn.TabIndex = 10;
@@ -184,7 +201,7 @@
             // importeCobroTextBox
             // 
             this.importeCobroTextBox.Enabled = false;
-            this.importeCobroTextBox.Location = new System.Drawing.Point(642, 29);
+            this.importeCobroTextBox.Location = new System.Drawing.Point(533, 26);
             this.importeCobroTextBox.Name = "importeCobroTextBox";
             this.importeCobroTextBox.Size = new System.Drawing.Size(100, 20);
             this.importeCobroTextBox.TabIndex = 0;
@@ -200,10 +217,20 @@
             this.filtrarGroupBox.Controls.Add(this.empresaFilterLabel);
             this.filtrarGroupBox.Location = new System.Drawing.Point(47, 12);
             this.filtrarGroupBox.Name = "filtrarGroupBox";
-            this.filtrarGroupBox.Size = new System.Drawing.Size(770, 125);
+            this.filtrarGroupBox.Size = new System.Drawing.Size(770, 119);
             this.filtrarGroupBox.TabIndex = 18;
             this.filtrarGroupBox.TabStop = false;
             this.filtrarGroupBox.Text = "Criterio de Búsqueda";
+            // 
+            // limpiarFiltrosBtn
+            // 
+            this.limpiarFiltrosBtn.Location = new System.Drawing.Point(695, 96);
+            this.limpiarFiltrosBtn.Name = "limpiarFiltrosBtn";
+            this.limpiarFiltrosBtn.Size = new System.Drawing.Size(75, 23);
+            this.limpiarFiltrosBtn.TabIndex = 27;
+            this.limpiarFiltrosBtn.Text = "Limpiar";
+            this.limpiarFiltrosBtn.UseVisualStyleBackColor = true;
+            this.limpiarFiltrosBtn.Click += new System.EventHandler(this.limpiarFiltrosBtn_Click);
             // 
             // clienteGroupBox
             // 
@@ -288,7 +315,7 @@
             // 
             // limpiarBtn
             // 
-            this.limpiarBtn.Location = new System.Drawing.Point(324, 506);
+            this.limpiarBtn.Location = new System.Drawing.Point(386, 435);
             this.limpiarBtn.Name = "limpiarBtn";
             this.limpiarBtn.Size = new System.Drawing.Size(111, 31);
             this.limpiarBtn.TabIndex = 19;
@@ -299,35 +326,59 @@
             // facturasLabel
             // 
             this.facturasLabel.AutoSize = true;
-            this.facturasLabel.Location = new System.Drawing.Point(53, 138);
+            this.facturasLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.facturasLabel.Location = new System.Drawing.Point(44, 134);
             this.facturasLabel.Name = "facturasLabel";
-            this.facturasLabel.Size = new System.Drawing.Size(91, 13);
+            this.facturasLabel.Size = new System.Drawing.Size(121, 17);
             this.facturasLabel.TabIndex = 20;
             this.facturasLabel.Text = "Facturas sin pago";
             // 
-            // limpiarFiltrosBtn
+            // facturasACobrarDataGrid
             // 
-            this.limpiarFiltrosBtn.Location = new System.Drawing.Point(695, 102);
-            this.limpiarFiltrosBtn.Name = "limpiarFiltrosBtn";
-            this.limpiarFiltrosBtn.Size = new System.Drawing.Size(75, 23);
-            this.limpiarFiltrosBtn.TabIndex = 27;
-            this.limpiarFiltrosBtn.Text = "Limpiar";
-            this.limpiarFiltrosBtn.UseVisualStyleBackColor = true;
-            this.limpiarFiltrosBtn.Click += new System.EventHandler(this.limpiarFiltrosBtn_Click);
+            this.facturasACobrarDataGrid.AllowUserToAddRows = false;
+            this.facturasACobrarDataGrid.AllowUserToDeleteRows = false;
+            this.facturasACobrarDataGrid.AllowUserToResizeRows = false;
+            this.facturasACobrarDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.facturasACobrarDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Empresa});
+            this.facturasACobrarDataGrid.Location = new System.Drawing.Point(444, 154);
+            this.facturasACobrarDataGrid.Name = "facturasACobrarDataGrid";
+            this.facturasACobrarDataGrid.ReadOnly = true;
+            this.facturasACobrarDataGrid.Size = new System.Drawing.Size(373, 102);
+            this.facturasACobrarDataGrid.TabIndex = 21;
             // 
-            // limpiarCobroBtn
+            // agregarABtn
             // 
-            this.limpiarCobroBtn.Location = new System.Drawing.Point(695, 120);
-            this.limpiarCobroBtn.Name = "limpiarCobroBtn";
-            this.limpiarCobroBtn.Size = new System.Drawing.Size(75, 23);
-            this.limpiarCobroBtn.TabIndex = 29;
-            this.limpiarCobroBtn.Text = "Limpiar";
-            this.limpiarCobroBtn.UseVisualStyleBackColor = true;
-            this.limpiarCobroBtn.Click += new System.EventHandler(this.limpiarCobroBtn_Click);
+            this.agregarABtn.Location = new System.Drawing.Point(396, 262);
+            this.agregarABtn.Name = "agregarABtn";
+            this.agregarABtn.Size = new System.Drawing.Size(75, 23);
+            this.agregarABtn.TabIndex = 22;
+            this.agregarABtn.Text = "Agregar A";
+            this.agregarABtn.UseVisualStyleBackColor = true;
+            this.agregarABtn.Click += new System.EventHandler(this.agregarABtn_Click);
+            // 
+            // facturasACobrarLabel
+            // 
+            this.facturasACobrarLabel.AutoSize = true;
+            this.facturasACobrarLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.facturasACobrarLabel.Location = new System.Drawing.Point(464, 134);
+            this.facturasACobrarLabel.Name = "facturasACobrarLabel";
+            this.facturasACobrarLabel.Size = new System.Drawing.Size(116, 17);
+            this.facturasACobrarLabel.TabIndex = 23;
+            this.facturasACobrarLabel.Text = "Facturas a pagar";
+            // 
+            // Empresa
+            // 
+            this.Empresa.HeaderText = "Empresa";
+            this.Empresa.Name = "Empresa";
+            this.Empresa.ReadOnly = true;
             // 
             // RegistroPago
             // 
-            this.ClientSize = new System.Drawing.Size(856, 559);
+            this.ClientSize = new System.Drawing.Size(856, 481);
+            this.Controls.Add(this.facturasACobrarLabel);
+            this.Controls.Add(this.agregarABtn);
+            this.Controls.Add(this.facturasACobrarDataGrid);
             this.Controls.Add(this.facturasLabel);
             this.Controls.Add(this.limpiarBtn);
             this.Controls.Add(this.filtrarGroupBox);
@@ -343,6 +394,7 @@
             this.filtrarGroupBox.PerformLayout();
             this.clienteGroupBox.ResumeLayout(false);
             this.clienteGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.facturasACobrarDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,5 +431,9 @@
         private System.Windows.Forms.Label facturasLabel;
         private System.Windows.Forms.Button limpiarCobroBtn;
         private System.Windows.Forms.Button limpiarFiltrosBtn;
+        private System.Windows.Forms.DataGridView facturasACobrarDataGrid;
+        private System.Windows.Forms.Button agregarABtn;
+        private System.Windows.Forms.Label facturasACobrarLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Empresa;
     }
 }

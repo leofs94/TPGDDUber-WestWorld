@@ -93,8 +93,7 @@ namespace PagoAgilFrba.RegistroPago
                     int idPago = -1;
                     var returnParameter = sqlCmd.Parameters.Add("@ReturnVal", SqlDbType.Int);
                     returnParameter.Direction = ParameterDirection.ReturnValue;
-
-
+       
                     sqlCmd.ExecuteNonQuery();
                     idPago = Convert.ToInt32(returnParameter.Value);
 
@@ -181,6 +180,29 @@ namespace PagoAgilFrba.RegistroPago
          private void limpiarCobroBtn_Click(object sender, EventArgs e)
          {
             sucursalTextBox.Text = importeCobroTextBox.Text = formaPagoComboBox.Text = clienteTextBox.Text = "";
+         }
+
+         private void agregarABtn_Click(object sender, EventArgs e)
+         {
+             //TODO insertar en la tabla temporal la factura seleccionada
+             try
+             {
+            
+                     facturasACobrarDataGrid.Rows.Add(new object[] {
+
+                                            //row.Cells["Cliente"].Value,
+                                            facturasDataGridL.CurrentRow.Cells["Empresa"].Value});
+
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show(ex.Message, "Error Message");
+             }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                    sqlCon.Close();
+            }
          }
 
     }

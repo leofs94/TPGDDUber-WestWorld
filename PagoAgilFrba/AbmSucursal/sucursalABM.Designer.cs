@@ -186,6 +186,7 @@
             this.searchButton.TabIndex = 47;
             this.searchButton.Text = "Buscar";
             this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // label8
             // 
