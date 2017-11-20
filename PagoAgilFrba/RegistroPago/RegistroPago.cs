@@ -23,7 +23,7 @@ namespace PagoAgilFrba.RegistroPago
             InitializeComponent();
             utils.llenar(empresaFilterComboBox, Utils.GetEmpresas());
             utils.llenar(formaPagoComboBox, Utils.GetFormasDePago());
-
+            sucursalTextBox.Text = 1.ToString();//TODO sucursal harcodeada. el idSucursal sale del operador -> Usuario logueado
 
         }
 
@@ -32,6 +32,8 @@ namespace PagoAgilFrba.RegistroPago
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(clienteTextBox.Text) & string.IsNullOrWhiteSpace(idClienteTextBox.Text)) throw new Exception("Debe seleccionar un cliente");
+
                 fillDataGridViewFacturas();
             }
             catch (Exception ex)
@@ -74,55 +76,31 @@ namespace PagoAgilFrba.RegistroPago
 
         private int cobrar()
         {
-            try
+            if (sqlCon.State == ConnectionState.Closed)
             {
-                if (sqlCon.State == ConnectionState.Closed)
-                {
-                    sqlCon.Open();
+                sqlCon.Open();
 
-                    SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.PagoCreate", sqlCon);
-                    sqlCmd.CommandType = CommandType.StoredProcedure;
-                    utils.validarYAgregarParam(sqlCmd, "@idCliente", idClienteTextBox);
+                SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.PagoCreate", sqlCon);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                utils.validarYAgregarParam(sqlCmd, "@idCliente", idClienteTextBox);
 
-                    utils.validarImporte(sqlCmd, "@importe", importeCobroTextBox);
+                utils.validarImporte(sqlCmd, "@importe", importeCobroTextBox);
 
-                    sucursalTextBox.Text = 1.ToString();//TODO sucursal harcodeada. el idSucursal sale del operador -> Usuario logueado
-                    utils.validarYAgregarParam(sqlCmd, "@idSucursal", sucursalTextBox);
-                    sqlCmd.Parameters.AddWithValue("@fechaCobro", DateTime.Now);
-                    if (string.IsNullOrWhiteSpace(formaPagoComboBox.Text)) throw new Exception("Seleccione una forma de pago");
-                    sqlCmd.Parameters.AddWithValue("@idFormaDePago", formaPagoComboBox.SelectedIndex + 1);
+                utils.validarYAgregarParam(sqlCmd, "@idSucursal", sucursalTextBox);
+                sqlCmd.Parameters.AddWithValue("@fechaCobro", DateTime.Now);
+                if (string.IsNullOrWhiteSpace(formaPagoComboBox.Text)) throw new Exception("Seleccione una forma de pago");
+                sqlCmd.Parameters.AddWithValue("@idFormaDePago", formaPagoComboBox.SelectedIndex + 1);
 
-                    int idPago = -1;
-                    var returnParameter = sqlCmd.Parameters.Add("@ReturnVal", SqlDbType.Int);
-                    returnParameter.Direction = ParameterDirection.ReturnValue;
+                int idPago = -1;
+                var returnParameter = sqlCmd.Parameters.Add("@ReturnVal", SqlDbType.Int);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
-                    sqlCmd.ExecuteNonQuery();
-                    idPago = Convert.ToInt32(returnParameter.Value);
+                sqlCmd.ExecuteNonQuery();
+                idPago = Convert.ToInt32(returnParameter.Value);
 
-                    MessageBox.Show("Se registró el pago " + idPago.ToString() + " correctamente");
-                    sqlCon.Close();
-                    return idPago;
-                }
-            }
-            catch (Exception ex)
-            {
-                if (ex is SqlException)
-                {
-                    SqlException sqlException = ex as SqlException;
-                    if (sqlException.Number == 2627) MessageBox.Show("No pueden existir 2 empresas con el mismo cuit", "Error Message");
-                    else if (sqlException.Number == 8114) MessageBox.Show("Todos los campos son obligatorios", "Error Message");
-                    else MessageBox.Show(ex.Message, "Mensaje de Error");
-
-                }
-                else
-                {
-                    MessageBox.Show(ex.Message, "Mensaje de Error");
-                }
-            }
-            finally
-            {
-                if (sqlCon.State == ConnectionState.Open)
-                    sqlCon.Close();
+                MessageBox.Show("Se registró el pago " + idPago.ToString() + " correctamente");
+                sqlCon.Close();
+                return idPago;
             }
             return -1;
         }
@@ -139,7 +117,16 @@ namespace PagoAgilFrba.RegistroPago
             {
                 int idPago = cobrar();
                 if (idPago == -1) throw new Exception("No se pudo registrar el pago");
-                //TODO asignar el idPago a todas las facturas que estaban en la tabla al momento de cobrar
+                sqlCon.Open();
+                foreach (int numFact in numFactList)
+                {
+                    SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.FacturaAsignarPago", sqlCon);
+                    sqlCmd.CommandType = CommandType.StoredProcedure;
+                    sqlCmd.Parameters.AddWithValue("@numFactura", numFact);
+                    sqlCmd.Parameters.AddWithValue("@pago", idPago);
+
+                    sqlCmd.ExecuteNonQuery();
+                }
 
             }
             catch (Exception ex)
@@ -162,6 +149,7 @@ namespace PagoAgilFrba.RegistroPago
             {
                 idClienteTextBox.Text = busquedaDeCliente.idClienteTextBox.Text;
                 clienteTextBox.Text = busquedaDeCliente.clienteTextBox.Text;
+                clienteTxt.Text = clienteTextBox.Text;
             }
         }
 
@@ -173,6 +161,15 @@ namespace PagoAgilFrba.RegistroPago
             fechaCobroDT.Value = Convert.ToDateTime(DateTime.Now.Date);
 
             facturasDataGridL.DataSource = new DataTable();
+
+            limpiarTablaFacturasACobrar();
+        }
+
+        private void limpiarTablaFacturasACobrar()
+        {
+            facturasACobrarDataGrid.ColumnHeadersVisible = false;
+            facturasACobrarDataGrid.Rows.Clear();
+            numFactList = new List<int>();
         }
 
         private void limpiarFiltrosBtn_Click(object sender, EventArgs e)
@@ -182,17 +179,17 @@ namespace PagoAgilFrba.RegistroPago
 
         private void limpiarCobroBtn_Click(object sender, EventArgs e)
         {
-            sucursalTextBox.Text = importeCobroTextBox.Text = formaPagoComboBox.Text = clienteTextBox.Text = "";
+            sucursalTextBox.Text = importeCobroTextBox.Text = formaPagoComboBox.Text = clienteTxt.Text = "";
         }
 
         private void agregarABtn_Click(object sender, EventArgs e)
         {
-            //TODO al apretar COBRAR limpiar la tabla temporal y facturasACobrarDataGrid
             try
             {
-                if (facturasDataGridL.CurrentRow == null) throw new Exception("Seleccione una factura sin pago");
+                if (facturasDataGridL.CurrentRow == null) throw new Exception("Seleccione una factura de la tabla facturas sin pago");
+
                 facturasACobrarDataGrid.ColumnHeadersVisible = true;
-                var numFact = facturasDataGridL.CurrentRow.Cells["Num Factura"].Value;
+                var numFact = facturasDataGridL.CurrentRow.Cells["Num Fact"].Value;
 
                 if (!numFactList.Contains(Convert.ToInt32(numFact)))
                 {
@@ -202,10 +199,10 @@ namespace PagoAgilFrba.RegistroPago
                                     facturasDataGridL.CurrentRow.Cells["Fecha Alta"].Value,
                                     facturasDataGridL.CurrentRow.Cells["Fecha Venc"].Value
                                     });
-                
+
                     numFactList.Add(Convert.ToInt32(numFact));
 
-                    //importeCobroTextBox.Text = utils.calcularColumna("total", dtbl); //TODO calcular al agregar
+                    importeCobroTextBox.Text = utils.calcularColumna(2, facturasACobrarDataGrid);
                 }
             }
             catch (Exception ex)
@@ -216,14 +213,24 @@ namespace PagoAgilFrba.RegistroPago
 
         private void eliminarBtn_Click(object sender, EventArgs e)
         {
-            if (facturasACobrarDataGrid.CurrentRow == null) throw new Exception("Seleccione una factura a pagar");
+            try
+            {
+                if (facturasACobrarDataGrid.CurrentRow == null) throw new Exception("Seleccione una factura de la tabla Facturas a pagar");
 
-            var numFact = facturasACobrarDataGrid.CurrentRow.Cells[0].Value;
-            numFactList.Remove(numFactList.IndexOf(Convert.ToInt32(numFact)));
+                var numFact = facturasACobrarDataGrid.CurrentRow.Cells[0].Value;
+                int index = numFactList.IndexOf(Convert.ToInt32(numFact));
+                numFactList.RemoveAt(index);
 
-            facturasACobrarDataGrid.Rows.Remove(facturasACobrarDataGrid.CurrentRow);
-            
-            if(!numFactList.Any()) facturasACobrarDataGrid.ColumnHeadersVisible = false;
+                facturasACobrarDataGrid.Rows.Remove(facturasACobrarDataGrid.CurrentRow);
+
+                if (!numFactList.Any()) facturasACobrarDataGrid.ColumnHeadersVisible = false;
+
+                importeCobroTextBox.Text = utils.calcularColumna(2, facturasACobrarDataGrid);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Message");
+            }
         }
 
     }

@@ -127,12 +127,21 @@ namespace PagoAgilFrba
         public string calcularColumna(string columna, DataTable dtbl)
         {
             decimal suma = 0;
-            foreach (DataRow dr in dtbl.Rows)
+            foreach (DataRow dataRow in dtbl.Rows)
             {
-                suma += Convert.ToDecimal(dr[columna]);
+                suma += Convert.ToDecimal(dataRow[columna]);
             }
             return suma.ToString();
         }
 
+        public string calcularColumna(int indexCol, DataGridView dataGridView)
+        {
+            decimal suma = 0;
+            foreach (DataGridViewRow dataRow in dataGridView.Rows)
+            {
+                suma += Convert.ToDecimal(dataRow.Cells[indexCol].Value.ToString());
+            }
+            return suma.ToString();
+        }
     }
 }

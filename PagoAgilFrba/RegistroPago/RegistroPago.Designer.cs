@@ -58,12 +58,12 @@
             this.facturasACobrarDataGrid = new System.Windows.Forms.DataGridView();
             this.agregarABtn = new System.Windows.Forms.Button();
             this.facturasACobrarLabel = new System.Windows.Forms.Label();
-            this.NumFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eliminarBtn = new System.Windows.Forms.Button();
+            this.NumFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Empresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaAlta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaVencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.eliminarBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.facturasDataGridL)).BeginInit();
             this.cobrarGroupBox.SuspendLayout();
             this.filtrarGroupBox.SuspendLayout();
@@ -118,7 +118,7 @@
             // formaPagoComboBox
             // 
             this.formaPagoComboBox.FormattingEnabled = true;
-            this.formaPagoComboBox.Location = new System.Drawing.Point(95, 30);
+            this.formaPagoComboBox.Location = new System.Drawing.Point(121, 27);
             this.formaPagoComboBox.Name = "formaPagoComboBox";
             this.formaPagoComboBox.Size = new System.Drawing.Size(121, 21);
             this.formaPagoComboBox.TabIndex = 25;
@@ -126,7 +126,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(250, 73);
+            this.label1.Location = new System.Drawing.Point(271, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 24;
@@ -136,7 +136,7 @@
             // 
             this.fechaCobroDT.Enabled = false;
             this.fechaCobroDT.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.fechaCobroDT.Location = new System.Drawing.Point(339, 70);
+            this.fechaCobroDT.Location = new System.Drawing.Point(365, 67);
             this.fechaCobroDT.Name = "fechaCobroDT";
             this.fechaCobroDT.Size = new System.Drawing.Size(103, 20);
             this.fechaCobroDT.TabIndex = 23;
@@ -144,7 +144,7 @@
             // formaDePagoLabel
             // 
             this.formaDePagoLabel.AutoSize = true;
-            this.formaDePagoLabel.Location = new System.Drawing.Point(10, 30);
+            this.formaDePagoLabel.Location = new System.Drawing.Point(36, 27);
             this.formaDePagoLabel.Name = "formaDePagoLabel";
             this.formaDePagoLabel.Size = new System.Drawing.Size(79, 13);
             this.formaDePagoLabel.TabIndex = 22;
@@ -153,7 +153,7 @@
             // clienteTxt
             // 
             this.clienteTxt.Enabled = false;
-            this.clienteTxt.Location = new System.Drawing.Point(95, 68);
+            this.clienteTxt.Location = new System.Drawing.Point(121, 65);
             this.clienteTxt.Name = "clienteTxt";
             this.clienteTxt.Size = new System.Drawing.Size(121, 20);
             this.clienteTxt.TabIndex = 20;
@@ -161,7 +161,7 @@
             // sucursalTextBox
             // 
             this.sucursalTextBox.Enabled = false;
-            this.sucursalTextBox.Location = new System.Drawing.Point(302, 31);
+            this.sucursalTextBox.Location = new System.Drawing.Point(328, 28);
             this.sucursalTextBox.Name = "sucursalTextBox";
             this.sucursalTextBox.Size = new System.Drawing.Size(140, 20);
             this.sucursalTextBox.TabIndex = 19;
@@ -169,7 +169,7 @@
             // clienteLabel2
             // 
             this.clienteLabel2.AutoSize = true;
-            this.clienteLabel2.Location = new System.Drawing.Point(47, 71);
+            this.clienteLabel2.Location = new System.Drawing.Point(73, 68);
             this.clienteLabel2.Name = "clienteLabel2";
             this.clienteLabel2.Size = new System.Drawing.Size(39, 13);
             this.clienteLabel2.TabIndex = 18;
@@ -178,7 +178,7 @@
             // sucursalLabel
             // 
             this.sucursalLabel.AutoSize = true;
-            this.sucursalLabel.Location = new System.Drawing.Point(245, 34);
+            this.sucursalLabel.Location = new System.Drawing.Point(271, 31);
             this.sucursalLabel.Name = "sucursalLabel";
             this.sucursalLabel.Size = new System.Drawing.Size(48, 13);
             this.sucursalLabel.TabIndex = 14;
@@ -187,7 +187,7 @@
             // importeFilterLabel
             // 
             this.importeFilterLabel.AutoSize = true;
-            this.importeFilterLabel.Location = new System.Drawing.Point(485, 29);
+            this.importeFilterLabel.Location = new System.Drawing.Point(511, 26);
             this.importeFilterLabel.Name = "importeFilterLabel";
             this.importeFilterLabel.Size = new System.Drawing.Size(42, 13);
             this.importeFilterLabel.TabIndex = 1;
@@ -195,7 +195,7 @@
             // 
             // cobrarBtn
             // 
-            this.cobrarBtn.Location = new System.Drawing.Point(488, 63);
+            this.cobrarBtn.Location = new System.Drawing.Point(514, 60);
             this.cobrarBtn.Name = "cobrarBtn";
             this.cobrarBtn.Size = new System.Drawing.Size(145, 32);
             this.cobrarBtn.TabIndex = 10;
@@ -206,7 +206,7 @@
             // importeCobroTextBox
             // 
             this.importeCobroTextBox.Enabled = false;
-            this.importeCobroTextBox.Location = new System.Drawing.Point(533, 26);
+            this.importeCobroTextBox.Location = new System.Drawing.Point(559, 23);
             this.importeCobroTextBox.Name = "importeCobroTextBox";
             this.importeCobroTextBox.Size = new System.Drawing.Size(100, 20);
             this.importeCobroTextBox.TabIndex = 0;
@@ -242,26 +242,28 @@
             this.clienteGroupBox.Controls.Add(this.idClienteTextBox);
             this.clienteGroupBox.Controls.Add(this.seleccionarClienteBtn);
             this.clienteGroupBox.Controls.Add(this.clienteTextBox);
+            this.clienteGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.clienteGroupBox.ForeColor = System.Drawing.SystemColors.MenuText;
             this.clienteGroupBox.Location = new System.Drawing.Point(66, 61);
             this.clienteGroupBox.Name = "clienteGroupBox";
             this.clienteGroupBox.Size = new System.Drawing.Size(291, 54);
             this.clienteGroupBox.TabIndex = 26;
             this.clienteGroupBox.TabStop = false;
-            this.clienteGroupBox.Text = "Cliente";
+            this.clienteGroupBox.Text = "Cliente (obligatorio)";
             // 
             // idClienteTextBox
             // 
             this.idClienteTextBox.Enabled = false;
             this.idClienteTextBox.Location = new System.Drawing.Point(6, 18);
             this.idClienteTextBox.Name = "idClienteTextBox";
-            this.idClienteTextBox.Size = new System.Drawing.Size(37, 20);
+            this.idClienteTextBox.Size = new System.Drawing.Size(37, 21);
             this.idClienteTextBox.TabIndex = 27;
             // 
             // seleccionarClienteBtn
             // 
             this.seleccionarClienteBtn.Location = new System.Drawing.Point(204, 18);
             this.seleccionarClienteBtn.Name = "seleccionarClienteBtn";
-            this.seleccionarClienteBtn.Size = new System.Drawing.Size(76, 20);
+            this.seleccionarClienteBtn.Size = new System.Drawing.Size(76, 27);
             this.seleccionarClienteBtn.TabIndex = 24;
             this.seleccionarClienteBtn.Text = "Seleccionar";
             this.seleccionarClienteBtn.UseVisualStyleBackColor = true;
@@ -272,7 +274,7 @@
             this.clienteTextBox.Enabled = false;
             this.clienteTextBox.Location = new System.Drawing.Point(45, 18);
             this.clienteTextBox.Name = "clienteTextBox";
-            this.clienteTextBox.Size = new System.Drawing.Size(158, 20);
+            this.clienteTextBox.Size = new System.Drawing.Size(158, 21);
             this.clienteTextBox.TabIndex = 23;
             // 
             // numFactLabelL
@@ -348,7 +350,7 @@
             this.facturasACobrarDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.facturasACobrarDataGrid.ColumnHeadersVisible = false;
             this.facturasACobrarDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NumFactura,
+            this.NumFact,
             this.Empresa,
             this.Total,
             this.fechaAlta,
@@ -380,12 +382,23 @@
             this.facturasACobrarLabel.TabIndex = 23;
             this.facturasACobrarLabel.Text = "Facturas a pagar";
             // 
-            // NumFactura
+            // eliminarBtn
             // 
-            this.NumFactura.HeaderText = "Num Factura";
-            this.NumFactura.Name = "NumFactura";
-            this.NumFactura.ReadOnly = true;
-            this.NumFactura.Width = 5;
+            this.eliminarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.eliminarBtn.Location = new System.Drawing.Point(401, 234);
+            this.eliminarBtn.Name = "eliminarBtn";
+            this.eliminarBtn.Size = new System.Drawing.Size(50, 32);
+            this.eliminarBtn.TabIndex = 24;
+            this.eliminarBtn.Text = "X";
+            this.eliminarBtn.UseVisualStyleBackColor = true;
+            this.eliminarBtn.Click += new System.EventHandler(this.eliminarBtn_Click);
+            // 
+            // NumFact
+            // 
+            this.NumFact.HeaderText = "Num Fact";
+            this.NumFact.Name = "NumFact";
+            this.NumFact.ReadOnly = true;
+            this.NumFact.Width = 5;
             // 
             // Empresa
             // 
@@ -414,17 +427,6 @@
             this.fechaVencimiento.Name = "fechaVencimiento";
             this.fechaVencimiento.ReadOnly = true;
             this.fechaVencimiento.Width = 5;
-            // 
-            // eliminarBtn
-            // 
-            this.eliminarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.eliminarBtn.Location = new System.Drawing.Point(401, 234);
-            this.eliminarBtn.Name = "eliminarBtn";
-            this.eliminarBtn.Size = new System.Drawing.Size(50, 32);
-            this.eliminarBtn.TabIndex = 24;
-            this.eliminarBtn.Text = "X";
-            this.eliminarBtn.UseVisualStyleBackColor = true;
-            this.eliminarBtn.Click += new System.EventHandler(this.eliminarBtn_Click);
             // 
             // RegistroPago
             // 
@@ -488,11 +490,11 @@
         private System.Windows.Forms.DataGridView facturasACobrarDataGrid;
         private System.Windows.Forms.Button agregarABtn;
         private System.Windows.Forms.Label facturasACobrarLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumFactura;
+        private System.Windows.Forms.Button eliminarBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn Empresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaAlta;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaVencimiento;
-        private System.Windows.Forms.Button eliminarBtn;
     }
 }
