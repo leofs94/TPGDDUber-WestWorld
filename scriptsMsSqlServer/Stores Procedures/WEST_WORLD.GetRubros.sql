@@ -1,6 +1,0 @@
-CREATE PROCEDURE WEST_WORLD.GetRubros
-AS
-	BEGIN 
-		SELECT idRubro, nombre
-		FROM WEST_WORLD.Rubro
-	END
