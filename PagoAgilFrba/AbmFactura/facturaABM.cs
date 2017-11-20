@@ -29,13 +29,9 @@ namespace PagoAgilFrba.AbmFactura
         public void llenarCombos() 
         {
             List<KeyValuePair<int, string>> empresas = Utils.GetEmpresas();
-            List<KeyValuePair<int, string>> clientes = Utils.GetClientes();
             utils.llenar(empresaComboBox, empresas);
             utils.llenar(empresaFilterComboBox, empresas);
-
-            utils.llenar(clienteComboBox, clientes);
-            utils.llenar(clienteFilterComboBox, clientes);   
-
+            
         }
 
         private void facturaABM_Load_1(object sender, EventArgs e)
@@ -56,7 +52,7 @@ namespace PagoAgilFrba.AbmFactura
                         sqlCmd.CommandType = CommandType.StoredProcedure;
                         sqlCmd.Parameters.AddWithValue("@mode", "Add");
 
-                        sqlCmd.Parameters.AddWithValue("@cliente", clienteComboBox.SelectedIndex + 1); //+1 Porque arranca de 0
+                        utils.validarYAgregarParam(sqlCmd, "@cliente", idClienteTextBox2);
                         sqlCmd.Parameters.AddWithValue("@Empresa", empresaComboBox.SelectedIndex + 1); //+1 Porque arranca de 0
 
                         utils.validarYAgregarParam(sqlCmd, "@numeroFactura", numFactTextBox);
@@ -71,11 +67,12 @@ namespace PagoAgilFrba.AbmFactura
                     }
                     else
                     {
+
                         SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.FacturaCreateOrUpdate", sqlCon);
                         sqlCmd.CommandType = CommandType.StoredProcedure;
                         sqlCmd.Parameters.AddWithValue("@mode", "Edit");
 
-                        sqlCmd.Parameters.AddWithValue("@cliente", clienteComboBox.SelectedIndex + 1); //+1 Porque arranca de 0
+                        utils.validarYAgregarParam(sqlCmd, "@cliente", idClienteTextBox2);
                         sqlCmd.Parameters.AddWithValue("@Empresa", empresaComboBox.SelectedIndex + 1); //+1 Porque arranca de 0
 
                         utils.validarYAgregarParam(sqlCmd, "@numeroFactura", numFactTextBox);
@@ -120,7 +117,7 @@ namespace PagoAgilFrba.AbmFactura
         public void validarFechaVencimientoYAgregar(SqlCommand sqlCmd)
         {
             DateTime fechaVenc = Convert.ToDateTime(fechaVencDT.Value);
-            if (fechaVenc > DateTime.Now.Date) throw new Exception("La fecha de vencimiento debe ser anterior a la fecha de hoy");
+            if (fechaVenc.Date > DateTime.Now.Date) throw new Exception("La fecha de vencimiento no debe ser mayor a la fecha de hoy");
             else sqlCmd.Parameters.AddWithValue("@fecha_venc", fechaVencDT.Value);
         }
 
@@ -130,12 +127,15 @@ namespace PagoAgilFrba.AbmFactura
             {
                 if (agregarItemBtn.Text == "Agregar Item")
                 {
-                    insertarItem();
+                    insertarItem(sender, e);
                     fillDataGridViewItems();
                 }
                 else
-                    updateItem();
+                {
+                    actualizarItem();
                     fillDataGridViewItems();
+                }
+                actualizarImporteDeFactura();
             }
             catch (Exception ex)
             {
@@ -156,7 +156,25 @@ namespace PagoAgilFrba.AbmFactura
             }
         }
 
-        void insertarItem()
+        public void actualizarImporteDeFactura()
+        {
+            if (sqlCon.State == ConnectionState.Closed)
+            {
+                sqlCon.Open();
+
+                SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.FacturaImporteUpdate", sqlCon);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                utils.validarYAgregarParam(sqlCmd, "@numeroFactura", numFactTextBox);
+                utils.validarImporte(sqlCmd, "@total", totalTextBox);
+
+                sqlCmd.ExecuteNonQuery();
+
+                sqlCmd.Connection.Close();
+            }
+        }
+
+        void insertarItem(object sender, EventArgs e)
         {
             if (sqlCon.State == ConnectionState.Closed)
             {
@@ -174,15 +192,15 @@ namespace PagoAgilFrba.AbmFactura
                 else sqlCmd.Parameters.AddWithValue("@numeroFactura", numFactTextBox.Text.Trim());
 
                 int exitCode = sqlCmd.ExecuteNonQuery();
-                if (exitCode == -1) MessageBox.Show("Ya existe el item ingresado para la factura" + " " + numFactTextBox.Text.Trim());
-                else MessageBox.Show("Item creado");
+                if (exitCode == -1) throw new Exception("Ya existe el item ingresado para la factura" + " " + numFactTextBox.Text.Trim());
+                MessageBox.Show("Item creado");
 
                 sqlCon.Close();
             }
         }
 
 
-        void updateItem()
+        private void actualizarItem()
         {
             if (sqlCon.State == ConnectionState.Closed)
             {
@@ -199,13 +217,13 @@ namespace PagoAgilFrba.AbmFactura
                 sqlCmd.Parameters.AddWithValue("@importe", Convert.ToDecimal(montoTextBox.Text.Trim()) * Int16.Parse(cantTextBox.Text.Trim()));
 
                 sqlCmd.ExecuteNonQuery();
-                MessageBox.Show("Item actualizado correctamente");
+                MessageBox.Show("Item actualizado");
 
                 sqlCon.Close();
             }
         }
 
-        void fillDataGridViewItems()
+        private void fillDataGridViewItems()
         {
             if (sqlCon.State == ConnectionState.Closed)
             {
@@ -237,7 +255,7 @@ namespace PagoAgilFrba.AbmFactura
 
         }
 
-        private void refreshBtn_Click_1(object sender, EventArgs e)
+        private void actualizarTablaItemsBtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -261,7 +279,7 @@ namespace PagoAgilFrba.AbmFactura
 
         private void limpiarBtn_Click_1(object sender, EventArgs e)
         {
-            clienteComboBox.Text = empresaComboBox.Text = numFactTextBox.Text = fechaAltaFactDT.Text
+            empresaComboBox.Text = numFactTextBox.Text = fechaAltaFactDT.Text = idClienteTextBox2.Text = clienteTextBox2.Text
                  = fechaVencDT.Text = totalTextBox.Text = montoTextBox.Text = cantTextBox.Text = numFactLabel2.Text = "";
             guardarFactButton.Text = "Guardar Factura";
             agregarItemBtn.Text = "Agregar Item";
@@ -277,7 +295,7 @@ namespace PagoAgilFrba.AbmFactura
                 cantTextBox.Text = itemsDataGrid.CurrentRow.Cells[2].Value.ToString();
                 numFactLabel2.Text = numFactTextBox.Text;
 
-                agregarItemBtn.Text = "Update Item";
+                agregarItemBtn.Text = "Actualizar Item";
             }
         }
 
@@ -301,15 +319,15 @@ namespace PagoAgilFrba.AbmFactura
                 if (sqlCon.State == ConnectionState.Open)
                     sqlCon.Close();
             }
-
         }
         
-        public void fillDataGridViewFacturas(){
+        private void fillDataGridViewFacturas(){
             if (sqlCon.State == ConnectionState.Closed)
             {
                 sqlCon.Open();
                 SqlDataAdapter sqlDa = new SqlDataAdapter("GD2C2017.WEST_WORLD.FacturaViewOrSearch", sqlCon);
                 sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+                sqlDa.SelectCommand.Parameters.AddWithValue("@estado", "Todas");
 
                 if (string.IsNullOrWhiteSpace(numFactFilterTextBoxL.Text.Trim())) sqlDa.SelectCommand.Parameters.AddWithValue("@numeroFactura", DBNull.Value);
                 else sqlDa.SelectCommand.Parameters.AddWithValue("@numeroFactura", utils.convertirAValor(numFactFilterTextBoxL));
@@ -317,14 +335,13 @@ namespace PagoAgilFrba.AbmFactura
                 if (string.IsNullOrWhiteSpace(empresaFilterComboBox.Text.Trim())) sqlDa.SelectCommand.Parameters.AddWithValue("@idEmpresa", DBNull.Value);
                 else sqlDa.SelectCommand.Parameters.AddWithValue("@idEmpresa", empresaFilterComboBox.SelectedIndex + 1);
 
-                if (string.IsNullOrWhiteSpace(clienteFilterComboBox.Text.Trim())) sqlDa.SelectCommand.Parameters.AddWithValue("@idCliente", DBNull.Value);
-                else sqlDa.SelectCommand.Parameters.AddWithValue("@idCliente", clienteFilterComboBox.SelectedIndex + 1);
+                if (string.IsNullOrWhiteSpace(idClienteTextBox.Text)) sqlDa.SelectCommand.Parameters.AddWithValue("@idCliente", DBNull.Value);
+                else sqlDa.SelectCommand.Parameters.AddWithValue("@idCliente", utils.convertirAValor(idClienteTextBox));
 
                 DataTable dtbl = new DataTable();
 
                 sqlDa.Fill(dtbl);
                 facturasDataGridL.DataSource = dtbl;
-                importeCobroTextBox.Text = utils.calcularColumna("total", dtbl);
                 sqlCon.Close();
             }
         }
@@ -339,21 +356,48 @@ namespace PagoAgilFrba.AbmFactura
 
         private void facturasDataGridL_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (facturasDataGridL.CurrentRow.Index != -1)
+            try
             {
-                numFactTextBox.Text = facturasDataGridL.CurrentRow.Cells[0].Value.ToString();
-                clienteComboBox.SelectedIndex = Convert.ToInt32(facturasDataGridL.CurrentRow.Cells[1].Value.ToString()) - 1;
-                empresaComboBox.SelectedIndex = Convert.ToInt32(facturasDataGridL.CurrentRow.Cells[2].Value.ToString()) - 1;
+                if (!(string.IsNullOrWhiteSpace(facturasDataGridL.CurrentRow.Cells[7].Value.ToString())))
+                    throw new Exception("No se puede actualizar una factura pagada y/o rendida");
+            
+                if (facturasDataGridL.CurrentRow.Index != -1)
+                {
+                    numFactTextBox.Text = facturasDataGridL.CurrentRow.Cells[0].Value.ToString();
+                    idClienteTextBox2.Text = facturasDataGridL.CurrentRow.Cells[1].Value.ToString();
 
-                fechaAltaFactDT.Text = facturasDataGridL.CurrentRow.Cells[3].Value.ToString();
-                fechaVencDT.Text = facturasDataGridL.CurrentRow.Cells[4].Value.ToString();
-                totalTextBox.Text = facturasDataGridL.CurrentRow.Cells[5].Value.ToString();
+                    if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
+                    SqlCommand sqlCmd = new SqlCommand();
+                    sqlCmd.CommandText = "SELECT nombre + ' ' + apellido FROM WEST_WORLD.Cliente WHERE idCliente = " + idClienteTextBox2.Text;
+                    sqlCmd.CommandType = CommandType.Text;
+                    sqlCmd.Connection = sqlCon;
+                    SqlDataReader reader = sqlCmd.ExecuteReader();
+                    while (reader.Read()) clienteTextBox2.Text = reader.GetString(0);
+                    sqlCon.Close();
+
+                    empresaComboBox.SelectedIndex = Convert.ToInt32(facturasDataGridL.CurrentRow.Cells[2].Value.ToString()) - 1;
+
+                    fechaAltaFactDT.Text = facturasDataGridL.CurrentRow.Cells[3].Value.ToString();
+                    fechaVencDT.Text = facturasDataGridL.CurrentRow.Cells[4].Value.ToString();
+                    totalTextBox.Text = facturasDataGridL.CurrentRow.Cells[5].Value.ToString();
                 
-                numFactLabel2.Text = numFactTextBox.Text;
+                    numFactLabel2.Text = numFactTextBox.Text;
 
-                guardarFactButton.Text = "Update Factura";
-                tabControl1.SelectedIndex = 1;
+                    guardarFactButton.Text = "Actualizar Factura";
+                    tabControl1.SelectedIndex = 1;
 
+                    actualizarTablaItemsBtn_Click(sender, e); //actualiza DataGridView items
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Message");
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                    sqlCon.Close();
             }
         }
 
@@ -363,8 +407,7 @@ namespace PagoAgilFrba.AbmFactura
 
         private void limpiarBtnL_Click(object sender, EventArgs e)
         {
-            numFactFilterTextBoxL.Text = importeCobroTextBox.Text = clienteFilterComboBox.Text = clienteCobroTextBox.Text = 
-                empresaFilterComboBox.Text = sucursalCobroTextBox.Text = "";
+            numFactFilterTextBoxL.Text = clienteTextBox.Text = idClienteTextBox.Text = empresaFilterComboBox.Text = "";
 
             facturasDataGridL.DataSource = new DataTable();
         }
@@ -382,7 +425,7 @@ namespace PagoAgilFrba.AbmFactura
                     sqlCmd.Parameters.AddWithValue("@numerofactura", Convert.ToInt64(facturasDataGridL.CurrentRow.Cells[0].Value.ToString()));
 
                     int exitCode = sqlCmd.ExecuteNonQuery();
-                    if (exitCode == -1) MessageBox.Show("No se puede eliminar una factura pagada/rendida");
+                    if (exitCode == -1) MessageBox.Show("No se puede eliminar una factura pagada y/o rendida");
                     else
                     {
                         MessageBox.Show("Factura " + facturasDataGridL.CurrentRow.Cells[0].Value.ToString() + " Eliminada");
@@ -408,34 +451,28 @@ namespace PagoAgilFrba.AbmFactura
 
         private void eliminarItemBtn_Click(object sender, EventArgs e)
         {
-            if (sqlCon.State == ConnectionState.Closed)
-            {
-                sqlCon.Open();
-                SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.ItemDelete", sqlCon);
-                sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@numeroFactura", Convert.ToInt64(numFactLabel2.Text));
-                sqlCmd.Parameters.AddWithValue("@idItem", Convert.ToInt64(itemsDataGrid.CurrentRow.Cells[0].Value.ToString()));
-
-                sqlCmd.ExecuteNonQuery();
-
-                MessageBox.Show("Item " + itemsDataGrid.CurrentRow.Cells[0].Value.ToString() + " Eliminado");
-                itemsDataGrid.Rows.RemoveAt(itemsDataGrid.CurrentRow.Index);
-
-                sqlCon.Close();
-
-                refreshBtn_Click_1(sender, e);
-            }
-
-        }
-
-        private void registrarPagoBtn_Click(object sender, EventArgs e)
-        {
             try
             {
-                int idPago = registroDePago.cobrar(clienteFilterComboBox, 1, importeCobroTextBox, formaDePagoTextBox);//sucursal hardcodeada. TODO se tiene que obtener del operador (cuando este lo del login)
-                if (idPago == -1) throw new Exception("No se pudo registrar el pago");
-                //TODO asignar el idPago a todas las facturas que estaban en la tabla al momento de cobrar
+                if (sqlCon.State == ConnectionState.Closed)
+                {
+                    sqlCon.Open();
+                    SqlCommand sqlCmd = new SqlCommand("GD2C2017.WEST_WORLD.ItemDelete", sqlCon);
+                    sqlCmd.CommandType = CommandType.StoredProcedure;
 
+                    if (itemsDataGrid.CurrentRow == null) throw new Exception("No se selecciono ningun Item");
+                    sqlCmd.Parameters.AddWithValue("@numeroFactura", Convert.ToInt64(numFactLabel2.Text));
+                    sqlCmd.Parameters.AddWithValue("@idItem", Convert.ToInt64(itemsDataGrid.CurrentRow.Cells[0].Value.ToString()));
+
+                    sqlCmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Item " + itemsDataGrid.CurrentRow.Cells[0].Value.ToString() + " Eliminado");
+                    itemsDataGrid.Rows.RemoveAt(itemsDataGrid.CurrentRow.Index);
+
+                    sqlCon.Close();
+
+                    actualizarTablaItemsBtn_Click(sender, e);
+                    actualizarImporteDeFactura();
+                }
             }
             catch (Exception ex)
             {
@@ -447,6 +484,7 @@ namespace PagoAgilFrba.AbmFactura
                     sqlCon.Close();
             }
 
+
         }
 
         private void Listado_Click(object sender, EventArgs e)
@@ -456,7 +494,46 @@ namespace PagoAgilFrba.AbmFactura
 
         private void clienteFilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            clienteCobroTextBox.Text = clienteFilterComboBox.Text;
+        }
+
+        private void limpiarItemBtn_Click(object sender, EventArgs e)
+        {
+            montoTextBox.Text = cantTextBox.Text = "";
+            agregarItemBtn.Text = "Agregar Item";
+        }
+
+        private void seleccionarClienteBtn_Click(object sender, EventArgs e)
+        {
+            BuscarCliente busquedaDeCliente = new BuscarCliente();
+            busquedaDeCliente.ShowDialog();
+
+            if (!string.IsNullOrWhiteSpace(busquedaDeCliente.clienteTextBox.Text) & !string.IsNullOrWhiteSpace(busquedaDeCliente.idClienteTextBox.Text))
+            {
+                idClienteTextBox.Text = busquedaDeCliente.idClienteTextBox.Text;
+                clienteTextBox.Text = busquedaDeCliente.clienteTextBox.Text;
+            }
+        }
+
+        private void seleccionarClienteBtn_Click_2(object sender, EventArgs e)
+        {
+            BuscarCliente busquedaDeCliente = new BuscarCliente();
+            busquedaDeCliente.ShowDialog();
+
+            if (!string.IsNullOrWhiteSpace(busquedaDeCliente.clienteTextBox.Text) & !string.IsNullOrWhiteSpace(busquedaDeCliente.idClienteTextBox.Text))
+            {
+                idClienteTextBox2.Text = busquedaDeCliente.idClienteTextBox.Text;
+                clienteTextBox2.Text = busquedaDeCliente.clienteTextBox.Text;
+            }
+        }
+
+        private void fechaVencDT_ValueChanged(object sender, EventArgs e)
+        {   
+            DateTime fechaVenc = Convert.ToDateTime(fechaVencDT.Value);
+            if (fechaVenc.Date > DateTime.Now.Date)
+            {
+                MessageBox.Show("La fecha de vencimiento no debe ser mayor a la fecha de hoy", "Error Message");
+                fechaVencDT.Value = Convert.ToDateTime(DateTime.Now.Date);
+            }
         }
 
     }

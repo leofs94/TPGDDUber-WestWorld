@@ -41,15 +41,22 @@ namespace PagoAgilFrba
             sucursalABM.ShowDialog();
         }
 
-        private void registrarPagoBtn_Click(object sender, EventArgs e)
+        private void ABMFacturaBtn_Click(object sender, EventArgs e)
+        {
+            AbmFactura.facturaABM facturaABM = new AbmFactura.facturaABM();
+            facturaABM.ShowDialog();
+        }
+
+        private void registarPagoBtn_Click(object sender, EventArgs e)
         {
             RegistroPago.RegistroPago registroPago = new RegistroPago.RegistroPago();
             registroPago.ShowDialog();
         }
 
-        private void ABMFacturaBtn_Click(object sender, EventArgs e)
+        private void rendirFacturasBtn_Click(object sender, EventArgs e)
         {
-
+            Rendicion.Rendicion rendicion = new Rendicion.Rendicion();
+            rendicion.ShowDialog();
         }
     }
 }

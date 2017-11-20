@@ -1,0 +1,12 @@
+CREATE PROCEDURE WEST_WORLD.ItemView
+	@NUMEROFACTURA bigint
+
+AS
+
+	SELECT idItem, monto, cantidad, importe
+	FROM WEST_WORLD.Item i
+	WHERE numeroFactura = @NUMEROFACTURA
+
+	OPTION (RECOMPILE)
+
+RETURN 0

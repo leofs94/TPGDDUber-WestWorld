@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PagoAgilFrba.Rendicion
 {
-    public partial class Form1 : Form
+    public partial class Rendicion : Form
     {
-        public Form1()
+        public Rendicion()
         {
             InitializeComponent();
         }

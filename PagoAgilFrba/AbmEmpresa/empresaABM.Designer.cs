@@ -37,25 +37,26 @@
             this.cuitTextBox = new System.Windows.Forms.TextBox();
             this.direccionTextBox = new System.Windows.Forms.TextBox();
             this.empresaDataGrid = new System.Windows.Forms.DataGridView();
-            this.Filtrar = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cuitFilter = new System.Windows.Forms.TextBox();
-            this.nombreFilterTextBox = new System.Windows.Forms.TextBox();
-            this.rubroFilterComboBox = new System.Windows.Forms.ComboBox();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.habilitadoCheck = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.limpiarBtn = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.rubroFilterComboBox = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cuitFilter = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.nombreFilterTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.empresaDataGrid)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 13);
+            this.label1.Location = new System.Drawing.Point(36, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 0;
@@ -64,11 +65,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 55);
+            this.label2.Location = new System.Drawing.Point(36, 58);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(25, 13);
+            this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Cuit";
+            this.label2.Text = "CUIT";
             // 
             // label3
             // 
@@ -91,7 +92,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(337, 54);
+            this.label4.Location = new System.Drawing.Point(343, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(36, 13);
             this.label4.TabIndex = 4;
@@ -121,97 +122,31 @@
             // empresaDataGrid
             // 
             this.empresaDataGrid.AllowUserToAddRows = false;
+            this.empresaDataGrid.AllowUserToDeleteRows = false;
+            this.empresaDataGrid.AllowUserToResizeRows = false;
             this.empresaDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.empresaDataGrid.Location = new System.Drawing.Point(91, 222);
+            this.empresaDataGrid.Location = new System.Drawing.Point(29, 222);
             this.empresaDataGrid.Name = "empresaDataGrid";
-            this.empresaDataGrid.Size = new System.Drawing.Size(665, 150);
+            this.empresaDataGrid.ReadOnly = true;
+            this.empresaDataGrid.Size = new System.Drawing.Size(727, 150);
             this.empresaDataGrid.TabIndex = 8;
             this.empresaDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.empresaDataGrid_CellContentClick);
             this.empresaDataGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.empresaDataGrid_MouseDoubleClick);
             // 
-            // Filtrar
-            // 
-            this.Filtrar.AutoSize = true;
-            this.Filtrar.Location = new System.Drawing.Point(26, 148);
-            this.Filtrar.Name = "Filtrar";
-            this.Filtrar.Size = new System.Drawing.Size(32, 13);
-            this.Filtrar.TabIndex = 9;
-            this.Filtrar.Text = "Filtrar";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(88, 181);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Nombre";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(273, 183);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(25, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Cuit";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(474, 181);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 13);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Rubro";
-            // 
-            // cuitFilter
-            // 
-            this.cuitFilter.Location = new System.Drawing.Point(304, 178);
-            this.cuitFilter.Name = "cuitFilter";
-            this.cuitFilter.Size = new System.Drawing.Size(112, 20);
-            this.cuitFilter.TabIndex = 13;
-            // 
-            // nombreFilterTextBox
-            // 
-            this.nombreFilterTextBox.Location = new System.Drawing.Point(138, 178);
-            this.nombreFilterTextBox.Name = "nombreFilterTextBox";
-            this.nombreFilterTextBox.Size = new System.Drawing.Size(101, 20);
-            this.nombreFilterTextBox.TabIndex = 14;
-            // 
-            // rubroFilterComboBox
-            // 
-            this.rubroFilterComboBox.FormattingEnabled = true;
-            this.rubroFilterComboBox.Location = new System.Drawing.Point(528, 178);
-            this.rubroFilterComboBox.Name = "rubroFilterComboBox";
-            this.rubroFilterComboBox.Size = new System.Drawing.Size(110, 21);
-            this.rubroFilterComboBox.TabIndex = 15;
-            this.rubroFilterComboBox.SelectedIndexChanged += new System.EventHandler(this.rubroFilter_SelectedIndexChanged);
-            // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(132, 400);
+            this.btnGuardar.Location = new System.Drawing.Point(363, 95);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.Size = new System.Drawing.Size(140, 36);
             this.btnGuardar.TabIndex = 16;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Location = new System.Drawing.Point(681, 176);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 17;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
-            // 
             // habilitadoCheck
             // 
             this.habilitadoCheck.AutoSize = true;
-            this.habilitadoCheck.Location = new System.Drawing.Point(102, 96);
+            this.habilitadoCheck.Location = new System.Drawing.Point(99, 95);
             this.habilitadoCheck.Name = "habilitadoCheck";
             this.habilitadoCheck.Size = new System.Drawing.Size(15, 14);
             this.habilitadoCheck.TabIndex = 31;
@@ -221,7 +156,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(26, 96);
+            this.label13.Location = new System.Drawing.Point(26, 95);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(54, 13);
             this.label13.TabIndex = 30;
@@ -229,13 +164,87 @@
             // 
             // limpiarBtn
             // 
-            this.limpiarBtn.Location = new System.Drawing.Point(304, 400);
+            this.limpiarBtn.Location = new System.Drawing.Point(315, 391);
             this.limpiarBtn.Name = "limpiarBtn";
-            this.limpiarBtn.Size = new System.Drawing.Size(75, 23);
+            this.limpiarBtn.Size = new System.Drawing.Size(103, 31);
             this.limpiarBtn.TabIndex = 38;
             this.limpiarBtn.Text = "Limpiar";
             this.limpiarBtn.UseVisualStyleBackColor = true;
             this.limpiarBtn.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnBuscar);
+            this.groupBox1.Controls.Add(this.rubroFilterComboBox);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.cuitFilter);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.nombreFilterTextBox);
+            this.groupBox1.Location = new System.Drawing.Point(26, 146);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(740, 70);
+            this.groupBox1.TabIndex = 39;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Criterio De Búsqueda";
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(607, 30);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(102, 23);
+            this.btnBuscar.TabIndex = 46;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            // 
+            // rubroFilterComboBox
+            // 
+            this.rubroFilterComboBox.FormattingEnabled = true;
+            this.rubroFilterComboBox.Location = new System.Drawing.Point(454, 30);
+            this.rubroFilterComboBox.Name = "rubroFilterComboBox";
+            this.rubroFilterComboBox.Size = new System.Drawing.Size(110, 21);
+            this.rubroFilterComboBox.TabIndex = 45;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(400, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(36, 13);
+            this.label7.TabIndex = 44;
+            this.label7.Text = "Rubro";
+            // 
+            // cuitFilter
+            // 
+            this.cuitFilter.Location = new System.Drawing.Point(257, 32);
+            this.cuitFilter.Name = "cuitFilter";
+            this.cuitFilter.Size = new System.Drawing.Size(112, 20);
+            this.cuitFilter.TabIndex = 43;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(219, 37);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 13);
+            this.label6.TabIndex = 42;
+            this.label6.Text = "CUIT";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(37, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Nombre";
+            // 
+            // nombreFilterTextBox
+            // 
+            this.nombreFilterTextBox.Location = new System.Drawing.Point(87, 32);
+            this.nombreFilterTextBox.Name = "nombreFilterTextBox";
+            this.nombreFilterTextBox.Size = new System.Drawing.Size(101, 20);
+            this.nombreFilterTextBox.TabIndex = 14;
             // 
             // empresaABM
             // 
@@ -245,15 +254,7 @@
             this.Controls.Add(this.limpiarBtn);
             this.Controls.Add(this.habilitadoCheck);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.rubroFilterComboBox);
-            this.Controls.Add(this.nombreFilterTextBox);
-            this.Controls.Add(this.cuitFilter);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.Filtrar);
             this.Controls.Add(this.empresaDataGrid);
             this.Controls.Add(this.direccionTextBox);
             this.Controls.Add(this.cuitTextBox);
@@ -263,10 +264,13 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.groupBox1);
             this.Name = "empresaABM";
             this.Text = "ABM Empresa";
             this.Load += new System.EventHandler(this.empresaABM_Load);
             ((System.ComponentModel.ISupportInitialize)(this.empresaDataGrid)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,17 +287,17 @@
         private System.Windows.Forms.TextBox cuitTextBox;
         private System.Windows.Forms.TextBox direccionTextBox;
         private System.Windows.Forms.DataGridView empresaDataGrid;
-        private System.Windows.Forms.Label Filtrar;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox cuitFilter;
-        private System.Windows.Forms.TextBox nombreFilterTextBox;
-        private System.Windows.Forms.ComboBox rubroFilterComboBox;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.CheckBox habilitadoCheck;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button limpiarBtn;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.ComboBox rubroFilterComboBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox cuitFilter;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox nombreFilterTextBox;
     }
 }

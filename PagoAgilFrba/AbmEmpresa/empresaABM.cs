@@ -119,7 +119,7 @@ namespace PagoAgilFrba.AbmEmpresa
                 direccionTextBox.Text = empresaDataGrid.CurrentRow.Cells[3].Value.ToString();
                 rubroComboBox.SelectedIndex = Convert.ToInt32(empresaDataGrid.CurrentRow.Cells[4].Value.ToString()) - 1;
                 habilitadoCheck.Checked = (bool) empresaDataGrid.CurrentRow.Cells[5].Value;
-                btnGuardar.Text = "Update";
+                btnGuardar.Text = "Actualizar";
             }
         }
 

@@ -45,26 +45,6 @@ namespace PagoAgilFrba
             return empresas;
         }
 
-        static public List<KeyValuePair<int, string>> GetClientes()
-        {
-            List<KeyValuePair<int, string>> clientes = new List<KeyValuePair<int, string>>();
-
-            SqlCommand com = new SqlCommand("WEST_WORLD.GetClientes", sqlCon);
-            com.CommandType = CommandType.StoredProcedure;
-
-            if (sqlCon.State == ConnectionState.Closed)
-                sqlCon.Open();
-
-            SqlDataReader reader = com.ExecuteReader();
-            while (reader.Read())
-            {
-                clientes.Add(new KeyValuePair<int, string>(Int32.Parse(reader["idCliente"].ToString()), reader["nombre"].ToString() + ' ' + reader["apellido"].ToString()));
-            }
-            reader.Close();
-            sqlCon.Close();
-            return clientes;
-        }
-
         static public List<KeyValuePair<int, string>> GetRubros()
         {
             List<KeyValuePair<int, string>> rubros = new List<KeyValuePair<int, string>>();
@@ -85,6 +65,25 @@ namespace PagoAgilFrba
             return rubros;
         }
 
+        static public List<KeyValuePair<int, string>> GetFormasDePago()
+        {
+            List<KeyValuePair<int, string>> formasDePago = new List<KeyValuePair<int, string>>();
+
+            SqlCommand com = new SqlCommand("WEST_WORLD.GetFormasDePago", sqlCon);
+            com.CommandType = CommandType.StoredProcedure;
+
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+
+            SqlDataReader reader = com.ExecuteReader();
+            while (reader.Read())
+            {
+                formasDePago.Add(new KeyValuePair<int, string>(Int32.Parse(reader["idFormaPago"].ToString()), reader["descripcion"].ToString()));
+            }
+            reader.Close();
+            sqlCon.Close();
+            return formasDePago;
+        }
 
         public void validarYAgregarParam(SqlCommand sqlCmd, string variable, TextBox text)
         {
@@ -106,9 +105,6 @@ namespace PagoAgilFrba
         private void InitializeComponent()
         {
             this.SuspendLayout();
-            // 
-            // Utils
-            // 
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Name = "Utils";
             this.Load += new System.EventHandler(this.Utils_Load);
@@ -122,6 +118,7 @@ namespace PagoAgilFrba
         }
         public void validarImporte(SqlCommand sqlCmd, string variable, TextBox text)
         {
+            if (string.IsNullOrWhiteSpace(text.Text)) throw new Exception("Ingrese un importe");
             if (Convert.ToDecimal(text.Text.Trim()) <= 0) throw new Exception("El importe debe ser mayor a 0");
             else this.validarConvYAgregarParam(sqlCmd, variable, text);
         }

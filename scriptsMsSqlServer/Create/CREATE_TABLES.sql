@@ -36,7 +36,7 @@ CREATE TABLE "WEST_WORLD"."Factura"  (
 GO
 CREATE TABLE "WEST_WORLD"."Item"( 
 	"idItem"       	bigint IDENTITY(1,1) NOT NULL,
-	"numeroFactura"	bigint NOT NULL,
+	"numeroFactura"	bigint,
 	"monto"         numeric(15,2) NOT NULL,
 	"cantidad"     	smallint NOT NULL,
 	"importe"		numeric(15,2) NOT NULL,
@@ -138,7 +138,7 @@ ALTER TABLE "WEST_WORLD"."Factura"
 	ADD CONSTRAINT "clienteFK"
 	FOREIGN KEY("cliente")
 	REFERENCES "WEST_WORLD"."Cliente"("idCliente")
-	ON DELETE SET NULL 
+	ON DELETE SET NULL
 	ON UPDATE NO ACTION 
 GO
 ALTER TABLE "WEST_WORLD"."Item"

@@ -113,7 +113,7 @@ namespace PagoAgilFrba.AbmSucursal
                         validarYAgregar(sqlCmd, "@codigoPostal", codigoPostalTxtBox);
 
                         sqlCmd.Parameters.AddWithValue("@habilitado", habilitadoCheck.Checked);
-                        sqlCmd.Parameters.AddWithValue("@operador", 0); // TODO este id saldria del login
+                        sqlCmd.Parameters.AddWithValue("@operador", 1); // TODO este id saldria del login
 
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Sucursal modificada correctamente");
@@ -160,7 +160,7 @@ namespace PagoAgilFrba.AbmSucursal
                 direccionTextBox.Text = sucursalDataGrid.CurrentRow.Cells[2].Value.ToString();
                 codigoPostalTxtBox.Text = sucursalDataGrid.CurrentRow.Cells[3].Value.ToString();
                 habilitadoCheck.Checked = (bool)sucursalDataGrid.CurrentRow.Cells[4].Value;
-                guardarBtn.Text = "Update";
+                guardarBtn.Text = "Actualizar";
             }
         }
 
@@ -182,6 +182,16 @@ namespace PagoAgilFrba.AbmSucursal
         }
 
         private void sucursalABM_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }

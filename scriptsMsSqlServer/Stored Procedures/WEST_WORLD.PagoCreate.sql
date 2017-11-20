@@ -1,0 +1,15 @@
+CREATE PROCEDURE WEST_WORLD.PagoCreate
+@FECHACOBRO datetime,
+@IDCLIENTE bigint,
+@IDSUCURSAL bigint,
+@IMPORTE numeric(15,2),
+@IDFORMADEPAGO nvarchar(50)
+
+AS
+	
+	DECLARE @ID int
+	SET @ID = (SELECT MAX(numeroPago) + 1 FROM WEST_WORLD.Pago)
+	INSERT INTO WEST_WORLD.Pago(numeroPago, FechaCobro, cliente, sucursal, importe, formaPago)
+		VALUES(@ID, @FECHACOBRO, @IDCLIENTE, @IDSUCURSAL, @IMPORTE, @IDFORMADEPAGO)
+
+RETURN @ID
